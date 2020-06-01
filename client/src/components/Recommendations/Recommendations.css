@@ -1,0 +1,30 @@
+
+
+#recommendations{
+
+}
+
+#recommendations h3{
+    color: white;
+    font-size: 22px;
+    padding-top: 5px;
+}
+
+#recommendations_details{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 28px;
+}
+
+#recommendations_details img{
+    width: 70px;
+    border: 1.5px solid #151B2D;
+}
+
+#recommendations_details h4{
+    font-size: 22px;
+}
+
+#recommendations_details h5{
+    font-size: 19px;
+}
