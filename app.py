@@ -7,8 +7,6 @@ from mongoengine import connect
 from mongoengine.queryset.visitor import Q
 from mongoengine import DoesNotExist, NotUniqueError
 
-from bson.objectid import ObjectId
-
 from models import Shelves
 from models import Books
 from models import Users
@@ -44,7 +42,6 @@ def register():
     email = request.get_json()['email']
     password = request.get_json()['password']
     date_of_birth = request.get_json()['dob']
-
 
     password = bcrypt.generate_password_hash(request.get_json()['password']).decode('utf-8')
 

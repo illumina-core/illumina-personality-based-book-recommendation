@@ -17,7 +17,7 @@ export class UserMenu extends Component {
         localStorage.removeItem('logged_in')
         
         logout().then(res =>{
-            window.location.href = "http://localhost:3001"
+            window.location.href = "http://localhost:3000"
         })
     }
 
