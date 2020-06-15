@@ -1,86 +1,93 @@
-import React, { useState } from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { 
-    Button,
-    Modal, 
-    ModalHeader, 
-    ModalBody, 
-    ModalFooter, 
-    Form, 
-    FormGroup, 
-    Label, 
-    Input
-} from 'reactstrap';
+import React, { Component } from 'react'
 
 import { login } from '../Services'
 
-const Login = (props) => {
-    
-  
-    const [modal, setModal] = useState(false);
-    const toggle = () => setModal(!modal);
+export class Login extends Component {
 
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+    constructor(){
+        super()
+        this.state ={
+            login_id: '',
+            password: ''
+        }
+        this.onChange = this.onChange.bind(this)
+        this.onSubmit = this.onSubmit.bind(this)
+    }
 
-    const Submit = (e) => {
+    onChange(e){
+        this.setState({[e.target.name]: e.target.value})
+    }
+
+    onSubmit(e){
         e.preventDefault()
 
-        const user = { email, password }
+        const newUser = {
+            login_id: this.state.login_id,
+            password: this.state.password
+        }
 
-        login(user).then(res => {
-            // if(!res.error){
-                // props.history.push('/dash')
-                alert('done')
-            // }
+        login(newUser).then(res => {
+            alert(res.data.user)
+            localStorage.setItem('logged_in', true)
+            window.location.href = window.location.href
+        }).catch(err => {
+            alert(err)
         })
     }
-  
-    return (        
-        <div>
-            <Button outline color="secondary" onClick={toggle}>Sign In</Button>
-            <Modal isOpen={modal} fade={false} toggle={toggle}>
-                <ModalHeader toggle={toggle}>Fill in your credentials</ModalHeader>
-                <ModalBody>
-                    <Form>
-                        <form onSubmit={Submit}>
-                        <FormGroup>
-                            <Input
-                            type="email"
-                            placeholder="email"
-                            value={email}
-                            onChange={e => setEmail(e.target.value)} 
-                            data-validate="Type valid email"
-                            />
-                        </FormGroup>
-                        <FormGroup>
-                            <Input
-                            type="password"
-                            placeholder="password"
-                            value={password}
-                            onChange={e => setPassword(e.target.value)} 
-                            data-validate="Type valid password"
-                            />
-                        </FormGroup>
-                        <FormGroup check inline>
-                            <Label check>
-                            <Input type="checkbox" /> Remember me
-                            </Label>
-                        </FormGroup>
-                        <ModalFooter>
-                            <a href="forgot-password" className="mr-auto">Forgot password?</a>
-                            {/* <Button color="secondary" onClick={toggle} type="submit"> */}
-                                <button type='submit'>Sign In</button>
-                            {/* </Button> */}
-                        </ModalFooter>
+
+
+    render() {
+        return (
+            <div>
+                <button type="button" className="btn btn-outline-success my-2 my-sm-0 mr-2" data-toggle="modal" data-target="#login">
+                    Login
+                </button>
+
+                
+                <div className="modal fade" id="login">
+                    <div className="modal-dialog">
+                    <div className="modal-content">
+                    
+                         {/* Modal Header  */}
+                        <div className="modal-header">
+                        <h4 className="modal-title">Login</h4>
+                        <button type="button" className="close" data-dismiss="modal">&times;</button>
+                        </div>
                         
+                        {/* Modal body */}
+                        <div className="modal-body">
+                        <form className="was-validated" onSubmit={this.onSubmit}>
+                            <div className="form-group">
+                                <label>Login ID:</label>
+                                <input type="text" minLength="3" className="form-control" 
+                                value={this.state.login_id}
+                                onChange={this.onChange}
+                                placeholder="Enter username/email" name="login_id" required/>
+                                <div className="valid-feedback">Valid.</div>
+                                <div className="invalid-feedback">Please enter valid username/email of minimum 3 length.</div> 
+                            </div>
+                            <div className="form-group">
+                                <label>Password:</label>
+                                <input type="password" minLength="5" className="form-control" 
+                                value={this.state.password}
+                                onChange={this.onChange}
+                                placeholder="Enter password" name="password" required/>
+                                <div className="valid-feedback">Valid.</div>
+                                <div className="invalid-feedback">Please enter valid password of minimum 5 length.</div> 
+                            </div>
+
+                            {/* Modal footer */}
+                            <div className="modal-footer">
+                                <button type="submit" className="btn btn-primary">Submit</button>
+                            </div>
                         </form>
-                    </Form>
-                </ModalBody>
-            </Modal>
-    </div>
-    )
-    
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        )
+    }
 }
 
 export default Login

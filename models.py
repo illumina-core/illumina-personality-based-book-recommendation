@@ -1,40 +1,41 @@
 from mongoengine import Document
 from mongoengine.fields import *
 from mongoengine import Document, EmbeddedDocument
+from datetime import datetime
 
 # review document schema
-class Review_Schema(EmbeddedDocument):
-    user = ReferenceField('User_Schema', dbref=True, required=True)
+class Reviews(EmbeddedDocument):
+    user = ReferenceField('Users', dbref=True, default=None)
     review_text = StringField()
-    rating = IntField()
+    rating = FloatField(default=3.5)
 
 # book document schema
-class Book_Schema(Document):
+class Books(Document):
     book_title = StringField(required=True)
-    author = StringField(required=True)
+    author = ListField(StringField())
     description = StringField(default='')
     genres = ListField(StringField())
     cover_image = StringField()
     avg_rating = FloatField() 
-    links = ListField(StringField())
-    reviews = ListField(EmbeddedDocumentField(Review_Schema))
+    links = DictField()
+    personality_index = ListField(FloatField(required=True, default=0.0))
+    reviews = ListField(EmbeddedDocumentField(Reviews))
     extra_details = DictField()
 
 # Shelf Schema
-class Shelf_Schema(EmbeddedDocument):
+class Shelves(EmbeddedDocument):
     shelf_title = StringField(required=True)
-    shelved_books = ListField(ReferenceField('Book_Schema', dbref=True))
+    shelved_books = ListField(ReferenceField('Books', dbref=True))
 
 # user document schema
-class User_Schema(Document):
+class Users(Document):
     username = StringField(unque=True)
     password = StringField()
     email = EmailField(unique=True)
-    full_name = StringField()
-    profile_pic = StringField()
-    gender = StringField(choices=('male', 'female', 'other'))
+    profile_pic = StringField(default="../images/default_user.png")
     date_of_birth = DateTimeField()
-    description = StringField()
+    description = StringField(default="i am a default user")
     personality_index = ListField(FloatField(required=True, default=0.0))
     friends_list = ListField(ReferenceField('self',  dbref=True))
-    shelves = ListField(EmbeddedDocumentField(Shelf_Schema))
+    shelves = ListField(EmbeddedDocumentField(Shelves))
+    created = DateTimeField(default=datetime.utcnow())
