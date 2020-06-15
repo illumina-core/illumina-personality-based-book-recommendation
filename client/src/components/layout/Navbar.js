@@ -21,7 +21,8 @@ export class Navbar extends Component {
 
     onSubmit(e){
         e.preventDefault()
-        window.location.href = "http://localhost:3000/search?title=" + this.state.search;
+        window.location.href = window.location.protocol + "//" + window.location.host + 
+        "/search?title=" + this.state.search;
     }
    
     render() {
