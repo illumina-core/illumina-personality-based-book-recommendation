@@ -1,0 +1,99 @@
+
+/******************HEADER**********************/
+#header{
+    border:1.5px solid #2C3554;
+    padding-top: 65px;
+    padding-bottom: 35px;
+    background-color:#151B2D;
+}
+
+#header h4{
+    font-size: 35px;
+    color: white;
+    padding-bottom: 20px;
+    padding-left: 15px;
+}
+
+#header Button{
+    font-size: 18px;
+    color: white;
+    border: 1px solid white;
+}
+
+/******************BOOKSHELVES**********************/
+#topbookshelves{
+    border-left:1.5px solid #2C3554;
+    border-right:1.5px solid #2C3554;
+    border-bottom:1.5px solid #2C3554;
+    padding-top: 45px;
+    padding-bottom: 45px;
+    background-color: white;
+}
+
+#topbookshelves h3{
+    font-size: 31px;
+    color: #151B2D;
+    padding-bottom: 15px;
+    text-align: center;
+}
+
+/**************RECOMMENDED BOOKS**********************/
+#recommend_books{
+    border-left:1.5px solid #2C3554;
+    border-right:1.5px solid #2C3554;
+    border-top:1.5px solid #2C3554;
+    border-bottom:1.5px solid #2C3554;
+    padding-bottom: 35px;
+    background-color: white;
+}
+
+#recommend_books h4{
+    width: 250px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color:#151B2D;
+    color: white;
+    border: 1.5px solid #151B2D;
+    border-radius: 0px 50px 50px 0px;
+}
+
+/******************BOOKSHELVES**********************/
+#topbookshelves{
+    border-left:1.5px solid #2C3554;
+    border-right:1.5px solid #2C3554;
+    border-bottom:1.5px solid #2C3554;
+    padding-top: 45px;
+    padding-bottom: 45px;
+    background-color: white;
+}
+
+#topbookshelves h3{
+    font-size: 31px;
+    color: #151B2D;
+    padding-bottom: 15px;
+    text-align: center;
+}
+
+/**************RECENT ACTIVITIES******************/
+#recent_activities{
+    border:1.5px solid #2C3554;
+    background-color: white;
+}
+
+#recent_activities h4{
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: 13px;
+    background-color: #2C3554;
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+/**************OTHERS******************/
+#others{
+    padding-top: 25px;
+    padding-bottom: 15px;
+}
+
+

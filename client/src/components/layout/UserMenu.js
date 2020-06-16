@@ -42,9 +42,10 @@ export class UserMenu extends Component {
                 &nbsp;Profile
                 </Link>
                 <div className="dropdown-menu" aria-labelledby="navDropDownLink">
-                    <Link className="dropdown-item" to="#">Preferences</Link>
+                    <a className="dropdown-item" href={window.location.protocol + "//" + window.location.host + '/dashboard'}>Dashboard</a>
+                    {/* <Link  to="/dashboard">Dashboard</Link> */}
                     <div className="dropdown-divider"></div>
-                    <Link className="dropdown-item" to="#" onClick={this.logOut.bind(this)}>Logout</Link>
+                    <button className="dropdown-item" onClick={this.logOut.bind(this)}>Logout</button>
                 </div>
             </li>
         )
