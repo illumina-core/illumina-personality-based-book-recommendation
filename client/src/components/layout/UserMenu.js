@@ -33,7 +33,7 @@ export class UserMenu extends Component {
     render() {
 
         const { profile_pic } = this.state.user
-        
+        const url = window.location.protocol + "//" + window.location.host
         return (
             <li className="nav-item dropdown ml-auto">
                 <Link to="#" className="nav-link dropdown-toggle" id="navDropDownLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -42,8 +42,9 @@ export class UserMenu extends Component {
                 &nbsp;Profile
                 </Link>
                 <div className="dropdown-menu" aria-labelledby="navDropDownLink">
-                    <a className="dropdown-item" href={window.location.protocol + "//" + window.location.host + '/dashboard'}>Dashboard</a>
-                    {/* <Link  to="/dashboard">Dashboard</Link> */}
+                    <a className="dropdown-item" href={url + '/dashboard'}>Dashboard</a>
+                    <div className="dropdown-divider"></div>
+                    <a className="dropdown-item" href={url + '/profile'}>Profile</a>
                     <div className="dropdown-divider"></div>
                     <button className="dropdown-item" onClick={this.logOut.bind(this)}>Logout</button>
                 </div>

@@ -16,17 +16,17 @@ export class BookShelves extends Component {
           
           <div className="row" id="bookshelf_icons">
             <div className="col-auto" md="auto" id="icons_col">
-              <div id="icon_div"><img data-tip="Favourites" src="./images/bks2.jpg" data-toggle="collapse" data-target="#book-shelf" id="toggler2" className="rounded img-fluid" /></div>
-              <div id="icon_div"><img data-tip="Favourites" src="./images/bks1.jpg" data-toggle="collapse" data-target="#book-shelf" id="toggler1" className="rounded img-fluid" /></div>
-              <div id="icon_div"><img data-tip="Favourites" src="./images/bks3.jpg" data-toggle="collapse" data-target="#book-shelf" id="toggler3" className="rounded img-fluid" /></div>
-              <div id="icon_div"><img data-tip="Favourites" src="./images/bks4.jpg" data-toggle="collapse" data-target="#book-shelf" id="toggler4" className="rounded img-fluid" /></div>
-              <div id="icon_div"><img data-tip="Favourites" src="./images/bks1.jpg" data-toggle="collapse" data-target="#book-shelf" id="toggler1" className="rounded img-fluid" /></div>
-              <div id="icon_div"><img data-tip="Favourites" src="./images/bks2.jpg" data-toggle="collapse" data-target="#book-shelf" id="toggler2" className="rounded img-fluid" /></div>
-              <div id="icon_div"><img data-tip="Favourites" src="./images/bks3.jpg" data-toggle="collapse" data-target="#book-shelf" id="toggler3" className="rounded img-fluid" /></div>
-              <div id="icon_div"><img data-tip="Favourites" src="./images/bks4.jpg" data-toggle="collapse" data-target="#book-shelf" id="toggler4" className="rounded img-fluid" /></div>
-              <div id="icon_div"><img data-tip="Favourites" src="./images/bks1.jpg" data-toggle="collapse" data-target="#book-shelf" id="toggler1" className="rounded img-fluid" /></div>
-              <div id="icon_div"><img data-tip="Favourites" src="./images/bks2.jpg" data-toggle="collapse" data-target="#book-shelf" id="toggler2" className="rounded img-fluid" /></div>
-              <div id="icon_div"><img data-tip="Favourites" src="./images/bks3.jpg" data-toggle="collapse" data-target="#book-shelf" id="toggler3" className="rounded img-fluid" /></div>
+              <div id="icon_div"><img alt="bookshelf" data-tip="Favourites" src="./images/bks2.jpg" data-toggle="collapse" data-target="#book-shelf" id="toggler2" className="rounded img-fluid" /></div>
+              <div id="icon_div"><img alt="bookshelf" data-tip="Favourites" src="./images/bks1.jpg" data-toggle="collapse" data-target="#book-shelf" id="toggler1" className="rounded img-fluid" /></div>
+              <div id="icon_div"><img alt="bookshelf" data-tip="Favourites" src="./images/bks3.jpg" data-toggle="collapse" data-target="#book-shelf" id="toggler3" className="rounded img-fluid" /></div>
+              <div id="icon_div"><img alt="bookshelf" data-tip="Favourites" src="./images/bks4.jpg" data-toggle="collapse" data-target="#book-shelf" id="toggler4" className="rounded img-fluid" /></div>
+              <div id="icon_div"><img alt="bookshelf" data-tip="Favourites" src="./images/bks1.jpg" data-toggle="collapse" data-target="#book-shelf" id="toggler1" className="rounded img-fluid" /></div>
+              <div id="icon_div"><img alt="bookshelf" data-tip="Favourites" src="./images/bks2.jpg" data-toggle="collapse" data-target="#book-shelf" id="toggler2" className="rounded img-fluid" /></div>
+              <div id="icon_div"><img alt="bookshelf" data-tip="Favourites" src="./images/bks3.jpg" data-toggle="collapse" data-target="#book-shelf" id="toggler3" className="rounded img-fluid" /></div>
+              <div id="icon_div"><img alt="bookshelf" data-tip="Favourites" src="./images/bks4.jpg" data-toggle="collapse" data-target="#book-shelf" id="toggler4" className="rounded img-fluid" /></div>
+              <div id="icon_div"><img alt="bookshelf" data-tip="Favourites" src="./images/bks1.jpg" data-toggle="collapse" data-target="#book-shelf" id="toggler1" className="rounded img-fluid" /></div>
+              <div id="icon_div"><img alt="bookshelf" data-tip="Favourites" src="./images/bks2.jpg" data-toggle="collapse" data-target="#book-shelf" id="toggler2" className="rounded img-fluid" /></div>
+              <div id="icon_div"><img alt="bookshelf" data-tip="Favourites" src="./images/bks3.jpg" data-toggle="collapse" data-target="#book-shelf" id="toggler3" className="rounded img-fluid" /></div>
               <ReactTooltip />
             </div>
 

@@ -1,0 +1,67 @@
+
+/******************User Header**********************/
+#user_header{
+    background-color: #151B2D;
+    border: 1px solid #151B2D;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+#profile_pic{
+    width: 80px;
+    border: 2px solid white;
+}
+
+#user_header Button{
+    color: white;
+    border: 1px solid white;
+}
+
+#user_header h4{
+    color: white;
+}
+
+#user_header h6{
+    color: white;
+}
+
+/******************PERSONALITY**********************/
+#heading{
+    padding-top: 25px;
+    padding-left: 10px;
+    background-color: white;
+    border-left:1.5px solid #2C3554;
+    border-right:1.5px solid #2C3554;
+    border-bottom:1.5px solid #2C3554;
+}
+
+#personality span{
+height: 280px;
+width:280px;
+background-color: #bbb;
+border-radius: 50%;
+display: inline-block;
+}
+
+/*****************BOOKSHELVES********************/
+#bookshelves{
+    border-left: 1.5px solid #151B2D;
+    border-right: 1.5px solid #151B2D;
+    padding-bottom: 20px;
+}
+
+#bookshelf{
+    padding-top: 25px;
+}
+
+#bookshelf_img{
+    width:45px;
+    border: 1.5px solid black;
+    border-radius: 50%;
+}
+
+#bookshelf h4{
+    padding-top: 5px;
+}
+
+

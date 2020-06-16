@@ -12,7 +12,7 @@ export class Bookshelf extends Component {
 
         <div className="row" id="bks_info">
           <div className="col-auto">
-            <img src="./images/redwall.jpg" className="rounded img-fluid"></img>
+            <img alt="title" src="./images/redwall.jpg" className="rounded img-fluid"></img>
           </div>
 
           <div className="col-9">
@@ -31,7 +31,7 @@ export class Bookshelf extends Component {
         
         <div className="row" id="bks_info">
           <div className="col-auto">
-            <img src="./images/redwall.jpg" className="rounded img-fluid"></img>
+            <img alt="title" src="./images/redwall.jpg" className="rounded img-fluid"></img>
           </div>
 
           <div className="col-9">
@@ -50,7 +50,7 @@ export class Bookshelf extends Component {
         
         <div className="row" id="bks_info">
           <div className="col-auto">
-            <img src="./images/redwall.jpg" className="rounded img-fluid"></img>
+            <img alt="title" src="./images/redwall.jpg" className="rounded img-fluid"></img>
           </div>
 
           <div className="col-9">

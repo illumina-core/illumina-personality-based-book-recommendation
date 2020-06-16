@@ -7,6 +7,7 @@ import { Navbar } from '../src/components/layout/Navbar'
 import { Book } from './components/Book/Book'
 import { Dashboard } from './components/Dashboard/Dashboard'
 import { BookShelves } from './components/Bookshelves/BookShelves'
+import { Profile } from './components/Profile/Profile'
 
 export class App extends Component {
 
@@ -18,6 +19,7 @@ export class App extends Component {
         <Route path="/dashboard" component={Dashboard}/>
         <Route path="/book/dashboard" component={Dashboard}/>
         <Route path="/book-shelves" component={BookShelves}/>
+        <Route path="/profile" component={Profile}/>
 
         <Route path="/book/:id" render={props => (
           <React.Fragment>
