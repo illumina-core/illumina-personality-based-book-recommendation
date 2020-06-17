@@ -4,7 +4,6 @@ import Navbar from '../layout/Navbar'
 import RecommendBooks from './RecommendBooks';
 import RecentActivities from './RecentActivities';
 import TopBookshelves from './TopBookshelves';
-import { Link } from 'react-router-dom'
 
 import { getUser } from '../Services'
 
@@ -15,12 +14,15 @@ export class Dashboard extends Component {
     constructor(){
         super()
         this.state ={
-            user: {}
+            user: {},
+            shelves: []
         }
     }
     componentDidMount(){        
         getUser().then(res => {
             this.setState({user: JSON.parse(res.data.user)})
+            this.setState({shelves: this.state.user['shelves']})
+            
         }).catch(err =>{
             alert(err)
         })
@@ -29,10 +31,11 @@ export class Dashboard extends Component {
     render() {
 
         const { 
-            profile_pic,
             username
          } = this.state.user
 
+        const url = window.location.protocol + "//" + window.location.host
+        
         return (
             <div>
             <Navbar />
@@ -53,9 +56,11 @@ export class Dashboard extends Component {
                 <div className="row mx-5" id="topbookshelves">
                     <div className="container">
                         <div className="row">
-                            <h3 className="font-weight-light"><Link className="text-dark" to={'book-shelves'}>Bookshelves</Link></h3>
+                            <h3 className="font-weight-light">
+                                <a className="nav-link" href={url + '/book-shelves'}>Book Shelves</a>
+                            </h3>
                         </div>
-                        <TopBookshelves />
+                        <TopBookshelves shelves={this.state.shelves} url={url}/>
                     </div>
                 </div>
                 <div className="row mx-5" id="recommend_books">

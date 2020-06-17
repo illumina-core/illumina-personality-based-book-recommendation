@@ -30,7 +30,10 @@ export class Register extends Component {
         }
 
         register(newUser).then(res => {
-            alert(res.data.result)
+            if ('result' in res.data)
+                alert(res.data.result)
+            else
+                alert(res.data.error)
             window.location.reload()
         })
     }
