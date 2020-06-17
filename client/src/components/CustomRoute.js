@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Redirect, Route } from "react-router-dom";
 
-
 export const CustomRoute = (props) => {
   const [returnedRoute, setReturnedRoute] = useState("");
   useEffect(() => {
