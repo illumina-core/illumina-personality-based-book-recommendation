@@ -27,19 +27,18 @@ export class UserMenu extends Component {
         }).catch(err =>{
             alert(err)
         })
-
     }
 
     render() {
 
-        const { profile_pic } = this.state.user
+        const { profile_pic, username } = this.state.user
         const url = window.location.protocol + "//" + window.location.host
         return (
             <li className="nav-item dropdown ml-auto">
                 <Link to="#" className="nav-link dropdown-toggle" id="navDropDownLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <img alt="" src={profile_pic} 
                 width="32" height="32" className="rounded-circle img-fluid" style={{border: '2px solid black'}} />
-                &nbsp;Profile
+                &nbsp;{username}
                 </Link>
                 <div className="dropdown-menu" aria-labelledby="navDropDownLink">
                     <a className="dropdown-item" href={url + '/dashboard'}>Dashboard</a>

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import UserMenu from './UserMenu'
 import { Login } from '../Home/Login'
 import { Register } from '../Home/Register'
@@ -26,6 +25,7 @@ export class Navbar extends Component {
     }
    
     render() {
+        const url = window.location.protocol + "//" + window.location.host
         return (
             <div className="container-fluid">
                 <div className="row">
@@ -38,7 +38,7 @@ export class Navbar extends Component {
                     <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
                         <ul className="navbar-nav w-75">
                             <li className="nav-item active">
-                            <Link className="nav-link" to="/">ILLUMINA <span className="sr-only">(current)</span></Link>
+                                <a className="nav-link" href={url}>ILLUMINA</a>
                             </li>
                             <li className="nav-item mx-auto w-50">
 

@@ -29,7 +29,7 @@ connect(host=host)
 def is_logged_in(f):
     @wraps(f)
     def wrap(*args, **kwargs):
-        if 'logged_in' in session:
+        if 'user' in session:
             return f(*args, **kwargs)
         else:
             return jsonify({"user":"Not logged in."})
@@ -80,7 +80,7 @@ def login():
 @app.route('/search', methods=['GET'])
 def search_book():
     title = request.args.get('title', default = '', type = str)
-    page = request.args.get('page', default = 1, type = int)
+    # page = request.args.get('page', default = 1, type = int)
 
     books = Books.objects(book_title__icontains=title)
 
@@ -127,6 +127,7 @@ def add_review():
     return jsonify({"result": True})
 
 @app.route('/logout', methods=['POST'])
+@app.route('/book/logout', methods=['POST'])
 def logout():
     session.clear()
 

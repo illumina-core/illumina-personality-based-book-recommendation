@@ -1,7 +1,11 @@
 import React from 'react';
-import ReactStars from 'react-star-rating-component'
+import ReactStars from "react-rating-stars-component"
 
 const RecentActivities = (props) => {
+
+    const ratingChanged = (newRating) => {
+        console.log(newRating);
+    };
     
   return (
       
@@ -25,12 +29,10 @@ const RecentActivities = (props) => {
             <div className="col-md-10">
                 <h5 className="font-weight-light">Rated</h5>
                 <ReactStars
-                    size={25}
-                    half={true}
-                    name={'rating'}
-                    onChange={newRating => {
-                        console.log(newRating);
-                    }}
+                    count={5}
+                    onChange={ratingChanged}
+                    size={24}
+                    color2={"#ffd700"}
                 />
             </div>
             <div className="col-md-1">

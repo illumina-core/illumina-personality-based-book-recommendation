@@ -31,6 +31,7 @@ export class Register extends Component {
 
         register(newUser).then(res => {
             alert(res.data.result)
+            window.location.reload()
         })
     }
 

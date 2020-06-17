@@ -1,9 +1,15 @@
 import React, { Component } from 'react'
-import ReactStars from 'react-star-rating-component'
+import ReactStars from "react-rating-stars-component"
 import './Bookshelf.css';
 
 export class Bookshelf extends Component {
+
   render() {
+
+    const ratingChanged = (newRating) => {
+      console.log(newRating);
+    }
+
     return (
       <div className="container-fluid" id="bks_book">
         <div className="row">
@@ -21,11 +27,12 @@ export class Bookshelf extends Component {
           </div>
           
           <div className="col-auto">
-            <ReactStars
-                size={25}
-                half={true}
-                name="rating"
-                onChange={newRating => {console.log(newRating); }}/>
+          <ReactStars
+              count={5}
+              onChange={ratingChanged}
+              size={24}
+              color2={"#ffd700"}
+            />
           </div>
         </div>
         
@@ -41,10 +48,11 @@ export class Bookshelf extends Component {
           
           <div className="col-auto">
             <ReactStars
-                size={25}
-                half={true}
-                name="rating"
-                onChange={newRating => {console.log(newRating); }}/>
+              count={5}
+              onChange={ratingChanged}
+              size={24}
+              color2={"#ffd700"}
+            />,
           </div>
         </div>
         
@@ -59,11 +67,12 @@ export class Bookshelf extends Component {
           </div>
           
           <div className="col-auto">
-            <ReactStars
-                size={25}
-                half={true}
-                name="rating"
-                onChange={newRating => {console.log(newRating); }}/>
+          <ReactStars
+              count={5}
+              onChange={ratingChanged}
+              size={24}
+              color2={"#ffd700"}
+            />
           </div>
         </div>
       </div>

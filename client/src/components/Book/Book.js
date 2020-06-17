@@ -2,9 +2,11 @@ import React, { Component } from 'react'
 
 import AddReview from './AddReview'
 
-import ReactStars from 'react-star-rating-component'
+import ReactStars from 'react-rating-stars-component'
 import { Link } from 'react-router-dom'
 import { get_book } from '../Services'
+import { Navbar } from '../layout/Navbar'
+import { rate_book } from '../Services'
 
 export class Book extends Component {
 
@@ -18,6 +20,12 @@ export class Book extends Component {
         }
     }
 
+    changeRating( newRating, name ) {
+        this.setState({
+          rating: newRating
+        });
+      }
+
     componentDidMount(){    
         
         get_book(window.location.pathname.split('/').pop()).then(res =>{                
@@ -25,16 +33,13 @@ export class Book extends Component {
             this.setState({data: JSON.parse(res.data.book)})
             this.setState({links: this.state.data['links']})
             this.setState({extra: this.state.data['extra_details']})
-            this.setState({id: this.state.data['_id']['$oid']})
-            
+            this.setState({id: this.state.data['_id']['$oid']})          
             
         }).catch(err =>{
             alert(err)
-            // window.history.back()
+            window.history.back()
         })
-
-        return false
-    }   
+    }
 
     render() {
         const {
@@ -47,8 +52,10 @@ export class Book extends Component {
             // reviews
         } = this.state.data
 
+        
         return (
             <div>
+            <Navbar />
             <div style={{height:'35px', backgroundColor:'#EAEDF1'}} />
             <div id="book" className="container-fluid">
                 <div className="row">
@@ -70,8 +77,9 @@ export class Book extends Component {
                             <div className="col" align="center">Rate Book!</div>
                         </div>
                         <div className='row'>
-                            <div className="col" align="center">
+                            <div className="col">
                                 <ReactStars 
+                                    className="mx-auto"
                                     size={25}
                                     half={true}
                                     name="rating"
