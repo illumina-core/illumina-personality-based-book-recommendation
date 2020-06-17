@@ -6,19 +6,40 @@ import RecentActivities from './RecentActivities';
 import TopBookshelves from './TopBookshelves';
 import { Link } from 'react-router-dom'
 
+import { getUser } from '../Services'
+
 import './Dashboard.css';
 
-// import Footer from '../Global/Footer';
-
 export class Dashboard extends Component {
+
+    constructor(){
+        super()
+        this.state ={
+            user: {}
+        }
+    }
+    componentDidMount(){        
+        getUser().then(res => {
+            this.setState({user: JSON.parse(res.data.user)})
+        }).catch(err =>{
+            alert(err)
+        })
+    }
+
     render() {
+
+        const { 
+            profile_pic,
+            username
+         } = this.state.user
+
         return (
             <div>
             <Navbar />
             <div className="container-fluid">
                 <div className="row mx-5" id="header">
                     <div className="container">
-                        <div className="row"><h4 className="">Welcome back Mbrz</h4></div>
+                        <div className="row"><h4 className="">Welcome back {username}</h4></div>
                         <div className="row">
                         <div className="col-auto pl-0">
                             <button className="btn btn-outline-secondary .bg-transparent"> Recommend me a book!</button>
