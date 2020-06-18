@@ -6,6 +6,7 @@ import json
 
 from models import Books
 
+
 username = 'admin'
 password = 'admin'
 db = 'illumina'
@@ -31,8 +32,14 @@ genres = ['10th-century', '11th-century', '12th-century', '13th-century', '14th-
 'anthropology', 'anthropomorphic', 'anti-intellectualism', 'anti-racist', 'anti-science', 
 'antietam-campaign', 'antiquities', 'antisemitism', 'apocalyptic', 'apple']
 
+count = []
+
 for genre in genres:
-    parts = len(os.listdir('cleansed_books/' + genre))
+    try:
+        parts = len(os.listdir('cleansed_books/' + genre))
+        print("DIR =====> ", genre)
+    except:
+        continue
     for x in range(1, parts):
         part = str(x)
         
@@ -41,23 +48,26 @@ for genre in genres:
                 books_data = json.load(read_file)
             except:
                 continue
-
+            print("part ", x)
             for title, data in books_data.items():
                 extra_details = {}
                 for key, value in data.items():
                     if key not in ['reviews', 'authors', 'description', 'genres', 'cover_image', 'avg_ratings', 'links']:
                         extra_details[key] = value
-
-            try:
-                Books(
-                    book_title = title,
-                    author = data['authors'],
-                    description = data['description'],
-                    genres = data['genres'],
-                    cover_image = data['cover_image'],
-                    avg_rating = float(data['avg_ratings'].strip()),
-                    links = data['links'],
-                    extra_details = extra_details
-                     ).save()
-            except NotUniqueError:
-                continue
+                try:
+                    Books(
+                        book_title = title,
+                        author = data['authors'],
+                        description = data['description'],
+                        genres = data['genres'],
+                        cover_image = data['cover_image'],
+                        avg_rating = float(data['avg_ratings'].strip()),
+                        links = data['links'],
+                        extra_details = extra_details
+                    ).save()
+                    count.append(title)
+                except NotUniqueError:
+                    continue
+                
+        
+print(len(set(count)))
