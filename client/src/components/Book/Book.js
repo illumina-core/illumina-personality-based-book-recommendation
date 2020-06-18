@@ -2,11 +2,10 @@ import React, { Component } from 'react'
 
 import AddReview from './AddReview'
 
-import ReactStars from 'react-rating-stars-component'
 import { Link } from 'react-router-dom'
 import { get_book } from '../Services'
 import { Navbar } from '../layout/Navbar'
-import { rate_book } from '../Services'
+import { Ratings } from './Rating'
 
 export class Book extends Component {
 
@@ -19,12 +18,6 @@ export class Book extends Component {
             id: ''
         }
     }
-
-    changeRating( newRating, name ) {
-        this.setState({
-          rating: newRating
-        });
-      }
 
     componentDidMount(){    
         
@@ -51,7 +44,6 @@ export class Book extends Component {
             avg_rating
             // reviews
         } = this.state.data
-
         
         return (
             <div>
@@ -78,13 +70,9 @@ export class Book extends Component {
                         </div>
                         <div className='row'>
                             <div className="col">
-                                <ReactStars 
-                                    className="mx-auto"
-                                    size={25}
-                                    half={true}
-                                    name="rating"
-                                    onChange={newRating =>{console.log(newRating)}}
-                                />   
+                                <Ratings 
+                                value={3}
+                                />
                             </div>
                         </div>
                         <div className='row mb-2'>

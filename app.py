@@ -2,15 +2,13 @@ from flask import Flask, jsonify, request, session
 from flask_bcrypt import Bcrypt 
 from flask_cors import CORS
 import json
+from datetime import datetime
 
 from mongoengine import connect
 from mongoengine.queryset.visitor import Q
 from mongoengine import DoesNotExist, NotUniqueError
 
-from models import Shelves
-from models import Books
-from models import Users
-from models import Reviews
+from models import Shelves, Books, Users, Reviews
 
 app = Flask(__name__)
 
@@ -37,6 +35,7 @@ def is_logged_in(f):
 
 @app.route('/register', methods=["POST"])
 @app.route('/book/register', methods=["POST"])
+@app.route('/book-shelves/register', methods=['POST'])
 def register():
     username = request.get_json()['username']
     email = request.get_json()['email']
@@ -61,6 +60,7 @@ def register():
 
 @app.route('/login', methods=['POST'])
 @app.route('/book/login', methods=['POST'])
+@app.route('/book-shelves/login', methods=['POSt'])
 def login():
     login_id = request.get_json()['login_id']
     password = request.get_json()['password']
@@ -76,6 +76,13 @@ def login():
         return jsonify({'user': response['username'] + ' logged in successfully!'})
     else:
         return jsonify({"user":"Invalid Password"})
+
+@app.route('/logout', methods=['POST'])
+@app.route('/book/logout', methods=['POST'])
+@app.route('/book-shelves/logout', methods=['POST'])
+def logout():
+    session.clear()
+    return jsonify({"logout": True})
 
 @app.route('/search', methods=['GET'])
 def search_book():
@@ -102,14 +109,12 @@ def get_book(id):
         return jsonify({"err": "Book not found"})
         
     return  jsonify({"book":book.to_json()})
-
-    
+ 
 @app.route('/get-user', methods=['GET'])
 @app.route('/book/get-user', methods=['GET'])
 @app.route('/book-shelves/get-user', methods=['GET'])
 def get_user():
     return jsonify({"user":session['user']})
-
 
 @app.route('/book/add-review', methods=['POST'])
 def add_review():
@@ -127,12 +132,19 @@ def add_review():
     
     return jsonify({"result": True})
 
-@app.route('/logout', methods=['POST'])
-@app.route('/book/logout', methods=['POST'])
-def logout():
-    session.clear()
+@app.route('/rate-book', methods=['POST'])
+def rete_book():
+    book_id = request.get_json()['book']
+    rating = request.get_json()['rating']
 
-    return jsonify({"logout": True})
+    book = Books.objects(id=book_id).get()
+    book['user_rating'] = {
+        session['user']['username'] : [rating, datetime.utcnow()]
+    }
+    book.save()
+
+    return jsonify({"result": True})
+
 
 if __name__ == '__main__':
     app.run(debug=True)

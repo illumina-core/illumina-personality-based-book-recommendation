@@ -46,7 +46,7 @@ export const add_review = rev => {
     })
 }
 
-export const rate_book = newRating => {
+export const rateBook = newRating => {
     return axios
     .post('rate-book', {
         book: newRating.id,
