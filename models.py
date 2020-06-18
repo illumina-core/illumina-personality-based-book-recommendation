@@ -8,6 +8,7 @@ class Reviews(EmbeddedDocument):
     user = ReferenceField('Users', dbref=True, default=None)
     review_text = StringField()
     rating = FloatField(default=3.5)
+    created = DateTimeField(default=datetime.utcnow())
 
 # book document schema
 class Books(Document):
@@ -17,9 +18,9 @@ class Books(Document):
     genres = ListField(StringField())
     cover_image = StringField()
     avg_rating = FloatField() 
-    user_rating = DictField()
-    links = DictField()
-    personality_index = ListField(FloatField(required=True, default=0.0))
+    user_rating = DictField() # {'username': ['rating', 'date']}
+    links = DictField()       # {'link name': url}
+    personality_index = ListField(FloatField(required=True), default=[0.0,0.0,0.0,0.0,0.0])
     reviews = ListField(EmbeddedDocumentField(Reviews))
     extra_details = DictField()
 
