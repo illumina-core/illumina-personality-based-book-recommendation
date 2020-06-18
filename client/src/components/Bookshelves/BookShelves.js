@@ -2,9 +2,35 @@ import React, { Component } from 'react'
 import Navbar from '../layout/Navbar'
 import Bookshelf from './Bookshelf'
 import ReactTooltip from "react-tooltip"
+import {getUser} from '../Services'
 import './Bookshelves.css';
 
 export class BookShelves extends Component {
+
+  constructor(){
+    super()
+    this.state ={
+        user: {},
+        shelves: []
+    }
+  }
+
+  componentDidMount(){
+    
+    getUser().then(res => {
+      this.setState({user: JSON.parse(res.data.user)})
+      this.setState({shelves: this.state.user['shelves']})
+    }).catch(err =>{
+      alert(err)
+    })
+  }
+
+  componentWillUnmount(){
+    if ('shelf_title' in this.props.match.params){
+      document.getElementById(this.props.match.params.shelf_title).click()
+    }
+  }
+
   render() {
     return (
       <div>
@@ -16,22 +42,33 @@ export class BookShelves extends Component {
           
           <div className="row" id="bookshelf_icons">
             <div className="col-auto" md="auto" id="icons_col">
-              <div id="icon_div"><img alt="bookshelf" data-tip="Favourites" src="./images/bks2.jpg" data-toggle="collapse" data-target="#book-shelf" id="toggler2" className="rounded img-fluid" /></div>
-              <div id="icon_div"><img alt="bookshelf" data-tip="Favourites" src="./images/bks1.jpg" data-toggle="collapse" data-target="#book-shelf" id="toggler1" className="rounded img-fluid" /></div>
-              <div id="icon_div"><img alt="bookshelf" data-tip="Favourites" src="./images/bks3.jpg" data-toggle="collapse" data-target="#book-shelf" id="toggler3" className="rounded img-fluid" /></div>
-              <div id="icon_div"><img alt="bookshelf" data-tip="Favourites" src="./images/bks4.jpg" data-toggle="collapse" data-target="#book-shelf" id="toggler4" className="rounded img-fluid" /></div>
-              <div id="icon_div"><img alt="bookshelf" data-tip="Favourites" src="./images/bks1.jpg" data-toggle="collapse" data-target="#book-shelf" id="toggler1" className="rounded img-fluid" /></div>
-              <div id="icon_div"><img alt="bookshelf" data-tip="Favourites" src="./images/bks2.jpg" data-toggle="collapse" data-target="#book-shelf" id="toggler2" className="rounded img-fluid" /></div>
-              <div id="icon_div"><img alt="bookshelf" data-tip="Favourites" src="./images/bks3.jpg" data-toggle="collapse" data-target="#book-shelf" id="toggler3" className="rounded img-fluid" /></div>
-              <div id="icon_div"><img alt="bookshelf" data-tip="Favourites" src="./images/bks4.jpg" data-toggle="collapse" data-target="#book-shelf" id="toggler4" className="rounded img-fluid" /></div>
-              <div id="icon_div"><img alt="bookshelf" data-tip="Favourites" src="./images/bks1.jpg" data-toggle="collapse" data-target="#book-shelf" id="toggler1" className="rounded img-fluid" /></div>
-              <div id="icon_div"><img alt="bookshelf" data-tip="Favourites" src="./images/bks2.jpg" data-toggle="collapse" data-target="#book-shelf" id="toggler2" className="rounded img-fluid" /></div>
-              <div id="icon_div"><img alt="bookshelf" data-tip="Favourites" src="./images/bks3.jpg" data-toggle="collapse" data-target="#book-shelf" id="toggler3" className="rounded img-fluid" /></div>
-              <ReactTooltip />
+
+              {
+                this.state.shelves.map((shelf) =>(
+                  <div id="icon_div" key={shelf.shelf_title}>
+                    <img 
+                    className="rounded img-fluid" 
+                    alt={shelf.shelf_title} 
+                    data-tip={shelf.shelf_title} 
+                    src={shelf.shelf_pic} 
+                    data-toggle="collapse" 
+                    data-target={"#" + shelf.shelf_title} 
+                    id="toggler2" 
+                    />
+                  <ReactTooltip />
+                  </div>
+                ))
+              }
             </div>
 
             <div className="col px-0">
-              <div id="book-shelf" className="collapse"><Bookshelf /></div>
+            {
+              this.state.shelves.map((shelf) =>( 
+                <div id={shelf.shelf_title} className="collapse" key={shelf.shelf_title}>
+                  <Bookshelf books={shelf.shelved_books} shelf={shelf.shelf_title} user={this.state.user.username}/>
+                </div>
+              ))
+            }
             </div>
 
           </div>                    

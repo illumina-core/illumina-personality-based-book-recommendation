@@ -106,6 +106,7 @@ def get_book(id):
     
 @app.route('/get-user', methods=['GET'])
 @app.route('/book/get-user', methods=['GET'])
+@app.route('/book-shelves/get-user', methods=['GET'])
 def get_user():
     return jsonify({"user":session['user']})
 

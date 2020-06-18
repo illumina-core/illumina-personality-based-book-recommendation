@@ -17,6 +17,7 @@ class Books(Document):
     genres = ListField(StringField())
     cover_image = StringField()
     avg_rating = FloatField() 
+    user_rating = DictField()
     links = DictField()
     personality_index = ListField(FloatField(required=True, default=0.0))
     reviews = ListField(EmbeddedDocumentField(Reviews))
@@ -25,7 +26,8 @@ class Books(Document):
 # Shelf Schema
 class Shelves(EmbeddedDocument):
     shelf_title = StringField(required=True)
-    shelved_books = ListField(ReferenceField('Books', dbref=True))
+    shelved_books = ListField(ReferenceField('Books', dbref=True), default=[])
+    shelf_pic = StringField(default="../images/favourite.png")
 
 # user document schema
 class Users(Document):
@@ -35,7 +37,11 @@ class Users(Document):
     profile_pic = StringField(default="../images/default_user.png")
     date_of_birth = DateTimeField()
     description = StringField(default="i am a default user")
-    personality_index = ListField(FloatField(required=True, default=0.0))
+    personality_index = ListField(FloatField(required=True), default=[0.0,0.0,0.0,0.0,0.0])
     friends_list = ListField(ReferenceField('self',  dbref=True))
-    shelves = ListField(EmbeddedDocumentField(Shelves))
+    shelves = ListField(EmbeddedDocumentField(Shelves), default=[
+        Shelves(
+            shelf_title="Favourite"
+        )
+    ])
     created = DateTimeField(default=datetime.utcnow())

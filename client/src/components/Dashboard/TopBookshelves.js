@@ -1,52 +1,67 @@
-import React from 'react';
+import React, { Component } from 'react'
 
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
-const responsive = {
+export class TopBookshelves extends Component {
   
-  desktop: {
-    breakpoint: { max: 3000, min: 1024 },
-    items: 4
-  },
-  tablet: {
-    breakpoint: { max: 1024, min: 464 },
-    items: 2
-  },
-  mobile: {
-    breakpoint: { max: 464, min: 0 },
-    items: 1
+  render() {
+    
+    const responsive = {  
+      desktop: {
+        breakpoint: { max: 3000, min: 1024 },
+        items: 4
+      },
+      tablet: {
+        breakpoint: { max: 1024, min: 464 },
+        items: 2
+      },
+      mobile: {
+        breakpoint: { max: 464, min: 0 },
+        items: 1
+      }
+    }
+    
+    const car_style = {
+      border:'1.5px solid black'
+    }
+    return (
+      <div>
+        {
+          this.props.shelves.length != 0 && 
+          <Carousel 
+          swipeable={false}
+          draggable={true}
+          responsive={responsive}
+          ssr={true} // means to render carousel on server-side.
+          infinite={true}
+          keyBoardControl={true}
+          >
+            {
+              this.props.shelves.map((shelf) =>(
+                <div key={shelf.shelf_title} className="container-fluid">
+                  <div className="row">
+                      <h4 className="text-center w-100">
+                        <a className="text-dark text-decoration-none" href={this.props.url + "/book-shelves/" + shelf.shelf_title}>
+                          {shelf.shelf_title}
+                        </a>
+                      </h4>
+                  </div>
+                  <div className="row">
+                    <a href={this.props.url + "/book-shelves/" + shelf.shelf_title}>
+                      <img className="img-fluid" alt={shelf.shelf_title} src={shelf.shelf_pic} style={car_style} />
+                    </a>
+                  </div>
+                </div>
+              ))
+            }
+      
+          </Carousel>
+        }
+      </div>
+      
+    )
   }
-};
-
-const TopBookshelves = (props) => {
-
-  return (
-    <Carousel 
-    swipeable={false}
-    draggable={true}
-//   showDots={true}
-  responsive={responsive}
-  ssr={true} // means to render carousel on server-side.
-     infinite={true}
-//   autoPlay={props.deviceType !== "mobile" ? true : false}
-//   autoPlaySpeed={1000}
-  keyBoardControl={true}
-//   customTransition="all .5"
-//   transitionDuration={500}
-//   containerClass="carousel-container"
-//   removeArrowOnDeviceType={["tablet", "mobile"]}
-//   deviceType={props.deviceType}
-//   dotListClass="custom-dot-list-style"
-//   itemClass="carousel-item-padding-40-px"
-  >
-    <div><img alt="img1" src="./images/bks1.jpg" style={{width: '300px', height: '300px', border:'1.5px solid black'}}></img></div>
-    <div><img alt="img2" src="./images/bks2.jpg" style={{width: '300px', height: '300px',border:'1.5px solid black'}}></img></div>
-    <div><img alt="img3" src="./images/bks3.jpg" style={{width: '300px', height: '300px',border:'1.5px solid black'}}></img></div>
-    <div><img alt="img4" src="./images/bks4.jpg" style={{width: '300px', height: '300px',border:'1.5px solid black'}}></img></div>
-    </Carousel>
-  );
 }
 
-export default TopBookshelves;
-
+export default TopBookshelves
