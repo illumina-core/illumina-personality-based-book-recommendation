@@ -65,9 +65,5 @@ for genre in genres:
                         links = data['links'],
                         extra_details = extra_details
                     ).save()
-                    count.append(title)
                 except NotUniqueError:
                     continue
-                
-        
-print(len(set(count)))
