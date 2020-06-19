@@ -46,10 +46,25 @@ export const add_review = rev => {
     })
 }
 
-export const rateBook = newRating => {
+export const rate_book = rating => {
     return axios
     .post('rate-book', {
-        book: newRating.id,
-        rating: newRating.rating
+        book: rating.id,
+        rating: rating.new_rating
+    })
+
+}
+export const add_shelf = shelf => {
+    return axios
+    .post('add-shelf', {
+        shelf: shelf
+    })
+}
+    
+export const add_book_to_shelf = data =>{
+    return axios
+    .post('add-book-to-shelf',{
+        book: data.book,
+        shelf: data.shelf
     })
 }

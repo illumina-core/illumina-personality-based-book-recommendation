@@ -5,7 +5,8 @@ from datetime import datetime
 
 # review document schema
 class Reviews(EmbeddedDocument):
-    user = ReferenceField('Users', dbref=True, default=None)
+    username = StringField(unque=True)
+    profile_pic = StringField(default="../images/default_user.png")
     review_text = StringField()
     rating = FloatField(default=0.0)
     created = DateTimeField(default=datetime.utcnow())

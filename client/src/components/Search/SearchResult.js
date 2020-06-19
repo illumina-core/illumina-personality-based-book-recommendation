@@ -4,7 +4,7 @@ import { Navbar } from '../layout/Navbar'
 import { SearchItem } from './SearchItem'
 
 import Pagination from "react-js-pagination";
-import { search_book } from '../Services'
+import { search_book, getUser } from '../Services'
 
 export class SearchResult extends Component {
 
@@ -13,14 +13,24 @@ export class SearchResult extends Component {
         this.state ={
             books: [],
             total: 0,
-            activePage: 1
+            activePage: 1,
+            shelves: []
         }
     }
 
-    componentWillMount(){        
+    componentDidMount(){        
         search_book(window.location.href.split('?')[1]).then(res =>{                
             this.setState({books: JSON.parse(res.data.books)})
             this.setState({total: parseInt(res.data.total)})
+        })
+        getUser().then(res => {
+          const shelves = []
+          JSON.parse(res.data.user)['shelves'].forEach(shelf => {
+            shelves.push(shelf.shelf_title)
+          });
+          this.setState({shelves: shelves})
+        }).catch(err =>{
+          alert(err)
         })
     }   
 
@@ -55,7 +65,7 @@ export class SearchResult extends Component {
 
                     {
                     this.state.books.slice(10*(this.state.activePage-1), 10*this.state.activePage).map((book) => (
-                        <SearchItem key={book['_id']['$oid']} book={book} />
+                        <SearchItem key={book['_id']['$oid']} book={book} shelves={this.state.shelves}/>
                     ))
                     }
 

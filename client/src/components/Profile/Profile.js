@@ -14,7 +14,7 @@ export class Profile extends Component {
                 <div id="profile" className="container">
                     <div id="user_header" className="row">
                         <div className="col-md-auto">
-                            <img src = "./images/letter.jpg" id="profile_pic" className="rounded img"/>
+                            <img alt="" src = "./images/letter.jpg" id="profile_pic" className="rounded img"/>
                         </div>
 
                         <div className="col-md-5" style={{marginRight:'50px'}}>
@@ -52,7 +52,7 @@ export class Profile extends Component {
                         <div id="bookshelf" className="container">
                             <div className="row">
                                 <div className="col-md-auto" style={{paddingRight:'0px'}}>
-                                <img src="./images/bks1.jpg" id="bookshelf_img"></img>
+                                <img alt="" src="./images/bks1.jpg" id="bookshelf_img"></img>
                                 </div>
                                 <div className="col-md-auto">
                                     <h4 className="font-weight-light">Favourites</h4>
@@ -72,7 +72,7 @@ export class Profile extends Component {
                         <div id="bookshelf" className="container">
                             <div className="row">
                                 <div className="col-md-auto" style={{paddingRight:'0px'}}>
-                                <img src="./images/bks3.jpg" id="bookshelf_img"></img>
+                                <img alt="" src="./images/bks3.jpg" id="bookshelf_img"></img>
                                 </div>
                                 <div className="col-md-auto">
                                     <h4 className="font-weight-light">Samurai Stories</h4>

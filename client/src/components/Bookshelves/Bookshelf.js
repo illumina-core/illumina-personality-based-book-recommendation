@@ -1,14 +1,9 @@
 import React, { Component } from 'react'
-import ReactStars from "react-rating-stars-component"
 import './Bookshelf.css';
 
 export class Bookshelf extends Component {
 
   render() {
-
-    const ratingChanged = (newRating) => {
-      console.log(newRating);
-    }
 
     return (
       <div className="container-fluid" id="bks_book">
@@ -26,16 +21,6 @@ export class Bookshelf extends Component {
               <div className="col-9">
                 <h4 className="font-weight-light">{book.book_title}</h4>
                 <h5 className="font-weight-light">{book.author.toString()}</h5>
-              </div>
-          
-              <div className="col-auto">
-              <ReactStars
-                  count={5}
-                  value={book.user_rating[this.props.user]}
-                  onChange={ratingChanged}
-                  size={24}
-                  color2={"#ffd700"}
-                  />
               </div>
             </div>
           ))

@@ -1,44 +1,29 @@
 import React, { Component } from 'react'
 
 import { Link } from 'react-router-dom'
-import {logout, getUser} from '../Services'
+import {logout} from '../Services'
 
 export class UserMenu extends Component {
-
-    constructor(){
-        super()
-        this.state ={
-            user: {}
-        }
-    }
 
     logOut (e) {
         e.preventDefault()
         localStorage.removeItem('logged_in')
+        localStorage.removeItem('username')
+        localStorage.removeItem('profile_pic')
         
         logout().then(res =>{
             window.location.href = window.location.protocol + "//" + window.location.host
         })
     }
 
-    componentDidMount(){        
-        getUser().then(res => {
-            this.setState({user: JSON.parse(res.data.user)})
-        }).catch(err =>{
-            alert(err)
-        })
-    }
-
     render() {
-
-        const { profile_pic, username } = this.state.user
         const url = window.location.protocol + "//" + window.location.host
         return (
             <li className="nav-item dropdown ml-auto">
                 <Link to="#" className="nav-link dropdown-toggle" id="navDropDownLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img alt="" src={profile_pic} 
+                <img alt="" src={localStorage.profile_pic} 
                 width="32" height="32" className="rounded-circle img-fluid" style={{border: '2px solid black'}} />
-                &nbsp;{username}
+                &nbsp;{localStorage.username}
                 </Link>
                 <div className="dropdown-menu" aria-labelledby="navDropDownLink">
                     <a className="dropdown-item" href={url + '/dashboard'}>Dashboard</a>

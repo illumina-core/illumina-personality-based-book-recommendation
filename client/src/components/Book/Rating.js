@@ -1,24 +1,28 @@
 import React, { Component } from 'react'
 import ReactStars from 'react-rating-stars-component'
-import {rateBook} from '../Services'
+import {rate_book} from '../Services'
 
 export class Rating extends Component {
-
-    changeRating = (newRating) => {
-        rateBook(newRating).catch(err =>{
-            alert(err)
-        })
-    }
 
     render() {
         return (
             <ReactStars 
-                className="mx-auto"
-                size={25}
+                className={this.props.className}
+                size={this.props.size}
+                edit={this.props.edit}
                 value={this.props.value}
                 half={true}
                 name="rating"
-                onChange={newRating =>{changeRating(newRating)}}
+                onChange={new_rating =>{
+                    const rating = {
+                        new_rating, 
+                        id: this.props.id
+                    }
+                    rate_book(rating)
+                    .catch(err =>{
+                        alert(err)
+                    })
+                }}
             /> 
         )
     }

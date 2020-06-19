@@ -3,9 +3,10 @@ import React, { Component } from 'react'
 import AddReview from './AddReview'
 
 import { Link } from 'react-router-dom'
-import { get_book } from '../Services'
+import { get_book, add_book_to_shelf, getUser } from '../Services'
 import { Navbar } from '../layout/Navbar'
 import { Rating } from './Rating'
+
 
 export class Book extends Component {
 
@@ -15,23 +16,55 @@ export class Book extends Component {
             data: {},
             links: {},
             extra: {},
-            id: ''
+            reviews: [],
+            user_rating: 0,
+            id: '',
+            shelves: []
         }
+    }
+
+    handleInput(e) {
+        const arr = e.target.value.split('||')
+        const data = {
+            shelf: arr[0],
+            book: arr[1]
+        }
+        add_book_to_shelf(data).then(res =>{
+            alert('Book added')
+        }).catch(err =>{
+            alert(err)
+        })
     }
 
     componentDidMount(){    
         
         get_book(window.location.pathname.split('/').pop()).then(res =>{                
-            
             this.setState({data: JSON.parse(res.data.book)})
             this.setState({links: this.state.data['links']})
             this.setState({extra: this.state.data['extra_details']})
-            this.setState({id: this.state.data['_id']['$oid']})          
+            this.setState({reviews: this.state.data['reviews']})
+            this.setState({id: this.state.data['_id']['$oid']})   
+            
+            this.state.reviews.forEach(review => {
+                if(review.username === localStorage.username){
+                    this.setState({user_rating: review.rating})   
+                }
+            });
             
         }).catch(err =>{
             alert(err)
             window.history.back()
         })
+
+        getUser().then(res => {
+            const shelves = []
+            JSON.parse(res.data.user)['shelves'].forEach(shelf => {
+              shelves.push(shelf.shelf_title)
+            });
+            this.setState({shelves: shelves})
+          }).catch(err =>{
+            alert(err)
+          })
     }
 
     render() {
@@ -42,7 +75,6 @@ export class Book extends Component {
             genres,
             cover_image,
             avg_rating
-            // reviews
         } = this.state.data
         
         return (
@@ -51,6 +83,7 @@ export class Book extends Component {
             <div style={{height:'35px', backgroundColor:'#EAEDF1'}} />
             <div id="book" className="container-fluid">
                 <div className="row">
+
                     <div className="col-md-4">
                         <div id='book_image' className='container'>
                         <div className='row' style={{paddingBottom:'20px'}}>
@@ -62,17 +95,24 @@ export class Book extends Component {
                         <div  id='book_sidebar' className='container'>
                         <div className='row'>
                             <div className="col" align="center">
-                                <h4 className="font-weight-light" style={{marginBottom:'0px'}}>Rating: {avg_rating}</h4>
+                                <h4 className="font-weight-light" style={{marginBottom:'0px'}}>Average Rating: {avg_rating}</h4>
                             </div>
                         </div>
                         <div className='row'>
-                            <div className="col" align="center">Rate Book!</div>
+                            <div className="col pt-2" align="center">Rate Book!</div>
                         </div>
                         <div className='row'>
                             <div className="col">
-                                <Rating
-                                value={3}
+                                {/* ================ RATING ==================*/}
+                                {localStorage.logged_in && 
+                                <Rating 
+                                className={"mx-auto"}
+                                value={this.state.user_rating} 
+                                id={this.state.id} 
+                                edit={true} 
+                                size={25}
                                 />
+                                }
                             </div>
                         </div>
                         <div className='row mb-2'>
@@ -81,16 +121,17 @@ export class Book extends Component {
                                     <button type="button" className="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
                                     Add to Bookshelf
                                     </button>
-                                    <div className="dropdown-menu">
-                                    <Link className="dropdown-item" to="#">
-                                    Shelf A</Link>
-                                    <div className="dropdown-divider m-0"></div>
-                                    <Link className="dropdown-item" to="#">
-                                    Shelf B</Link>
-                                    <div className="dropdown-divider m-0"></div>
-                                    <Link className="dropdown-item" to="#">
-                                    Shelf C</Link>
-                                    </div>
+                                    <div className="dropdown-menu p-0">
+                                    {
+                                        this.state.shelves.map((shelf) =>(
+                                            <button key={shelf} 
+                                            value={shelf + '||' + this.state.id}
+                                            onClick={e => this.handleInput(e, "value")}
+                                            className="dropdown-item border border-top-0 border-right-0 border-left-0"
+                                            >{shelf}</button>
+                                        ))
+                                    }
+                                </div>
                                 </div>
                             </div>
                         </div>
@@ -151,16 +192,32 @@ export class Book extends Component {
                             <h5 className="font-weight-light"><b>Reviews</b></h5>
                         </div>
                         <div className="row" style={{backgroundColor:'white'}}>
+
+{/* ============================ REVIEWS ============================================= */}
+
                             <div className="container">
-                            <div id="review" className="row">
-                                <div className='col-md-1'>
-                                    <img src="#" className="rounded" alt="genres"></img>
-                                </div>
-                                <div className="col-md-11">
-                                    <p className="star font-weight-light"><span id="star" className="rating -green rated-8"> ★★★★ </span>  Review by <strong className="name">Stephy_H</strong> </p>
-                                    <p id="review_text" className="font-weight-light">This was funny, tense, gory &amp; excellent, it comes out the gate at full force and really keeps up at a pretty brisk pace of madness... It actually reminds me of early Danny Boyle like Shallow Grave, parts gave me vibes of Cabin Fever (2002) &amp; its also funny how it shares some similarities to The Lighthouse... Its straightforward unlike the lighthouse, and its a really loose connection but if you've seen both, hopefully you know where I'm coming from... This is a Dark comedy indie gem...</p>
-                                </div>
-                            </div>      
+                                { 
+                                this.state.reviews.map((review) =>  
+                                <div id="review" className="row" key={review.username}>
+                                        <div className='col-md-1'>
+                                            <img 
+                                            className="rounded img-fluid" 
+                                            src={review.profile_pic}
+                                            alt="profile pic" 
+                                            />
+                                        </div>
+                                        <div className="col-md-9 p-0">
+                                            Review by <strong className="name">{review.username}</strong> 
+                                            <Rating
+                                             className={"mx-0"}
+                                             value={review.rating} 
+                                             id={this.state.id} 
+                                             edit={false}
+                                            />
+                                            <p id="review_text" className="font-weight-light">{review.review_text}</p>
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                         </div>
                         </div>

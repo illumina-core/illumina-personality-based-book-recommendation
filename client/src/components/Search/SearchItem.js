@@ -1,8 +1,23 @@
 import React, { Component } from 'react'
 
 import { Link } from 'react-router-dom'
+import { add_book_to_shelf } from '../Services'
 
 export class SearchItem extends Component {
+
+    handleInput(e) {
+        const arr = e.target.value.split('||')
+        const data = {
+            shelf: arr[0],
+            book: arr[1]
+        }
+        add_book_to_shelf(data).then(res =>{
+            alert('Book added')
+        }).catch(err =>{
+            alert(err)
+        })
+    }
+
     render() {
         const { 
             _id,
@@ -35,12 +50,16 @@ export class SearchItem extends Component {
                     <button type="button" className="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
                         Add to Bookshelf
                     </button>
-                    <div className="dropdown-menu">
-                        <Link className="dropdown-item" to="#">Shelf A</Link>
-                        <div className="dropdown-divider m-0"></div>
-                        <Link className="dropdown-item" to="#">Shelf B</Link>
-                        <div className="dropdown-divider m-0"></div>
-                        <Link className="dropdown-item" to="#">Shelf C</Link>
+                    <div className="dropdown-menu p-0">
+                        {
+                            this.props.shelves.map((shelf) =>(
+                                <button key={shelf} 
+                                value={shelf + '||' + _id['$oid']}
+                                onClick={e => this.handleInput(e, "value")}
+                                className="dropdown-item border border-top-0 border-right-0 border-left-0"
+                                >{shelf}</button>
+                            ))
+                        }
                     </div>
                 </div>
             </div>

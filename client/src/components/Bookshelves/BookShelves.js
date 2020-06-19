@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Navbar from '../layout/Navbar'
 import Bookshelf from './Bookshelf'
+import AddShelf from './AddShelf'
 import ReactTooltip from "react-tooltip"
 import {getUser} from '../Services'
 import './Bookshelves.css';
@@ -43,6 +44,13 @@ export class BookShelves extends Component {
           <div className="row" id="bookshelf_icons">
             <div className="col-auto" md="auto" id="icons_col">
 
+              <div className="container-fluid">
+                <div className="row">
+                  {/* add shelf */}
+                  <AddShelf />
+                </div>
+              </div>
+
               {
                 this.state.shelves.map((shelf) =>(
                   <div id="icon_div" key={shelf.shelf_title}>
@@ -62,13 +70,13 @@ export class BookShelves extends Component {
             </div>
 
             <div className="col px-0">
-            {
+            {/* {
               this.state.shelves.map((shelf) =>( 
                 <div id={shelf.shelf_title} className="collapse" key={shelf.shelf_title}>
                   <Bookshelf books={shelf.shelved_books} shelf={shelf.shelf_title} user={this.state.user.username}/>
                 </div>
               ))
-            }
+            } */}
             </div>
 
           </div>                    

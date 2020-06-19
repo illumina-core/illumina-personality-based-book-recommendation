@@ -28,7 +28,7 @@ export class TopBookshelves extends Component {
     return (
       <div>
         {
-          this.props.shelves.length != 0 && 
+          this.props.shelves.length !== 0 && 
           <Carousel 
           swipeable={false}
           draggable={true}

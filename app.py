@@ -24,15 +24,6 @@ host = f'mongodb+srv://{username}:{password}@illumina-lmf8b.gcp.mongodb.net/{db}
 
 connect(host=host)
 
-def is_logged_in(f):
-    @wraps(f)
-    def wrap(*args, **kwargs):
-        if 'user' in session:
-            return f(*args, **kwargs)
-        else:
-            return jsonify({"user":"Not logged in."})
-    return wrap
-
 @app.route('/register', methods=["POST"])
 @app.route('/book/register', methods=["POST"])
 @app.route('/book-shelves/register', methods=['POST'])
@@ -73,7 +64,7 @@ def login():
     if bcrypt.check_password_hash(response['password'], password):
         session['user'] = response.to_json()
 
-        return jsonify({'user': response['username'] + ' logged in successfully!'})
+        return jsonify({'username': response['username'] , 'profile_pic': response['profile_pic']})
     else:
         return jsonify({"user":"Invalid Password"})
 
@@ -114,7 +105,9 @@ def get_book(id):
 @app.route('/book/get-user', methods=['GET'])
 @app.route('/book-shelves/get-user', methods=['GET'])
 def get_user():
-    return jsonify({"user":session['user']})
+    user = json.loads(session['user'])
+    user = Users.objects(username=user['username']).get()
+    return jsonify({"user":user.to_json()})
 
 @app.route('/book/add-review', methods=['POST'])
 def add_review():
@@ -122,29 +115,57 @@ def add_review():
     book = request.get_json()['book']
 
     user = json.loads(session['user'])
-    user = Users.objects(id=user['_id']['$oid']).get()
     book = Books.objects(id=book).get()
-    
-    r = Reviews(user=user,review_text=review)
 
-    book.reviews.append(r)
+    book.reviews.append(Reviews(
+        username=user['username'],
+        profile_pic=user['profile_pic'],
+        review_text=review
+        ))
     book.save()
     
     return jsonify({"result": True})
 
-@app.route('/rate-book', methods=['POST'])
-def rete_book():
+@app.route('/book/rate-book', methods=['POST'])
+def rate_book():
     book_id = request.get_json()['book']
     rating = request.get_json()['rating']
-
+ 
     book = Books.objects(id=book_id).get()
-    book['user_rating'] = {
-        session['user']['username'] : [rating, datetime.utcnow()]
-    }
+    user = json.loads(session['user'])
+
+    book.reviews.get(username=user['username'])['rating'] = rating
+    book.reviews.get(username=user['username'])['created'] = datetime.utcnow()
+
     book.save()
 
     return jsonify({"result": True})
 
+@app.route('/add-shelf', methods=['POST'])
+def add_shelf():
+    shelf = request.get_json()['shelf']
+    user = json.loads(session['user'])
+    user = Users.objects(username=user['username']).get()
+    user.shelves.append(Shelves(
+        shelf_title=shelf
+    ))
+    user.save()
+    return jsonify({"result": True})
+
+@app.route('/add-book-to-shelf', methods=['POST'])
+@app.route('/book/add-book-to-shelf', methods=['POST'])
+def add_book_to_shelf():
+    shelf = request.get_json()['shelf']
+    book = request.get_json()['book']
+
+    user = json.loads(session['user'])
+    user = Users.objects(username=user['username']).get()
+
+    user.shelves.get(shelf_title=shelf).shelved_books.append(
+        Books.objects(id=book).get()
+    )
+    user.save()
+    return jsonify({"result": True})
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -27,8 +27,10 @@ export class Login extends Component {
         }
 
         login(newUser).then(res => {
-            alert(res.data.user)
+            alert(res.data.username + " has logged in SUccessfully!")
             localStorage.setItem('logged_in', true)
+            localStorage.setItem('username', res.data.username)
+            localStorage.setItem('profile_pic', res.data.profile_pic)
             window.location.reload()
         }).catch(err => {
             alert(err)
