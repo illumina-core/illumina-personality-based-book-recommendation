@@ -5,7 +5,7 @@ import AddReview from './AddReview'
 import { Link } from 'react-router-dom'
 import { get_book } from '../Services'
 import { Navbar } from '../layout/Navbar'
-import { Ratings } from './Rating'
+import { Rating } from './Rating'
 
 export class Book extends Component {
 
@@ -70,7 +70,7 @@ export class Book extends Component {
                         </div>
                         <div className='row'>
                             <div className="col">
-                                <Ratings 
+                                <Rating
                                 value={3}
                                 />
                             </div>
