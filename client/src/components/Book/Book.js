@@ -5,7 +5,7 @@ import AddReview from './AddReview'
 import { Link } from 'react-router-dom'
 import { get_book, add_book_to_shelf, getUser } from '../Services'
 import { Navbar } from '../layout/Navbar'
-import { Rating } from './Rating'
+import  Rating  from './Rating'
 
 
 export class Book extends Component {

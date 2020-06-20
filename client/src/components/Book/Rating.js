@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import ReactStars from 'react-rating-stars-component'
+import ReactStars from "react-rating-stars-component";
 import {rate_book} from '../Services'
 
 export class Rating extends Component {

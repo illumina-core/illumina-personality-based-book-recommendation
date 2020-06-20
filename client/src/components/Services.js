@@ -68,3 +68,8 @@ export const add_book_to_shelf = data =>{
         shelf: data.shelf
     })
 }
+
+export const get_user_shelf = () =>{
+    return axios
+    .get('get-user-shelf')
+}

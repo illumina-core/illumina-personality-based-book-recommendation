@@ -167,5 +167,35 @@ def add_book_to_shelf():
     user.save()
     return jsonify({"result": True})
 
+
+@app.route('/get-user-shelf', methods=['GET'])
+@app.route('/book-shelves/get-user-shelf', methods=['GET'])
+def get_user_shelf():
+    user = json.loads(session['user'])
+    user = Users.objects(username=user['username']).get()
+
+    shelves = []
+    for shelf in user.shelves:
+        books = []
+        for book in shelf.shelved_books:
+            books.append(
+                {
+                'id': str(book.id),
+                'title': book.book_title,
+                'cover_image': book.cover_image,
+                'author': book.author
+                }
+            )
+        shelves.append(
+            {
+            "shelf_title": shelf.shelf_title,
+            "shelf_pic": shelf.shelf_pic,
+            "books": books
+            }
+        )
+
+    return jsonify({"shelves": json.dumps(shelves)})
+
+
 if __name__ == '__main__':
     app.run(debug=True)

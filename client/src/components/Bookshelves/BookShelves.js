@@ -3,7 +3,7 @@ import Navbar from '../layout/Navbar'
 import Bookshelf from './Bookshelf'
 import AddShelf from './AddShelf'
 import ReactTooltip from "react-tooltip"
-import {getUser} from '../Services'
+import {get_user_shelf} from '../Services'
 import './Bookshelves.css';
 
 export class BookShelves extends Component {
@@ -11,25 +11,16 @@ export class BookShelves extends Component {
   constructor(){
     super()
     this.state ={
-        user: {},
         shelves: []
     }
   }
 
-  componentDidMount(){
-    
-    getUser().then(res => {
-      this.setState({user: JSON.parse(res.data.user)})
-      this.setState({shelves: this.state.user['shelves']})
+  componentDidMount(){    
+    get_user_shelf().then(res => {
+      this.setState({shelves: JSON.parse(res.data.shelves)})
     }).catch(err =>{
       alert(err)
     })
-  }
-
-  componentWillUnmount(){
-    if ('shelf_title' in this.props.match.params){
-      document.getElementById(this.props.match.params.shelf_title).click()
-    }
   }
 
   render() {
@@ -45,14 +36,15 @@ export class BookShelves extends Component {
             <div className="col-auto" md="auto" id="icons_col">
 
               <div className="container-fluid">
-                <div className="row">
+                <div className="row py-1">
                   {/* add shelf */}
                   <AddShelf />
                 </div>
               </div>
 
               {
-                this.state.shelves.map((shelf) =>(
+                this.state.shelves.map((shelf) =>( 
+                  // this.props.match.params.shelf_title === shelf.shelf_title &&
                   <div id="icon_div" key={shelf.shelf_title}>
                     <img 
                     className="rounded img-fluid" 
@@ -61,24 +53,34 @@ export class BookShelves extends Component {
                     src={shelf.shelf_pic} 
                     data-toggle="collapse" 
                     data-target={"#" + shelf.shelf_title} 
-                    id="toggler2" 
+                    // id={shelf.shelf_title} 
                     />
                   <ReactTooltip />
                   </div>
-                ))
+                  ))
               }
             </div>
 
             <div className="col px-0">
-            {/* {
-              this.state.shelves.map((shelf) =>( 
-                <div id={shelf.shelf_title} className="collapse" key={shelf.shelf_title}>
-                  <Bookshelf books={shelf.shelved_books} shelf={shelf.shelf_title} user={this.state.user.username}/>
-                </div>
+            {
+              this.state.shelves.map((shelf) =>(
+                <React.Fragment key={shelf.shelf_title}>
+                  {
+                  this.props.match.params.shelf_title === shelf.shelf_title &&
+                  <div id={shelf.shelf_title} className="collapse show">
+                    <Bookshelf books={shelf.books} shelf={shelf.shelf_title} />
+                  </div>
+                  }
+                  {
+                  this.props.match.params.shelf_title !== shelf.shelf_title &&
+                  <div id={shelf.shelf_title} className="collapse">
+                    <Bookshelf books={shelf.books} shelf={shelf.shelf_title} />
+                  </div>
+                  }
+                </React.Fragment>
               ))
-            } */}
+            }
             </div>
-
           </div>                    
         </div>  
       </div>
