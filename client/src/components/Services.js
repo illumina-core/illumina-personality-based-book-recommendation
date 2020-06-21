@@ -73,3 +73,8 @@ export const get_user_shelf = () =>{
     return axios
     .get('get-user-shelf')
 }
+
+export const get_book_recommendation = () =>{
+    return axios
+    .get('get-book-recommendation')
+}

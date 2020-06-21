@@ -30,7 +30,7 @@ export class AddShelf extends Component {
 
     render() {
         return (
-            <div>
+            <React.Fragment>
             <button type="button" className="btn" data-toggle="modal" data-target="#myModal">
                 <i className="fa fa-plus" aria-hidden="true" />
             </button>
@@ -63,7 +63,7 @@ export class AddShelf extends Component {
                     </div>
                 </div>
             </div>
-            </div>
+            </React.Fragment>
         )
     }
 }

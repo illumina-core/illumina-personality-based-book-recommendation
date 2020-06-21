@@ -3,6 +3,8 @@ from flask_bcrypt import Bcrypt
 from flask_cors import CORS
 import json
 from datetime import datetime
+import random
+from collections import Counter
 
 from mongoengine import connect
 from mongoengine.queryset.visitor import Q
@@ -141,6 +143,7 @@ def rate_book():
 
     return jsonify({"result": True})
 
+@app.route('/book-shelves/add-shelf', methods=['POST'])
 @app.route('/add-shelf', methods=['POST'])
 def add_shelf():
     shelf = request.get_json()['shelf']
@@ -196,6 +199,42 @@ def get_user_shelf():
 
     return jsonify({"shelves": json.dumps(shelves)})
 
+
+@app.route('/get-book-recommendation', methods=['GET'])
+def get_book_recommendation():
+
+    user = json.loads(session['user'])
+    user = Users.objects(username=user['username']).get()
+
+    genres = []
+    ignore_books = []
+    for shelf in user.shelves:
+        for book in shelf.shelved_books:
+            ignore_books.append(book['id'])
+            for genre in book.genres:
+                genres.append(genre)
+
+    genres = list(dict(Counter(genres).most_common()).keys())
+
+    if len(genres) > 3:
+        genres = genres[:3]
+
+    books = Books.objects(
+        Q(avg_rating__gte=4.5) & Q(genres__in=list(genres)) & Q(id__nin=list(set(ignore_books)))
+        ).only(
+        'book_title',
+        'id',
+        'cover_image',
+        'author',
+        'description',
+        'genres',
+        'avg_rating'
+    ).to_json()
+    
+    books = json.loads(books)
+    books = random.sample(books,6)
+
+    return jsonify({"rec": json.dumps(books)})
 
 if __name__ == '__main__':
     app.run(debug=True)

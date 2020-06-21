@@ -1,114 +1,113 @@
-import React from 'react';
+import React, { Component } from 'react'
+import { get_book_recommendation } from '../Services'
 
+export class RecommendBooks extends Component {
 
+  constructor(){
+    super()
+    this.state ={
+        recs: []
+    }
+}
+  
+  componentDidMount(){
+    get_book_recommendation().then(res =>{
+      this.setState({recs: JSON.parse(res.data.rec)})
+    })
+  }
 
-const RecommendBooks = (props) => {
-  return (
-    <div className="container" style={{paddingTop:'16px'}}>
+  render() {
+    const url = window.location.protocol + "//" + window.location.host
+    return (
+    <div className="container-fluid" style={{paddingTop:'16px'}}>
+
       <div className="row" style={{paddingBottom:'12px'}}>
-        <div className="col" >
-          <div className="card" style={{border:'1.5px solid #151B2D'}}>
-              <div className="row">
-                  <div className="col-sm-4" >
-                      <img className="card-img-top" style={{width:'150px'}} src="./images/redwall.jpg" alt="Card cap" />
-                  </div>
-                  <div className="col-sm-8" >
-                    <div className="card-body">
-                      <h4 className="card-title">Card title</h4>
-                      <p className="card-subtitle">Card subtitle</p>
-                      <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      {
+        this.state.recs.slice(0, 2).map((book) =>(
+          <div className="col" key={book['_id']['$oid']}>
+            <div className="card" style={{border:'1.5px solid #151B2D'}}>
+                <div className="row">
+                    <div className="col-sm-4" >
+                        <img className="card-img-top img-fluid" style={{width:'150px'}}
+                          src={book.cover_image} alt="Card cap" />
                     </div>
-                  </div>
-              </div>
-          </div>
-        </div>
-        <div className="col" >
-          <div className="card" style={{border:'1.5px solid #151B2D'}}>
-              <div className="row">
-                  <div className="col-sm-4" >
-                      <img className="card-img-top" style={{width:'150px'}} src="./images/redwall.jpg" alt="Card cap" />
-                  </div>
-                  <div className="col-sm-8" >
-                    <div className="card-body">
-                      <h4 className="card-title">Card title</h4>
-                      <p className="card-subtitle">Card subtitle</p>
-                      <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <div className="col-sm-8" >
+                      <div className="card-body">
+                        <h3 className="card-title">
+                          <a href={url + '/book/' + book['_id']['$oid']}>
+                            {book.book_title}
+                          </a>
+                        </h3>
+                        <p className="card-subtitle"><b>Authors:</b> {book.author.toString()}</p>
+                        <p className="card-subtitle"><b>Genres:</b> {book.genres.toString()}</p>
+                        {/* <p className="card-text">{book.description}</p> */}
+                      </div>
                     </div>
-                  </div>
-              </div>
+                </div>
+            </div>
           </div>
-        </div>
+        ))
+      }
       </div>
       <div className="row" style={{paddingBottom:'12px'}}>
-        <div className="col" >
-          <div className="card" style={{border:'1.5px solid #151B2D'}}>
-              <div className="row">
-                  <div className="col-sm-4" >
-                      <img className="card-img-top" style={{width:'150px'}} src="./images/redwall.jpg" alt="Card cap" />
-                  </div>
-                  <div className="col-sm-8" >
-                    <div className="card-body">
-                      <h4 className="card-title">Card title</h4>
-                      <p className="card-subtitle">Card subtitle</p>
-                      <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      {
+        this.state.recs.slice(2, 4).map((book) =>(
+          <div className="col" key={book['_id']['$oid']}>
+            <div className="card" style={{border:'1.5px solid #151B2D'}}>
+                <div className="row">
+                    <div className="col-sm-4" >
+                        <img className="card-img-top img-fluid" style={{width:'150px'}}
+                          src={book.cover_image} alt="Card cap" />
                     </div>
-                  </div>
-              </div>
-          </div>
-        </div>
-        <div className="col" >
-          <div className="card" style={{border:'1.5px solid #151B2D'}}>
-              <div className="row">
-                  <div className="col-sm-4" >
-                      <img className="card-img-top" style={{width:'150px'}} src="./images/redwall.jpg" alt="Card cap" />
-                  </div>
-                  <div className="col-sm-8" >
-                    <div className="card-body">
-                      <h4 className="card-title">Card title</h4>
-                      <p className="card-subtitle">Card subtitle</p>
-                      <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <div className="col-sm-8" >
+                      <div className="card-body">
+                        <h3 className="card-title">
+                          <a href={url + '/book/' + book['_id']['$oid']}>
+                            {book.book_title}
+                          </a>
+                        </h3>
+                        <p className="card-subtitle">Authors: {book.author.toString()}</p>
+                        <p className="card-subtitle">Authors: {book.genres.toString()}</p>
+                        {/* <p className="card-text">{book.description}</p> */}
+                      </div>
                     </div>
-                  </div>
-              </div>
+                </div>
+            </div>
           </div>
-        </div>
+        ))
+      }
       </div>
       <div className="row" style={{paddingBottom:'12px'}}>
-        <div className="col" >
-          <div className="card" style={{border:'1.5px solid #151B2D'}}>
-              <div className="row">
-                  <div className="col-sm-4" >
-                      <img className="card-img-top" style={{width:'150px'}} src="./images/redwall.jpg" alt="Card cap" />
-                  </div>
-                  <div className="col-sm-8" >
-                    <div className="card-body">
-                      <h4 className="card-title">Card title</h4>
-                      <p className="card-subtitle">Card subtitle</p>
-                      <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      {
+        this.state.recs.slice(4, 6).map((book) =>(
+          <div className="col" key={book['_id']['$oid']}>
+            <div className="card" style={{border:'1.5px solid #151B2D'}}>
+                <div className="row">
+                    <div className="col-sm-4" >
+                        <img className="card-img-top img-fluid" style={{width:'150px'}}
+                          src={book.cover_image} alt="Card cap" />
                     </div>
-                  </div>
-              </div>
-          </div>
-        </div>
-        <div className="col" >
-          <div className="card" style={{border:'1.5px solid #151B2D'}}>
-              <div className="row">
-                  <div className="col-sm-4" >
-                      <img className="card-img-top" style={{width:'150px'}} src="./images/redwall.jpg" alt="Card cap" />
-                  </div>
-                  <div className="col-sm-8" >
-                    <div className="card-body">
-                      <h4 className="card-title">Card title</h4>
-                      <p className="card-subtitle">Card subtitle</p>
-                      <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <div className="col-sm-8" >
+                      <div className="card-body">
+                        <h3 className="card-title">
+                          <a href={url + '/book/' + book['_id']['$oid']}>
+                            {book.book_title}
+                          </a>
+                        </h3>
+                        <p className="card-subtitle">Authors: {book.author.toString()}</p>
+                        <p className="card-subtitle">Authors: {book.genres.toString()}</p>
+                        {/* <p className="card-text">{book.description}</p> */}
+                      </div>
                     </div>
-                  </div>
-              </div>
+                </div>
+            </div>
           </div>
-        </div>
+        ))
+      }
       </div>
     </div>
-  );
-};
+    )
+  }
+}
 
-export default RecommendBooks;
+export default RecommendBooks

@@ -33,7 +33,7 @@ export class BookShelves extends Component {
           </div>
           
           <div className="row" id="bookshelf_icons">
-            <div className="col-auto" md="auto" id="icons_col">
+            <div className="col-auto" id="icons_col">
 
               <div className="container-fluid">
                 <div className="row py-1">
@@ -44,7 +44,6 @@ export class BookShelves extends Component {
 
               {
                 this.state.shelves.map((shelf) =>( 
-                  // this.props.match.params.shelf_title === shelf.shelf_title &&
                   <div id="icon_div" key={shelf.shelf_title}>
                     <img 
                     className="rounded img-fluid" 
@@ -53,7 +52,6 @@ export class BookShelves extends Component {
                     src={shelf.shelf_pic} 
                     data-toggle="collapse" 
                     data-target={"#" + shelf.shelf_title} 
-                    // id={shelf.shelf_title} 
                     />
                   <ReactTooltip />
                   </div>

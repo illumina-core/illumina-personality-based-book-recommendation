@@ -49,7 +49,7 @@ export class TopBookshelves extends Component {
                   </div>
                   <div className="row">
                     <a href={this.props.url + "/book-shelves/" + shelf.shelf_title}>
-                      <img className="img-fluid" alt={shelf.shelf_title} src={shelf.shelf_pic} style={car_style} />
+                      <img className="img-fluid p-1" alt={shelf.shelf_title} src={shelf.shelf_pic} style={car_style} />
                     </a>
                   </div>
                 </div>

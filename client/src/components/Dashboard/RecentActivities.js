@@ -9,7 +9,7 @@ const RecentActivities = (props) => {
     
   return (
       
-    <div className="container mh-50" style={{overflowY:'scroll'}}>
+    <div className="container-fluid" style={{overflowY:'scroll'}}>
         <div className="row pb-2">
             <div className="col-md-1">
                 <img alt="redwal" src="./images/redwall.jpg" style={{width:'80px'}}/>

@@ -5,6 +5,7 @@ export class Bookshelf extends Component {
 
   render() {
 
+    const url = window.location.protocol + "//" + window.location.host
     return (
       <div className="container-fluid pt-0" id="bks_book">
         <div className="row">
@@ -19,7 +20,11 @@ export class Bookshelf extends Component {
               </div>
 
               <div className="col-9">
-                <h4 className="font-weight-light">{book.title}</h4>
+                <h4 className="font-weight-light">
+                  <a href={url + '/book/' + book.id}>
+                    {book.title}
+                  </a>
+                </h4>
                 <h5 className="font-weight-light">{book.author.toString()}</h5>
               </div>
             </div>
