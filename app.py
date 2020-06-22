@@ -216,8 +216,8 @@ def get_book_recommendation():
 
     genres = list(dict(Counter(genres).most_common()).keys())
 
-    if len(genres) > 3:
-        genres = genres[:3]
+    if len(genres) > 5:
+        genres = genres[:5]
 
     books = Books.objects(
         Q(avg_rating__gte=4.5) & Q(genres__in=list(genres)) & Q(id__nin=list(set(ignore_books)))
@@ -226,7 +226,6 @@ def get_book_recommendation():
         'id',
         'cover_image',
         'author',
-        'description',
         'genres',
         'avg_rating'
     ).to_json()
@@ -238,3 +237,8 @@ def get_book_recommendation():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+# add user, genre, author to search
+# add remove button to book shelves for shelf and books
+# create profile form
+# create personality graph

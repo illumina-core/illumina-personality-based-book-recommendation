@@ -40,7 +40,6 @@ export class RecommendBooks extends Component {
                         </h3>
                         <p className="card-subtitle"><b>Authors:</b> {book.author.toString()}</p>
                         <p className="card-subtitle"><b>Genres:</b> {book.genres.toString()}</p>
-                        {/* <p className="card-text">{book.description}</p> */}
                       </div>
                     </div>
                 </div>
@@ -66,9 +65,8 @@ export class RecommendBooks extends Component {
                             {book.book_title}
                           </a>
                         </h3>
-                        <p className="card-subtitle">Authors: {book.author.toString()}</p>
-                        <p className="card-subtitle">Authors: {book.genres.toString()}</p>
-                        {/* <p className="card-text">{book.description}</p> */}
+                        <p className="card-subtitle"><b>Authors:</b> {book.author.toString()}</p>
+                        <p className="card-subtitle"><b>Genres:</b> {book.genres.toString()}</p>
                       </div>
                     </div>
                 </div>
@@ -94,9 +92,8 @@ export class RecommendBooks extends Component {
                             {book.book_title}
                           </a>
                         </h3>
-                        <p className="card-subtitle">Authors: {book.author.toString()}</p>
-                        <p className="card-subtitle">Authors: {book.genres.toString()}</p>
-                        {/* <p className="card-text">{book.description}</p> */}
+                        <p className="card-subtitle"><b>Authors:</b> {book.author.toString()}</p>
+                        <p className="card-subtitle"><b>Genres:</b> {book.genres.toString()}</p>
                       </div>
                     </div>
                 </div>

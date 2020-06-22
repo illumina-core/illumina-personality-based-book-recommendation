@@ -15,8 +15,8 @@ html,body {
 }
 
 #bookshelf_icons img{
-    width: 50px;
-    border: 2px solid #151B2D;
+    /* width: 50px; */
+    border: 1px solid #151B2D;
 }
 
 #icon_div{

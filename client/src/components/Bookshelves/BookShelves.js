@@ -33,7 +33,7 @@ export class BookShelves extends Component {
           </div>
           
           <div className="row" id="bookshelf_icons">
-            <div className="col-auto" id="icons_col">
+            <div className="col-1"  id="icons_col">
 
               <div className="container-fluid">
                 <div className="row py-1">
@@ -46,7 +46,7 @@ export class BookShelves extends Component {
                 this.state.shelves.map((shelf) =>( 
                   <div id="icon_div" key={shelf.shelf_title}>
                     <img 
-                    className="rounded img-fluid" 
+                    className="img-fluid btn-light" 
                     alt={shelf.shelf_title} 
                     data-tip={shelf.shelf_title} 
                     src={shelf.shelf_pic} 
@@ -59,7 +59,7 @@ export class BookShelves extends Component {
               }
             </div>
 
-            <div className="col px-0">
+            <div className="col-11 px-0">
             {
               this.state.shelves.map((shelf) =>(
                 <React.Fragment key={shelf.shelf_title}>

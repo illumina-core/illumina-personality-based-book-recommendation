@@ -22,11 +22,11 @@
 
 /******************BOOKSHELVES**********************/
 #topbookshelves{
-    border-left:1.5px solid #2C3554;
-    border-right:1.5px solid #2C3554;
+    /* border-left:1.5px solid #2C3554; */
+    /* border-right:1.5px solid #2C3554; */
     border-bottom:1.5px solid #2C3554;
-    padding-top: 45px;
-    padding-bottom: 45px;
+    /* padding-top: 45px; */
+    /* padding-bottom: 45px; */
     background-color: white;
 }
 
@@ -39,8 +39,8 @@
 
 /**************RECOMMENDED BOOKS**********************/
 #recommend_books{
-    border-left:1.5px solid #2C3554;
-    border-right:1.5px solid #2C3554;
+    /* border-left:1.5px solid #2C3554; */
+    /* border-right:1.5px solid #2C3554; */
     border-top:1.5px solid #2C3554;
     border-bottom:1.5px solid #2C3554;
     padding-bottom: 35px;
@@ -59,19 +59,22 @@
 
 /******************BOOKSHELVES**********************/
 #topbookshelves{
-    border-left:1.5px solid #2C3554;
-    border-right:1.5px solid #2C3554;
+    /* border-left:1.5px solid #2C3554; */
+    /* border-right:1.5px solid #2C3554; */
     border-bottom:1.5px solid #2C3554;
     padding-top: 45px;
     padding-bottom: 45px;
     background-color: white;
 }
 
-#topbookshelves h3{
-    font-size: 31px;
-    color: #151B2D;
+#topbookshelves div div h3 a{
+    width: 250px;
+    padding-top: 15px;
     padding-bottom: 15px;
-    text-align: center;
+    background-color:#151B2D;
+    color: white;
+    border: 1.5px solid #151B2D;
+    border-radius: 0px 50px 50px 0px;
 }
 
 /**************RECENT ACTIVITIES******************/
