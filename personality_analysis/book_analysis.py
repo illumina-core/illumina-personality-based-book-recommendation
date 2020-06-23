@@ -15,7 +15,7 @@ def predict_review(bookshelf_data):
         if not os.path.exists(cwd + "/data/results/" + bookshelf_key):
             os.mkdir(cwd + "/data/results/" + bookshelf_key)
 
-        for x in range(parts-1):
+        for x in range(parts):
             part = str(x+1)
             with open("data/cleansed_books/" + bookshelf_key + "/part_" + part + ".json", encoding="utf8") as read_file:
                 book_data = json.load(read_file)
@@ -50,7 +50,7 @@ def average_review(bookshelf_data):
             if not os.path.exists(cwd + "/data/average/" + bookshelf_key):
                 os.mkdir(cwd + "/data/average/" + bookshelf_key)
 
-            for x in range(parts-1):
+            for x in range(parts):
                 part = str(x+1)
                 with open("data/results/" + bookshelf_key + "/part_" + part + ".json", encoding="utf8") as read_file:
                     book_data = json.load(read_file)
@@ -85,7 +85,7 @@ def average_review(bookshelf_data):
                             avg_traits["NEU"] = avg_traits["NEU"] / range_x   
                         
                         personality[book_key] = avg_traits
-                        
+
 with open("data/book_list.json", encoding="utf8") as read_file:
     bookshelf_data = json.load(read_file)
 
