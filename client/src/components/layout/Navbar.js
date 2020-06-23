@@ -8,7 +8,8 @@ export class Navbar extends Component {
     constructor(){
         super()
         this.state ={
-            search: ''
+            search: '',
+            search_type: 'opt1'
         }
         this.onChange = this.onChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
@@ -20,8 +21,23 @@ export class Navbar extends Component {
 
     onSubmit(e){
         e.preventDefault()
-        window.location.href = window.location.protocol + "//" + window.location.host + 
-        "/search?title=" + this.state.search;
+
+        if(this.state.search_type === 'opt1'){
+            window.location.href = window.location.protocol + "//" + window.location.host + 
+            "/search?title=" + this.state.search;
+        }
+        else if(this.state.search_type === 'opt2'){
+            window.location.href = window.location.protocol + "//" + window.location.host + 
+            "/search?genre=" + this.state.search;
+        }
+        else if(this.state.search_type === 'opt3'){
+            window.location.href = window.location.protocol + "//" + window.location.host + 
+            "/search?author=" + this.state.search;
+        }
+        else if(this.state.search_type === 'opt4'){
+            window.location.href = window.location.protocol + "//" + window.location.host + 
+            "/search?title=" + this.state.search;
+        }
     }
    
     render() {
@@ -47,7 +63,42 @@ export class Navbar extends Component {
                                 value={this.state.search}
                                 onChange={this.onChange}
                                 placeholder="Search" aria-label="Search"/>
+
+                                <div className="btn-group">
                                 <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                                {/* <button type="button" className="btn btn-outline-success my-2 my-sm-0 dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
+                                </button>
+                                <div className="dropdown-menu">
+                                    <label className="form-check-label">
+                                        <input type="radio" className="form-check-input" name="search_type"
+                                        value={'opt1'}
+                                        checked={this.state.search_type === "opt1"}
+                                        onChange={this.onChange}
+                                        />Book Title
+                                    </label>
+                                    <label className="form-check-label">
+                                        <input type="radio" className="form-check-input" name="search_type"
+                                        value={'opt2'}
+                                        checked={this.state.search_type === "opt2"}
+                                        onChange={this.onChange}
+                                        />Genre
+                                    </label>
+                                    <label className="form-check-label">
+                                        <input type="radio" className="form-check-input" name="search_type"
+                                        value={'opt3'}
+                                        checked={this.state.search_type === "opt3"}
+                                        onChange={this.onChange}
+                                        />Author
+                                    </label>
+                                    <label className="form-check-label">
+                                        <input type="radio" className="form-check-input" name="search_type"
+                                        value={'opt4'}
+                                        checked={this.state.search_type === "opt4"}
+                                        onChange={this.onChange}
+                                        />User
+                                    </label>
+                                </div> */}
+                                </div>
                             </form>
 
                             </li>

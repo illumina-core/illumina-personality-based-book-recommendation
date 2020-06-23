@@ -51,7 +51,7 @@ export class SearchItem extends Component {
                         Add to Bookshelf
                     </button>
                     <div className="dropdown-menu p-0">
-                        {
+                        {localStorage.logged_in && 
                             this.props.shelves.map((shelf) =>(
                                 <button key={shelf} 
                                 value={shelf + '||' + _id['$oid']}

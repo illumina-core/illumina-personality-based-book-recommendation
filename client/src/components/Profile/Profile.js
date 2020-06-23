@@ -42,6 +42,9 @@ export class Profile extends Component {
                         <div className="col">
                             <button className="btn btn-lg btn-secondary">Personalize Me</button></div>
                     </div>
+                    <div className="row" style={{borderTop:'1.5px solid #151B2D'}}>
+                        here
+                    </div>
                 </div>
             </div>
         )

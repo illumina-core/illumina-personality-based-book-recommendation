@@ -18,7 +18,9 @@ export class Rating extends Component {
                         new_rating, 
                         id: this.props.id
                     }
-                    rate_book(rating)
+                    rate_book(rating).then(res =>{
+                        window.location.reload()
+                    })
                     .catch(err =>{
                         alert(err)
                     })

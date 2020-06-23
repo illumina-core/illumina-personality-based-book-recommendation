@@ -4,7 +4,7 @@ import { Navbar } from '../layout/Navbar'
 import { SearchItem } from './SearchItem'
 
 import Pagination from "react-js-pagination";
-import { search_book, getUser } from '../Services'
+import { search_book } from '../Services'
 
 export class SearchResult extends Component {
 
@@ -19,20 +19,14 @@ export class SearchResult extends Component {
     }
 
     componentDidMount(){        
-        search_book(window.location.href.split('?')[1]).then(res =>{                
+        search_book(window.location.href.split('?')[1]).then(res =>{  
             this.setState({books: JSON.parse(res.data.books)})
             this.setState({total: parseInt(res.data.total)})
+            if(localStorage.logged_in){
+              this.setState({shelves: res.data.shelves})
+            }
         })
-        getUser().then(res => {
-          const shelves = []
-          JSON.parse(res.data.user)['shelves'].forEach(shelf => {
-            shelves.push(shelf.shelf_title)
-          });
-          this.setState({shelves: shelves})
-        }).catch(err =>{
-          alert(err)
-        })
-    }   
+      }   
 
     handlePageChange(pageNumber) {
         this.setState({ activePage: pageNumber })

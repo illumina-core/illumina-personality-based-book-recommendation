@@ -78,3 +78,25 @@ export const get_book_recommendation = () =>{
     return axios
     .get('get-book-recommendation')
 }
+
+export const remove_review = book =>{
+    return axios
+    .post('remove-review', {
+        book: book
+    })
+}
+
+export const remove_shelf_book = data =>{
+    return axios
+    .post('remove-shelf-book', {
+        book: data.book,
+        shelf: data.shelf
+    })
+
+}
+export const remove_shelf = shelf =>{
+    return axios
+    .post('remove-shelf', {
+        shelf: shelf
+    })
+}
