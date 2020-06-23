@@ -64,7 +64,7 @@ def login():
         return jsonify({"user": "Invalid login id"})
 
     if bcrypt.check_password_hash(response['password'], password):
-        session['user'] = response.to_json()
+        session['user'] = response['username']
 
         return jsonify({'username': response['username'] , 'profile_pic': response['profile_pic']})
     else:
@@ -79,19 +79,32 @@ def logout():
 
 @app.route('/search', methods=['GET'])
 def search_book():
-    title = request.args.get('title', default = '', type = str)
-    # page = request.args.get('page', default = 1, type = int)
-
-    books = Books.objects(book_title__icontains=title)
+    title = request.args.get('title', default = None, type = str)
+    
+    books = Books.objects(book_title__icontains=title).only(
+        'book_title',
+        'id',
+        'cover_image',
+        'avg_rating',
+        'genres',
+        'author'
+    )
 
     lim = 10
-    total = len(books)
+    total = books.count()
     if total%lim != 0:
         total = int(total/lim) + 1
     else:
         total = int(total/lim)
 
-    # books = books[lim*(page-1):lim*page]
+    if 'user' in session:
+        user = Users.objects(username=session['user']).get()
+        shelves = []
+        for shelf in user['shelves']:
+            shelves.append(shelf['shelf_title'])
+
+        return  jsonify({"books":books.to_json(), "total": total, "shelves": shelves})
+
     return  jsonify({"books":books.to_json(), "total": total})
 
 @app.route('/book/<id>', methods=['GET'])
@@ -101,14 +114,21 @@ def get_book(id):
     except:
         return jsonify({"err": "Book not found"})
         
+    if 'user' in session:
+        user = Users.objects(username=session['user']).get()
+        shelves = []
+        for shelf in user['shelves']:
+            shelves.append(shelf['shelf_title'])
+
+        return  jsonify({"book":book.to_json(), "shelves": shelves})
+
     return  jsonify({"book":book.to_json()})
  
 @app.route('/get-user', methods=['GET'])
 @app.route('/book/get-user', methods=['GET'])
 @app.route('/book-shelves/get-user', methods=['GET'])
 def get_user():
-    user = json.loads(session['user'])
-    user = Users.objects(username=user['username']).get()
+    user = Users.objects(username=session['user']).get()
     return jsonify({"user":user.to_json()})
 
 @app.route('/book/add-review', methods=['POST'])
@@ -116,14 +136,18 @@ def add_review():
     review = request.get_json()['review']
     book = request.get_json()['book']
 
-    user = json.loads(session['user'])
+    user = Users.objects(username=session['user']).only('username', 'profile_pic').get()
     book = Books.objects(id=book).get()
 
-    book.reviews.append(Reviews(
-        username=user['username'],
-        profile_pic=user['profile_pic'],
-        review_text=review
-        ))
+    try:
+        book.reviews.get(username=session['user'])['review_text'] = review
+    except DoesNotExist:
+        book.reviews.append(Reviews(
+            username=user['username'],
+            profile_pic=user['profile_pic'],
+            review_text=review
+            ))
+
     book.save()
     
     return jsonify({"result": True})
@@ -134,10 +158,16 @@ def rate_book():
     rating = request.get_json()['rating']
  
     book = Books.objects(id=book_id).get()
-    user = json.loads(session['user'])
 
-    book.reviews.get(username=user['username'])['rating'] = rating
-    book.reviews.get(username=user['username'])['created'] = datetime.utcnow()
+    try:
+        book.reviews.get(username=session['user'])['rating'] = rating
+        book.reviews.get(username=session['user'])['created'] = datetime.utcnow()
+    except DoesNotExist:
+        user = Users.objects(username=session['user']).only('username', 'profile_pic').get()
+        book.reviews.append(Reviews(
+            username=user['username'],
+            profile_pic=user['profile_pic']
+        ))
 
     book.save()
 
@@ -147,8 +177,7 @@ def rate_book():
 @app.route('/add-shelf', methods=['POST'])
 def add_shelf():
     shelf = request.get_json()['shelf']
-    user = json.loads(session['user'])
-    user = Users.objects(username=user['username']).get()
+    user = Users.objects(username=session['user']).get()
     user.shelves.append(Shelves(
         shelf_title=shelf
     ))
@@ -161,8 +190,7 @@ def add_book_to_shelf():
     shelf = request.get_json()['shelf']
     book = request.get_json()['book']
 
-    user = json.loads(session['user'])
-    user = Users.objects(username=user['username']).get()
+    user = Users.objects(username=session['user']).get()
 
     user.shelves.get(shelf_title=shelf).shelved_books.append(
         Books.objects(id=book).get()
@@ -170,12 +198,10 @@ def add_book_to_shelf():
     user.save()
     return jsonify({"result": True})
 
-
 @app.route('/get-user-shelf', methods=['GET'])
 @app.route('/book-shelves/get-user-shelf', methods=['GET'])
 def get_user_shelf():
-    user = json.loads(session['user'])
-    user = Users.objects(username=user['username']).get()
+    user = Users.objects(username=session['user']).get()
 
     shelves = []
     for shelf in user.shelves:
@@ -199,12 +225,9 @@ def get_user_shelf():
 
     return jsonify({"shelves": json.dumps(shelves)})
 
-
 @app.route('/get-book-recommendation', methods=['GET'])
 def get_book_recommendation():
-
-    user = json.loads(session['user'])
-    user = Users.objects(username=user['username']).get()
+    user = Users.objects(username=session['user']).get()
 
     genres = []
     ignore_books = []
@@ -235,10 +258,43 @@ def get_book_recommendation():
 
     return jsonify({"rec": json.dumps(books)})
 
+@app.route('/book/remove-review', methods=['POST'])
+def remove_review():
+    book = request.get_json()['book']
+
+    book = Books.objects(id=book).get()
+    book.reviews.remove(book.reviews.get(username=session['user']))
+    book.save()
+
+    return jsonify({'result': True})
+
+@app.route('/remove-shelf-book', methods=['POST'])
+def remove_shelf_book():
+    book = request.get_json()['book']
+    shelf = request.get_json()['shelf']
+
+    user = Users.objects(username=session['user']).get()
+    user.shelves.get(shelf_title=shelf).shelved_books.remove(Books.objects(id=book).get())
+    
+    user.save()
+
+    return jsonify({'result': True})
+
+@app.route('/remove-shelf', methods=['POST'])
+def remove_shelf():
+    shelf = request.get_json()['shelf']
+
+    user = Users.objects(username=session['user']).get()
+    user.shelves.remove(user.shelves.get(shelf_title=shelf))
+    
+    user.save()
+
+    return jsonify({'result': True})
+
 if __name__ == '__main__':
     app.run(debug=True)
 
-# add user, genre, author to search
-# add remove button to book shelves for shelf and books
+# add user, genre, author to search | not doing
+# add remove button to book shelves for shelf and books | done
 # create profile form
 # create personality graph

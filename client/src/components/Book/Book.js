@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import AddReview from './AddReview'
 
 import { Link } from 'react-router-dom'
-import { get_book, add_book_to_shelf, getUser } from '../Services'
+import { get_book, add_book_to_shelf, remove_review } from '../Services'
 import { Navbar } from '../layout/Navbar'
 import  Rating  from './Rating'
 
@@ -36,6 +36,14 @@ export class Book extends Component {
         })
     }
 
+    removeReview(e){
+        remove_review(this.state.id).then(res =>{
+            alert('Book removed')
+        }).catch(err =>{
+            alert(err)
+        })
+    }
+
     componentDidMount(){    
         
         get_book(window.location.pathname.split('/').pop()).then(res =>{                
@@ -43,8 +51,11 @@ export class Book extends Component {
             this.setState({links: this.state.data['links']})
             this.setState({extra: this.state.data['extra_details']})
             this.setState({reviews: this.state.data['reviews']})
-            this.setState({id: this.state.data['_id']['$oid']})   
-            
+            this.setState({id: this.state.data['_id']['$oid']})  
+             
+            if(localStorage.logged_in){
+                this.setState({shelves: res.data.shelves})
+            }
             this.state.reviews.forEach(review => {
                 if(review.username === localStorage.username){
                     this.setState({user_rating: review.rating})   
@@ -55,16 +66,6 @@ export class Book extends Component {
             alert(err)
             window.history.back()
         })
-
-        getUser().then(res => {
-            const shelves = []
-            JSON.parse(res.data.user)['shelves'].forEach(shelf => {
-              shelves.push(shelf.shelf_title)
-            });
-            this.setState({shelves: shelves})
-          }).catch(err =>{
-            alert(err)
-          })
     }
 
     render() {
@@ -199,14 +200,14 @@ export class Book extends Component {
                                 { 
                                 this.state.reviews.map((review) =>  
                                 <div id="review" className="row" key={review.username}>
-                                        <div className='col-md-1'>
+                                        <div className='col-1'>
                                             <img 
                                             className="rounded img-fluid" 
                                             src={review.profile_pic}
                                             alt="profile pic" 
                                             />
                                         </div>
-                                        <div className="col-md-9 p-0">
+                                        <div className="col-9 p-0">
                                             Review by <strong className="name">{review.username}</strong> 
                                             <Rating
                                              className={"mx-0"}
@@ -216,7 +217,16 @@ export class Book extends Component {
                                             />
                                             <p id="review_text" className="font-weight-light">{review.review_text}</p>
                                         </div>
-                                    </div>
+                                        {
+                                            localStorage.logged_in && 
+                                        <div className="col-2">
+                                            <button
+                                            className="btn btn-danger"
+                                            onClick={e => this.removeReview(e)}
+                                            ><i className="fa fa-trash" aria-hidden="true" /> Remove</button>
+                                        </div>
+                                        }
+                                </div>
                                 )}
                             </div>
                         </div>
