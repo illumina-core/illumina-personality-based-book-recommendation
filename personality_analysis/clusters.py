@@ -54,7 +54,7 @@ plt.scatter(X[labels==28, 0], X[labels==28, 1], s=50, marker='o', color='mistyro
 plt.scatter(X[labels==29, 0], X[labels==29, 1], s=50, marker='o', color='peachpuff')
 plt.scatter(X[labels==30, 0], X[labels==30, 1], s=50, marker='o', color='antiquewhite')
 
-new_data = pd.read_csv("gdrive/My Drive/proper_pers_values.csv",encoding='latin1')
+new_data = pd.read_csv("data/proper_pers_values.csv",encoding='latin1')
 new_data = new_data[['ID']]
 new_data['Clusters'] = labels 
 new_data.to_csv('clusters.csv')
