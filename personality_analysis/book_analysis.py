@@ -8,33 +8,37 @@ from pmodel import PModel
 P = Predictor()
 
 def predict_review(bookshelf_data):
+    personality = {}
+
     for bookshelf_key, value in bookshelf_data.items():
-        parts = len(os.listdir('data/cleansed_books/' + bookshelf_key))
+        if bookshelf_key == 'applied-mathematics':
+            with open("data/personality_book_reviews.json", "w" , encoding="utf8") as fp:
+                json.dump(personality, fp, indent=1, ensure_ascii=False)
+            break
+        else:
+            parts = len(os.listdir('data/cleansed_books/' + bookshelf_key))
 
-        cwd = os.getcwd()
-        if not os.path.exists(cwd + "/data/results/" + bookshelf_key):
-            os.mkdir(cwd + "/data/results/" + bookshelf_key)
+            cwd = os.getcwd()
+            if not os.path.exists(cwd + "/data/results/" + bookshelf_key):
+                os.mkdir(cwd + "/data/results/" + bookshelf_key)
 
-        for x in range(parts):
-            part = str(x+1)
-            with open("data/cleansed_books/" + bookshelf_key + "/part_" + part + ".json", encoding="utf8") as read_file:
-                book_data = json.load(read_file)
-                personality = {}
-                for book_key, value in book_data.items():
-                    sample = {}
-                    sample['rating'] = book_data[book_key]['avg_ratings']
-                    reviews = book_data[book_key]['reviews']
+            for x in range(parts):
+                part = str(x+1)
+                with open("data/cleansed_books/" + bookshelf_key + "/part_" + part + ".json", encoding="utf8") as read_file:
+                    book_data = json.load(read_file)
 
-                    x = 0
-                    for review in reviews:
-                        prediction =  P.review_predict([review])
-                        sample[str(x)] = prediction
-                        x = x + 1
+                    for book_key, value in book_data.items():
+                        sample = {}
+                        sample['rating'] = book_data[book_key]['avg_ratings']
+                        reviews = book_data[book_key]['reviews']
 
-                    personality[book_key] = sample
-                    
-                    with open("data/results/" + bookshelf_key + "/part_" + part + ".json", "w" , encoding="utf8") as fp:
-                        json.dump(personality, fp, indent=1, ensure_ascii=False)
+                        x = 0
+                        for review in reviews:
+                            prediction =  P.review_predict([review])
+                            sample[str(x)] = prediction
+                            x = x + 1
+
+                        personality[book_key] = sample
 
 def average_review(bookshelf_data):
     personality = {}
