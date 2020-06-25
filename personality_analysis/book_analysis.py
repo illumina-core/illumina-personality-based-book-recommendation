@@ -27,9 +27,6 @@ genres = ['10th-century', '11th-century', '12th-century', '13th-century', '14th-
 def predict_review(genres):
     for genre in genres:
 
-        if genre in ['10th-century']:
-            continue
-
         print("Dir ==>", genre)
         parts = len(os.listdir(f'data/cleansed_books/{genre}'))
 
