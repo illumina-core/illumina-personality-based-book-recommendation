@@ -27,13 +27,11 @@ genres = ['10th-century', '11th-century', '12th-century', '13th-century', '14th-
 def predict_review(genres):
     for genre in genres:
 
+        if genre in ['10th-century']:
+            continue
+
         print("Dir ==>", genre)
         parts = len(os.listdir(f'data/cleansed_books/{genre}'))
-        print("parts", parts)
-
-        cwd = os.getcwd()
-        if not os.path.exists(f"{cwd}/data/analyzed_books/{genre}"):
-            os.mkdir(f"{cwd}/data/analyzed_books/{genre}")
 
         personality = []
         for x in range(1, parts+1):
