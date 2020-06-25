@@ -56,16 +56,6 @@ def book_cleanse(books_data):
 #reading book data for cleansing
 def read_book_cleanse(genres):    
     for genre in genres:
-        if genre in ['10th-century', '11th-century', '12th-century', '13th-century', '14th-century', 
-'15th-century', '16th-century', '17th-century', '1864-shenandoah-campaign', '18th-century', 
-'1917', '19th-century', '1st-grade', '20th-century', '21st-century', '2nd-grade', '40k', 
-'ableism', 'abuse', 'academia', 'academic', 'academics', 'accounting', 'accra', 'action', 
-'activism', 'adaptations', 'addis-ababa', 'addition', 'adolescence', 'adoption', 'adult', 
-'adult-colouring-books', 'adult-fiction', 'adventure', 'adventurers', 'aeroplanes', 'africa', 
-'african-american', 'african-american-literature', 'african-american-romance', 
-'african-literature', 'agender', 'agriculture', 'ahistory', 'aircraft', 'airliners', 
-'airships', 'albanian-literature', 'alchemy', 'alcohol', 'alexandria', 'algebra', 'algeria', 'algiers']:
-            continue
         parts = len(os.listdir('books/' + genre))
 
         if not os.path.exists("cleansed_books/" + genre):
@@ -74,13 +64,14 @@ def read_book_cleanse(genres):
 
         for x in range(1, parts):
             part = str(x)
-            print("part ", x)
             with open("books/" + genre + "/part_" + part + ".json", encoding="utf8") as read_file:
                 books_data = json.load(read_file)
                 cleansed_books = book_cleanse(books_data)
                 
             with open("cleansed_books/" + genre + "/part_" + part + ".json", "w", encoding="utf8") as write_file:
                 json.dump(cleansed_books, write_file, indent=4, ensure_ascii=False)
+            
+            print("part", part)
 
 
 read_book_cleanse(genres)

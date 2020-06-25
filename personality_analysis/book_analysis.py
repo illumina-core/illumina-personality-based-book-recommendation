@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import json
 import copy
 import os
@@ -7,94 +6,94 @@ from pmodel import PModel
 
 P = Predictor()
 
-def predict_review(bookshelf_data):
-    personality = {}
+genres = ['10th-century', '11th-century', '12th-century', '13th-century', '14th-century', 
+'15th-century', '16th-century', '17th-century', '1864-shenandoah-campaign', '18th-century', 
+'1917', '19th-century', '1st-grade', '20th-century', '21st-century', '2nd-grade', '40k', 
+'ableism', 'abuse', 'academia', 'academic', 'academics', 'accounting', 'accra', 'action', 
+'activism', 'adaptations', 'addis-ababa', 'addition', 'adolescence', 'adoption', 'adult', 
+'adult-colouring-books', 'adult-fiction', 'adventure', 'adventurers', 'aeroplanes', 'africa', 
+'african-american', 'african-american-literature', 'african-american-romance', 
+'african-literature', 'agender', 'agriculture', 'ahistory', 'aircraft', 'airliners', 
+'airships', 'albanian-literature', 'alchemy', 'alcohol', 'alexandria', 'algebra', 'algeria', 
+'algiers', 'algorithms', 'aliens', 'alternate-history', 'alternate-universe', 
+'alternative-medicine', 'amateur-sleuth', 'amazon', 'ambulance-service', 'ambulances', 
+'american', 'american-civil-war', 'american-classics', 'american-fiction', 'american-history', 
+'american-novels', 'american-revolution', 'american-revolutionary-war', 'americana', 'amish', 
+'amish-fiction', 'amish-historical-romance-fiction', 'ancient', 'ancient-history', 'androgyne',
+'angels', 'anglo-saxon', 'angola', 'animal-fiction', 'animals', 'anime', 'anthologies', 
+'anthropology', 'anthropomorphic', 'anti-intellectualism', 'anti-racist', 'anti-science', 
+'antietam-campaign', 'antiquities', 'antisemitism', 'apocalyptic', 'apple']
 
-    for bookshelf_key, value in bookshelf_data.items():
-        if bookshelf_key == 'applied-mathematics':
-            break
-        else:
-            print("Dir ==>", bookshelf_key)
-            parts = len(os.listdir('data/cleansed_books/' + bookshelf_key))
+def predict_review(genres):
+    for genre in genres:
 
-            cwd = os.getcwd()
-            if not os.path.exists(cwd + "/data/analyzed_books/" + bookshelf_key):
-                os.mkdir(cwd + "/data/analyzed_books/" + bookshelf_key)
+        print("Dir ==>", genre)
+        parts = len(os.listdir(f'data/cleansed_books/{genre}'))
+        print("parts", parts)
 
-            for x in range(parts):
-                part = str(x+1)
-                with open("data/cleansed_books/" + bookshelf_key + "/part_" + part + ".json", encoding="utf8") as read_file:
-                    book_data = json.load(read_file)
-                
-                    for book_key, value in book_data.items():
-                        sample = {}
-                        sample['rating'] = book_data[book_key]['avg_ratings']
-                        reviews = book_data[book_key]['reviews']
+        cwd = os.getcwd()
+        if not os.path.exists(f"{cwd}/data/analyzed_books/{genre}"):
+            os.mkdir(f"{cwd}/data/analyzed_books/{genre}")
 
-                        x = 0
-                        for review in reviews:
-                            prediction =  P.review_predict([review])
-                            sample[str(x)] = prediction
-                            x = x + 1
+        personality = []
+        for x in range(1, parts+1):
+            part = str(x)
+            with open(f"data/cleansed_books/{genre}/part_{part}.json", encoding="utf8") as read_file:
+                book_data = json.load(read_file)
 
-                        personality[book_key] = sample
-                        
-                        with open("data/analyzed_books/" + bookshelf_key + "/part_" + part + ".json", "w", encoding="utf8") as write_file:
-                            json.dump(personality, write_file, indent=4, ensure_ascii=False)
-                            
-                print('part', part)
+                for book_key, value in book_data.items():
 
-def average_review(bookshelf_data):
-    personality = {}
-    
-    for bookshelf_key, value in bookshelf_data.items():
-        if bookshelf_key == 'applied-mathematics':
-            with open("data/FINAL.json", "w" , encoding="utf8") as fp:
-                json.dump(personality, fp, indent=1, ensure_ascii=False)
-        else:
-            parts = len(os.listdir('data/results/' + bookshelf_key))
+                    OPN = []
+                    CON = []
+                    EXT = []
+                    AGR = []
+                    NEU = []
 
-            cwd = os.getcwd()
-            if not os.path.exists(cwd + "/data/average/" + bookshelf_key):
-                os.mkdir(cwd + "/data/average/" + bookshelf_key)
+                    for review in value['reviews']:
+                        pre =  P.review_predict([review])
+                        OPN.append(pre['OPN'])
+                        CON.append(pre['CON'])
+                        EXT.append(pre['EXT'])
+                        AGR.append(pre['AGR'])
+                        NEU.append(pre['NEU'])
 
-            for x in range(parts):
-                part = str(x+1)
-                with open("data/results/" + bookshelf_key + "/part_" + part + ".json", encoding="utf8") as read_file:
-                    book_data = json.load(read_file)
+                    OPN_LEN = len(OPN)
+                    CON_LEN = len(CON)
+                    EXT_LEN = len(EXT)
+                    AGR_LEN = len(AGR)
+                    NEU_LEN = len(NEU)
 
-                    traits = ["OPN", "CON", "EXT", "AGR", "NEU"]
+                    OPN_SUM = sum(OPN)
+                    CON_SUM = sum(CON)
+                    EXT_SUM = sum(EXT)
+                    AGR_SUM = sum(AGR)
+                    NEU_SUM = sum(NEU)                        
+
+                    if((OPN_LEN or CON_LEN or EXT_LEN or AGR_LEN or NEU_LEN) < 1):
+                       continue
+
+                    if((OPN_SUM or CON_SUM or EXT_SUM or AGR_SUM or NEU_SUM) < 1):
+                       continue
+
+                    personality.append({
+                        book_key: {
+                            'rating': float(value['avg_ratings'].strip()),
+                            'OPN': OPN,
+                            'CON': CON,
+                            'EXT': EXT,
+                            'AGR': AGR,
+                            'NEU': NEU,
+                            'average': {
+                                'OPN': OPN_SUM/OPN_LEN,
+                                'CON': CON_SUM/CON_LEN,
+                                'EXT': EXT_SUM/EXT_LEN,
+                                'AGR': AGR_SUM/AGR_LEN,
+                                'NEU': NEU_SUM/NEU_LEN
+                            }
+                        }
+                    })
                     
-                    for book_key, value in book_data.items():
-                        range_x = len(book_data[book_key]) - 2
-                        avg_traits = {"OPN": 0, "CON": 0, "EXT": 0, "AGR": 0, "NEU": 0}
-                        for x in range(0, range_x):
-                            x = str(x)
-                            for y in range(0, 5):
-                                avg_traits[traits[y]] = book_data[book_key][x][traits[y]] + avg_traits[traits[y]]
+        with open(f"data/analyzed_books/{genre}.json", "w", encoding="utf8") as write_file:
+            json.dump(personality, write_file, indent=4, ensure_ascii=False)
 
-                        if range_x == 0:
-                            avg_traits["OPN"] = avg_traits["OPN"] 
-                            avg_traits["CON"] = avg_traits["CON"] 
-                            avg_traits["EXT"] = avg_traits["EXT"] 
-                            avg_traits["AGR"] = avg_traits["AGR"] 
-                            avg_traits["NEU"] = avg_traits["NEU"]
-                        elif range_x == 1:
-                            avg_traits["OPN"] = avg_traits["OPN"] 
-                            avg_traits["CON"] = avg_traits["CON"] 
-                            avg_traits["EXT"] = avg_traits["EXT"] 
-                            avg_traits["AGR"] = avg_traits["AGR"] 
-                            avg_traits["NEU"] = avg_traits["NEU"]
-                        else:
-                            avg_traits["OPN"] = avg_traits["OPN"] / range_x
-                            avg_traits["CON"] = avg_traits["CON"] / range_x
-                            avg_traits["EXT"] = avg_traits["EXT"] / range_x
-                            avg_traits["AGR"] = avg_traits["AGR"] / range_x
-                            avg_traits["NEU"] = avg_traits["NEU"] / range_x   
-                        
-                        personality[book_key] = avg_traits
-
-with open("data/book_list.json", encoding="utf8") as read_file:
-    bookshelf_data = json.load(read_file)
-
-predict_review(bookshelf_data)
+predict_review(genres)
