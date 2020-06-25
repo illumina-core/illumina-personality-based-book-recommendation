@@ -166,7 +166,8 @@ def rate_book():
         user = Users.objects(username=session['user']).only('username', 'profile_pic').get()
         book.reviews.append(Reviews(
             username=user['username'],
-            profile_pic=user['profile_pic']
+            profile_pic=user['profile_pic'],
+            rating = rating
         ))
 
     book.save()

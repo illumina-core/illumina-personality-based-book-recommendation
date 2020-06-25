@@ -17,11 +17,11 @@ export class App extends Component {
         <Switch>
           <CustomRoute exact path="/" component={Home} />
           <CustomRoute exact path="/search" component={SearchResult} />
+          <CustomRoute exact path="/book/:id" component={Book} />
           <CustomRoute exact condition="logged_in" path="/dashboard" component={Dashboard} />
           <CustomRoute exact condition="logged_in" path="/profile" component={Profile} />
           <CustomRoute exact condition="logged_in" path="/book-shelves" component={BookShelves} />
           <CustomRoute exact condition="logged_in" path="/book-shelves/:shelf_title" component={BookShelves} />
-          <CustomRoute exact condition="logged_in" path="/book/:id" component={Book} />
         </Switch>
       </Router>
     );
