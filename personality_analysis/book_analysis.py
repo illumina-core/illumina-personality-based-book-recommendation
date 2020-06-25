@@ -12,15 +12,13 @@ def predict_review(bookshelf_data):
 
     for bookshelf_key, value in bookshelf_data.items():
         if bookshelf_key == 'applied-mathematics':
-            with open("data/personality_book_reviews.json", "w" , encoding="utf8") as fp:
-                json.dump(personality, fp, indent=1, ensure_ascii=False)
             break
         else:
             parts = len(os.listdir('data/cleansed_books/' + bookshelf_key))
 
             cwd = os.getcwd()
-            if not os.path.exists(cwd + "/data/results/" + bookshelf_key):
-                os.mkdir(cwd + "/data/results/" + bookshelf_key)
+            if not os.path.exists(cwd + "/data/analyzed_books/" + bookshelf_key):
+                os.mkdir(cwd + "/data/analyzed_books/" + bookshelf_key)
 
             for x in range(parts):
                 part = str(x+1)
@@ -39,6 +37,9 @@ def predict_review(bookshelf_data):
                             x = x + 1
 
                         personality[book_key] = sample
+                        
+                        with open("data/analyzed_books/" + bookshelf_key + "/part_" + part + ".json", "w", encoding="utf8") as write_file:
+                            json.dump(personality, write_file, indent=4, ensure_ascii=False)
 
 def average_review(bookshelf_data):
     personality = {}
