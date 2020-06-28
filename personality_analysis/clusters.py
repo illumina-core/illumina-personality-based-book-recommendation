@@ -5,6 +5,7 @@ import time
 import json
 import copy
 import os
+import pickle
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import normalize
 from sklearn.cluster import AgglomerativeClustering
@@ -119,8 +120,6 @@ if __name__ == '__main__':
         plt.show()
         return labels
 
-
-
     cluster = Clusters()
 
     genres = ['10th-century', '11th-century', '12th-century', '13th-century', '14th-century', 
@@ -151,6 +150,10 @@ if __name__ == '__main__':
     y = (cdata['Clusters']).values
     X_train, X_test, y_train, y_test= train_test_split(X, y, test_size=0.3, random_state=101)
 
-    # cluster.fit(X_train, y_train)
-    # cluster.predict(X_test)
-    # print(cluster.knn.score(X_test, y_test))
+    cluster.fit(X_train, y_train)
+    with open('data/static/cluster_model.pkl', 'wb') as f:
+        # Write the model to a file.
+        pickle.dump(cluster, f)
+
+    cluster.predict(X_test)
+    print(cluster.knn.score(X_test, y_test))
