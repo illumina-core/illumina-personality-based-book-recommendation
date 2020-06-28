@@ -4,7 +4,7 @@ from preprocess import Preprocess
 from pmodel import PModel
 from sklearn.preprocessing import MinMaxScaler
 
-class Predictor():
+class PPredictor():
     def __init__(self):
         self.traits = ['OPN', 'CON', 'EXT', 'AGR', 'NEU']
         self.models = {}
@@ -25,16 +25,16 @@ class Predictor():
             return predictions
 
     def user_predict(self, X, traits='All', predictions='All'):
-        predictions = {}
+        predictions = []
         if traits == 'All':
             for trait in self.traits:
                 pkl_model = self.models[trait]
                 trait_scores = pkl_model.predict(X, regression=True).reshape(1, -1)
-                predictions[trait] = trait_scores.flatten()[0]
+                predictions.append(trait_scores.flatten()[0])
         return predictions
 
 # if __name__ == '__main__':
-#     P = Predictor()
+#     P = PPredictor()
 #     text = """"
 #       you know what was the best part of these books? and i say books as in plural because there were so fucking many of them i can't sit still long enough to check them all off. and i DID read every single one. what else was there to do in middle school?
 #       anyway, the best part of these books was brian's description of food. it was magnificent. it didn't just make you hungry, it made you crave weird ass things that nobody would ever dream about eating in middle school. nutted cheeses and flan bread and berry cakes and what-not; almost makes you want to be a sword weilding ferret yourself.
