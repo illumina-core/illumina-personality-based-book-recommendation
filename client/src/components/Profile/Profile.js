@@ -1,8 +1,16 @@
 import React, { Component } from 'react'
 import Navbar from '../layout/Navbar';
 import './Profile.css';
+import {get_other_user} from '../Services'
 
 export class Profile extends Component {
+
+    // componentDidMount(){
+    //     get_other_user().then(res =>{
+
+    //     })
+    // }
+
     render() {
         return (
             <div className="container-fluid">

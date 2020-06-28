@@ -100,3 +100,8 @@ export const remove_shelf = shelf =>{
         shelf: shelf
     })
 }
+
+export const get_other_user = username =>{
+    return axios
+    .get('get_other_user?user=' + username)
+}
