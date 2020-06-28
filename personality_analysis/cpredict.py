@@ -10,7 +10,7 @@ class CPredictor():
             self.model = pickle.load(f)
 
     def user_cluster_predict(self, X):
-        test = np.array(test1) 
+        test = np.array(X) 
         prediction = self.model.predict(test)
         return prediction
 

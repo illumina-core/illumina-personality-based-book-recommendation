@@ -25,12 +25,12 @@ class PPredictor():
             return predictions
 
     def user_predict(self, X, traits='All', predictions='All'):
-        predictions = {}
+        predictions = []
         if traits == 'All':
             for trait in self.traits:
                 pkl_model = self.models[trait]
                 trait_scores = pkl_model.predict(X, regression=True).reshape(1, -1)
-                predictions[trait] = trait_scores.flatten()[0]
+                predictions.append(trait_scores.flatten()[0])
         return predictions
 
 # if __name__ == '__main__':
