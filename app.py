@@ -10,6 +10,8 @@ from mongoengine import connect
 from mongoengine.queryset.visitor import Q
 from mongoengine import DoesNotExist, NotUniqueError
 
+from scipy.spatial import distance
+
 from models import Shelves, Books, Users, Reviews
 
 app = Flask(__name__)
@@ -292,10 +294,45 @@ def remove_shelf():
 
     return jsonify({'result': True})
 
+@app.route('/recommend-books-by-personality', methods=['GET'])
+def recommend_books_by_personality():
+    data = Users.objects(username=session['user']).only(
+        'personality_index',
+        'cluster'
+    ).get()
+
+    per = data['personality_index']
+
+    books = Books.objects(cluster = 12).aggregate(*[
+            {
+                '$project': {
+                    'book_title': 1,
+                    'cover_image': 1,
+                    'avg_rating': 1,
+                    'genres': 1,
+                    'authors': 1,
+                    'cluster': 1,
+                    'personality_index': 1
+                }
+            },
+            { '$sample': { 'size': 20 } }
+        ])
+
+    books = list(books)
+
+    dis = {}
+    up = tuple(per.values())
+    for x in range(len(books)):
+        bp = tuple(books[x]['personality_index'].values())
+        dis[x] = distance.euclidean(up, bp)
+
+    dis = sorted(dis.items(), key=lambda x: x[1])
+    sorted_books = []
+    for x in dis:
+        sorted_books.append(books[x[0]]['book_title'])
+
+    return jsonify({"rec": json.dumps(books)})
+
 if __name__ == '__main__':
     app.run(debug=True)
 
-# add user, genre, author to search | not doing
-# add remove button to book shelves for shelf and books | done
-# create profile form
-# create personality graph

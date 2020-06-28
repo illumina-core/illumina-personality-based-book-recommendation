@@ -22,7 +22,7 @@ genres = ['10th-century', '11th-century', '12th-century', '13th-century', '14th-
 'adult-colouring-books', 'adult-fiction', 'adventure', 'adventurers', 'aeroplanes', 'africa', 
 'african-american', 'african-american-literature', 'african-american-romance', 
 'african-literature', 'agender', 'agriculture', 'ahistory', 'aircraft', 'airliners', 
-'airships', 'albanian-literature', 'alchemy', 'alcohol', 'alexandria', 'algebra', 'algeria', 
+'airships', 'albanian-literature', 'alcohol', 'alexandria', 'algebra', 'algeria', 
 'algiers', 'algorithms', 'aliens', 'alternate-history', 'alternate-universe', 
 'alternative-medicine', 'amateur-sleuth', 'amazon', 'ambulance-service', 'ambulances', 
 'american', 'american-civil-war', 'american-classics', 'american-fiction', 'american-history', 
@@ -32,38 +32,37 @@ genres = ['10th-century', '11th-century', '12th-century', '13th-century', '14th-
 'anthropology', 'anthropomorphic', 'anti-intellectualism', 'anti-racist', 'anti-science', 
 'antietam-campaign', 'antiquities', 'antisemitism', 'apocalyptic', 'apple']
 
-count = []
-
 for genre in genres:
-    try:
-        parts = len(os.listdir('cleansed_books/' + genre))
-        print("DIR =====> ", genre)
-    except:
-        continue
-    for x in range(1, parts):
-        part = str(x)
-        
-        with open("cleansed_books/" + genre + "/part_" + part + ".json", encoding="utf8") as read_file:
+    with open(f"data/analyzed_books/{genre}.json", encoding="utf8") as read_file:
+        try:
+            books_data = json.load(read_file)
+        except:
+            print('Error! Book not loaded')
+            continue
+        print(genre)
+        count = 0
+        for id, data in books_data.items():
+            extra_details = {}
+            for key, value in data.items():
+                if key not in ['title', 'reviews', 'authors', 'description', 'genres', 
+                                'cover_image', 'avg_ratings', 'links', 'OPN', 'CON',
+                                'EXT', 'AGR', 'NEU', 'average', 'cluster', 'rating']:
+                    extra_details[key] = value
             try:
-                books_data = json.load(read_file)
-            except:
+                Books(
+                    book_title = data['title'],
+                    authors = data['authors'],
+                    description = data['description'],
+                    genres = data['genres'],
+                    cover_image = data['cover_image'],
+                    avg_rating = data['rating'],
+                    links = data['links'],
+                    personality_index = data['average'],
+                    cluster = int(data['cluster']),
+                    extra_details = extra_details
+                ).save()
+                count += 1
+            except NotUniqueError:
                 continue
-            print("part ", x)
-            for title, data in books_data.items():
-                extra_details = {}
-                for key, value in data.items():
-                    if key not in ['reviews', 'authors', 'description', 'genres', 'cover_image', 'avg_ratings', 'links']:
-                        extra_details[key] = value
-                try:
-                    Books(
-                        book_title = title,
-                        author = data['authors'],
-                        description = data['description'],
-                        genres = data['genres'],
-                        cover_image = data['cover_image'],
-                        avg_rating = float(data['avg_ratings'].strip()),
-                        links = data['links'],
-                        extra_details = extra_details
-                    ).save()
-                except NotUniqueError:
-                    continue
+
+        print(f'Books in {genre} added equal {count}')

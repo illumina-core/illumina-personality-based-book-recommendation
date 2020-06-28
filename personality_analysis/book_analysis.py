@@ -14,7 +14,7 @@ genres = ['10th-century', '11th-century', '12th-century', '13th-century', '14th-
 'adult-colouring-books', 'adult-fiction', 'adventure', 'adventurers', 'aeroplanes', 'africa', 
 'african-american', 'african-american-literature', 'african-american-romance', 
 'african-literature', 'agender', 'agriculture', 'ahistory', 'aircraft', 'airliners', 
-'airships', 'albanian-literature', 'alchemy', 'alcohol', 'alexandria', 'algebra', 'algeria', 
+'airships', 'albanian-literature', 'alcohol', 'alexandria', 'algebra', 'algeria', 
 'algiers', 'algorithms', 'aliens', 'alternate-history', 'alternate-universe', 
 'alternative-medicine', 'amateur-sleuth', 'amazon', 'ambulance-service', 'ambulances', 
 'american', 'american-civil-war', 'american-classics', 'american-fiction', 'american-history', 
@@ -24,6 +24,8 @@ genres = ['10th-century', '11th-century', '12th-century', '13th-century', '14th-
 'anthropology', 'anthropomorphic', 'anti-intellectualism', 'anti-racist', 'anti-science', 
 'antietam-campaign', 'antiquities', 'antisemitism', 'apocalyptic', 'apple']
 
+id = 1
+
 def predict_review(genres):
     for genre in genres:
 
@@ -31,6 +33,7 @@ def predict_review(genres):
         parts = len(os.listdir(f'data/cleansed_books/{genre}'))
 
         personality = []
+        
         for x in range(1, parts+1):
             part = str(x)
             with open(f"data/cleansed_books/{genre}/part_{part}.json", encoding="utf8") as read_file:
@@ -70,23 +73,32 @@ def predict_review(genres):
                     if((OPN_SUM or CON_SUM or EXT_SUM or AGR_SUM or NEU_SUM) < 1):
                        continue
 
-                    personality.append({
-                        book_key: {
-                            'rating': float(value['avg_ratings'].strip()),
-                            'OPN': OPN,
-                            'CON': CON,
-                            'EXT': EXT,
-                            'AGR': AGR,
-                            'NEU': NEU,
-                            'average': {
-                                'OPN': OPN_SUM/OPN_LEN,
-                                'CON': CON_SUM/CON_LEN,
-                                'EXT': EXT_SUM/EXT_LEN,
-                                'AGR': AGR_SUM/AGR_LEN,
-                                'NEU': NEU_SUM/NEU_LEN
+                    sample = {
+                            id: {
+                                'book_title': book_key,
+                                'avg_rating': float(value['avg_ratings'].strip()),
+                                'OPN': OPN,
+                                'CON': CON,
+                                'EXT': EXT,
+                                'AGR': AGR,
+                                'NEU': NEU,
+                                'average_personality': {
+                                    'OPN': OPN_SUM/OPN_LEN,
+                                    'CON': CON_SUM/CON_LEN,
+                                    'EXT': EXT_SUM/EXT_LEN,
+                                    'AGR': AGR_SUM/AGR_LEN,
+                                    'NEU': NEU_SUM/NEU_LEN
+                                }
                             }
                         }
-                    })
+
+                    for key, val in value.items():
+                        if key in ['avg_rating']:
+                            continue
+                        sample[id][key] = val
+
+                    personality.append(sample)
+                    id += 1
                     
         with open(f"data/analyzed_books/{genre}.json", "w", encoding="utf8") as write_file:
             json.dump(personality, write_file, indent=4, ensure_ascii=False)

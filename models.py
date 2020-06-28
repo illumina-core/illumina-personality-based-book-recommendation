@@ -14,13 +14,13 @@ class Reviews(EmbeddedDocument):
 # book document schema
 class Books(Document):
     book_title = StringField(required=True)
-    author = ListField(StringField(), required=True)
+    authors = ListField(StringField(), required=True)
     description = StringField(required=True, unique=True, default="")
     genres = ListField(StringField(), required=True)
     cover_image = StringField(required=True, default="../images/default_book.png")
     avg_rating = FloatField(default=0.0) 
     links = DictField()       # {'link name': url}
-    personality_index = ListField(FloatField(required=True), default=[0.0,0.0,0.0,0.0,0.0])
+    personality_index = DictField()
     reviews = EmbeddedDocumentListField(Reviews)
     cluster = IntField(default=0)
     extra_details = DictField()
@@ -46,7 +46,7 @@ class Users(Document):
     profile_pic = StringField(default="../images/default_user.png")
     date_of_birth = DateTimeField()
     description = StringField(default="i am a default user")
-    personality_index = ListField(FloatField(required=True), default=[0.0,0.0,0.0,0.0,0.0])
+    personality_index = DictField()
     friends_list = ListField(ReferenceField('self',  dbref=True))
     shelves = EmbeddedDocumentListField(Shelves, default=[
         Shelves(
