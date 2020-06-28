@@ -32,7 +32,7 @@ class Clusters():
 
 if __name__ == '__main__':
 
-    # extract id and personality values, not required to run
+    #extract id and personality values, not required to run
     def extract_cluster_data(genres):   
         data = {}
         for genre in genres:
@@ -44,6 +44,23 @@ if __name__ == '__main__':
                         
         with open("data/cdata.json", "w", encoding="utf8") as write_file:
             json.dump(data, write_file, indent=4, ensure_ascii=False)
+
+    #insert cluster values in dataset, not required to run
+    def insert_cluster_data(labels, genres):   
+        x = 0
+        print('start')
+        for genre in genres:
+            with open(f"data/analyzed_books/{genre}.json", encoding="utf8") as read_file:
+                books_data = json.load(read_file)
+                
+            for book_key, value in books_data.items():
+                books_data[book_key]['cluster'] = str(labels[x])
+                x = x + 1
+                with open(f"data/final/{genre}.json", "w", encoding="utf8") as write_file:
+                    json.dump(books_data, write_file, indent=4, ensure_ascii=False)
+
+            with open(f"data/final/{genre}.json", "w", encoding="utf8") as write_file:
+                json.dump(books_data, write_file, indent=4, ensure_ascii=False)
                         
     # create clusters
     # Books per Cluster:
@@ -102,22 +119,7 @@ if __name__ == '__main__':
         plt.show()
         return labels
 
-    #insert cluster values in dataset
-    def insert_cluster_data(labels, genres):   
-        x = 0
-        print('start')
-        for genre in genres:
-            with open(f"data/analyzed_books/{genre}.json", encoding="utf8") as read_file:
-                books_data = json.load(read_file)
-                
-            for book_key, value in books_data.items():
-                books_data[book_key]['cluster'] = str(labels[x])
-                x = x + 1
-                with open(f"data/final/{genre}.json", "w", encoding="utf8") as write_file:
-                    json.dump(books_data, write_file, indent=4, ensure_ascii=False)
 
-            with open(f"data/final/{genre}.json", "w", encoding="utf8") as write_file:
-                json.dump(books_data, write_file, indent=4, ensure_ascii=False)
 
     cluster = Clusters()
 
