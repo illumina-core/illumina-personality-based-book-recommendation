@@ -63,14 +63,14 @@ def login():
     try:
         response = Users.objects(Q(username=login_id) or Q(email=login_id)).get()
     except DoesNotExist as err:
-        return jsonify({"user": "Invalid login id"})
+        return jsonify({"err": True})
 
     if bcrypt.check_password_hash(response['password'], password):
         session['user'] = response['username']
 
         return jsonify({'username': response['username'] , 'profile_pic': response['profile_pic']})
     else:
-        return jsonify({"user":"Invalid Password"})
+        return jsonify({"err":True})
 
 @app.route('/logout', methods=['POST'])
 @app.route('/book/logout', methods=['POST'])
@@ -89,8 +89,8 @@ def search_book():
         'cover_image',
         'avg_rating',
         'genres',
-        'author'
-    )
+        'authors'
+    ).order_by('-avg_rating')
 
     lim = 10
     total = books.count()
@@ -215,7 +215,7 @@ def get_user_shelf():
                 'id': str(book.id),
                 'title': book.book_title,
                 'cover_image': book.cover_image,
-                'author': book.author
+                'authors': book.authors
                 }
             )
         shelves.append(
@@ -251,7 +251,7 @@ def get_book_recommendation():
         'book_title',
         'id',
         'cover_image',
-        'author',
+        'authors',
         'genres',
         'avg_rating'
     ).to_json()
@@ -271,7 +271,7 @@ def remove_review():
 
     return jsonify({'result': True})
 
-@app.route('/remove-shelf-book', methods=['POST'])
+@app.route('/book-shelves/remove-shelf-book', methods=['POST'])
 def remove_shelf_book():
     book = request.get_json()['book']
     shelf = request.get_json()['shelf']
@@ -283,10 +283,10 @@ def remove_shelf_book():
 
     return jsonify({'result': True})
 
+@app.route('/book-shelves/remove-shelf', methods=['POST'])
 @app.route('/remove-shelf', methods=['POST'])
 def remove_shelf():
     shelf = request.get_json()['shelf']
-
     user = Users.objects(username=session['user']).get()
     user.shelves.remove(user.shelves.get(shelf_title=shelf))
     
@@ -335,4 +335,3 @@ def recommend_books_by_personality():
 
 if __name__ == '__main__':
     app.run(debug=True)
-

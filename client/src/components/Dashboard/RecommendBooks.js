@@ -38,7 +38,7 @@ export class RecommendBooks extends Component {
                             {book.book_title}
                           </a>
                         </h3>
-                        <p className="card-subtitle"><b>Authors:</b> {book.author.toString()}</p>
+                        <p className="card-subtitle"><b>Authors:</b> {book.authors.toString()}</p>
                         <p className="card-subtitle"><b>Genres:</b> {book.genres.toString()}</p>
                       </div>
                     </div>
@@ -65,7 +65,7 @@ export class RecommendBooks extends Component {
                             {book.book_title}
                           </a>
                         </h3>
-                        <p className="card-subtitle"><b>Authors:</b> {book.author.toString()}</p>
+                        <p className="card-subtitle"><b>Authors:</b> {book.authors.toString()}</p>
                         <p className="card-subtitle"><b>Genres:</b> {book.genres.toString()}</p>
                       </div>
                     </div>
@@ -92,7 +92,7 @@ export class RecommendBooks extends Component {
                             {book.book_title}
                           </a>
                         </h3>
-                        <p className="card-subtitle"><b>Authors:</b> {book.author.toString()}</p>
+                        <p className="card-subtitle"><b>Authors:</b> {book.authors.toString()}</p>
                         <p className="card-subtitle"><b>Genres:</b> {book.genres.toString()}</p>
                       </div>
                     </div>

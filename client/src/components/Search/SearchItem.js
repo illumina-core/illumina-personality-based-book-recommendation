@@ -22,7 +22,7 @@ export class SearchItem extends Component {
         const { 
             _id,
             book_title,
-            author,
+            authors,
             genres,
             cover_image,
             avg_rating
@@ -40,28 +40,30 @@ export class SearchItem extends Component {
                         {book_title}
                     </Link>
                 </h2>
-                <h5 className="font-weight-light" ><b>Authors:</b> {author.toString()}</h5>
+                <h5 className="font-weight-light" ><b>Authors:</b> {authors.toString()}</h5>
                 <h5 className="font-weight-light" ><b>Genres:</b> {genres.toString()}</h5>
             </div>
 
             <div className="col-md-auto">
                 <h5 className="font-weight-light" style={{paddingTop:'8px', paddingBottom:'5px', textAlign:'center'}}>Rating: <b>{avg_rating}</b></h5>
-                <div className="dropdown">  
-                    <button type="button" className="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
-                        Add to Bookshelf
-                    </button>
-                    <div className="dropdown-menu p-0">
-                        {localStorage.logged_in && 
-                            this.props.shelves.map((shelf) =>(
-                                <button key={shelf} 
-                                value={shelf + '||' + _id['$oid']}
-                                onClick={e => this.handleInput(e, "value")}
-                                className="dropdown-item border border-top-0 border-right-0 border-left-0"
-                                >{shelf}</button>
-                            ))
-                        }
+                {localStorage.logged_in && 
+                    <div className="dropdown">  
+                        <button type="button" className="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
+                            Add to Bookshelf
+                        </button>
+                        <div className="dropdown-menu p-0">
+                            {
+                                this.props.shelves.map((shelf) =>(
+                                    <button key={shelf} 
+                                    value={shelf + '||' + _id['$oid']}
+                                    onClick={e => this.handleInput(e, "value")}
+                                    className="dropdown-item border border-top-0 border-right-0 border-left-0"
+                                    >{shelf}</button>
+                                ))
+                            }
+                        </div>
                     </div>
-                </div>
+                }
             </div>
         </div>
         )

@@ -71,7 +71,7 @@ export class Book extends Component {
     render() {
         const {
             book_title,
-            author,
+            authors,
             description,
             genres,
             cover_image,
@@ -168,7 +168,7 @@ export class Book extends Component {
                             </h2>
                         </div>
                         <div className="adjust row">
-                            <h3 className="font-weight-light">Author(s): {[author].toString()}</h3>
+                            <h3 className="font-weight-light">Author(s): {[authors].toString()}</h3>
                         </div>
                         <div className="adjust row">
                             <h5 className="font-weight-light">Genres: {[genres].toString()}</h5>

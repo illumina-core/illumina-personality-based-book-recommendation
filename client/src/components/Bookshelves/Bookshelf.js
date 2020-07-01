@@ -57,7 +57,7 @@ export class Bookshelf extends Component {
                     {book.title}
                   </a>
                 </h4>
-                <h5 className="font-weight-light">{book.author.toString()}</h5>
+                <h5 className="font-weight-light">{book.authors.toString()}</h5>
               </div>
 
               {localStorage.logged_in && 
