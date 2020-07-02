@@ -80,17 +80,41 @@ def logout():
     return jsonify({"logout": True})
 
 @app.route('/search', methods=['GET'])
-def search_book():
+def search_book():  
     title = request.args.get('title', default = None, type = str)
+    genre = request.args.get('genre', default = None, type = str)
+    author = request.args.get('author', default = None, type = str)
     
-    books = Books.objects(book_title__icontains=title).only(
-        'book_title',
-        'id',
-        'cover_image',
-        'avg_rating',
-        'genres',
-        'authors'
-    ).order_by('-avg_rating')
+    books = None
+    if title != None:
+        books = Books.objects(book_title__icontains=title).only(
+            'book_title',
+            'id',
+            'cover_image',
+            'avg_rating',
+            'genres',
+            'authors'
+        ).order_by('-avg_rating')
+
+    elif genre != None:
+        books = Books.objects(genres__icontains=genre).only(
+            'book_title',
+            'id',
+            'cover_image',
+            'avg_rating',
+            'genres',
+            'authors'
+        ).order_by('-avg_rating')
+
+    elif author != None:
+        books = Books.objects(authors__icontains=author).only(
+            'book_title',
+            'id',
+            'cover_image',
+            'avg_rating',
+            'genres',
+            'authors'
+        ).order_by('-avg_rating')
 
     lim = 10
     total = books.count()
@@ -303,7 +327,7 @@ def recommend_books_by_personality():
 
     per = data['personality_index']
 
-    books = Books.objects(cluster = 12).aggregate(*[
+    books = Books.objects(cluster = data['cluster']).aggregate(*[
             {
                 '$project': {
                     'book_title': 1,
@@ -311,7 +335,6 @@ def recommend_books_by_personality():
                     'avg_rating': 1,
                     'genres': 1,
                     'authors': 1,
-                    'cluster': 1,
                     'personality_index': 1
                 }
             },
@@ -331,7 +354,7 @@ def recommend_books_by_personality():
     for x in dis:
         sorted_books.append(books[x[0]]['book_title'])
 
-    return jsonify({"rec": json.dumps(books)})
+    return jsonify({"rec": json.dumps(sorted_books)})
 
 if __name__ == '__main__':
     app.run(debug=True)

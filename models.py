@@ -47,11 +47,11 @@ class Users(Document):
     date_of_birth = DateTimeField()
     description = StringField(default="i am a default user")
     personality_index = DictField(default={
-        'OPN': 0,
-        'CON': 0,
-        'EXT': 0,
-        'AGR': 0,
-        'NEU': 0
+        'OPN': 0.0,
+        'CON': 0.0,
+        'EXT': 0.0,
+        'AGR': 0.0,
+        'NEU': 0.0
     })
     friends_list = ListField(ReferenceField('self',  dbref=True))
     shelves = EmbeddedDocumentListField(Shelves, default=[

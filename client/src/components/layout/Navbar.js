@@ -17,6 +17,7 @@ export class Navbar extends Component {
 
     onChange(e){
         this.setState({[e.target.name]: e.target.value})
+        console.log(this.state.search_type)
     }
 
     onSubmit(e){
@@ -65,39 +66,32 @@ export class Navbar extends Component {
                                 placeholder="Search" aria-label="Search"/>
 
                                 <div className="btn-group">
-                                <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                                {/* <button type="button" className="btn btn-outline-success my-2 my-sm-0 dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
-                                </button>
-                                <div className="dropdown-menu">
-                                    <label className="form-check-label">
-                                        <input type="radio" className="form-check-input" name="search_type"
-                                        value={'opt1'}
-                                        checked={this.state.search_type === "opt1"}
-                                        onChange={this.onChange}
-                                        />Book Title
-                                    </label>
-                                    <label className="form-check-label">
-                                        <input type="radio" className="form-check-input" name="search_type"
-                                        value={'opt2'}
-                                        checked={this.state.search_type === "opt2"}
-                                        onChange={this.onChange}
-                                        />Genre
-                                    </label>
-                                    <label className="form-check-label">
-                                        <input type="radio" className="form-check-input" name="search_type"
-                                        value={'opt3'}
-                                        checked={this.state.search_type === "opt3"}
-                                        onChange={this.onChange}
-                                        />Author
-                                    </label>
-                                    <label className="form-check-label">
-                                        <input type="radio" className="form-check-input" name="search_type"
-                                        value={'opt4'}
-                                        checked={this.state.search_type === "opt4"}
-                                        onChange={this.onChange}
-                                        />User
-                                    </label>
-                                </div> */}
+                                    <button className="btn btn-outline-success" type="submit">Search</button>
+                                    <button type="button" className="btn btn-outline-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
+                                    
+                                    <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                        <div className="dropdown-item ">
+                                            <input type="radio"
+                                            checked={this.state.search_type === 'opt1' && true}
+                                            name="search_type"
+                                            value='opt1'
+                                            onClick={this.onChange}/> Book Title
+                                        </div>
+                                        <div className="dropdown-item ">
+                                            <input type="radio"
+                                            checked={this.state.search_type === 'opt2' && true}
+                                            name="search_type"
+                                            value='opt2'
+                                            onClick={this.onChange}/> Gernes
+                                        </div>
+                                        <div className="dropdown-item ">
+                                            <input type="radio"
+                                            checked={this.state.search_type === 'opt3' && true}
+                                            name="search_type"
+                                            value='opt3'
+                                            onClick={this.onChange}/> Author
+                                        </div>
+                                    </div>
                                 </div>
                             </form>
 
