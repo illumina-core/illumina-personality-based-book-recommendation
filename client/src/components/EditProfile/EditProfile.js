@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import Navbar from '../layout/Navbar';
+import Upload from './Upload';
 import './EditProfile.css';
-import {get_other_user} from '../Services'
+
 
 export class EditProfile extends Component {
 
@@ -21,7 +22,8 @@ export class EditProfile extends Component {
                 <div className="container-fluid p-0">
                     <div id="user_header" className="row">
                         <div className="col-md-auto">
-                            <img alt="" src = "./images/upload_img.png" id="profile_pic" className="rounded img"/>
+                            
+                            <Upload />
                         </div>
 
                         <div className="col-md-5" style={{marginRight:'50px'}}>
