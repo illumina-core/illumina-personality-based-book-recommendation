@@ -105,3 +105,8 @@ export const get_other_user = username =>{
     return axios
     .get('get_other_user?user=' + username)
 }
+
+export const get_genres = () =>{
+    return axios
+    .get('get-genres')
+}

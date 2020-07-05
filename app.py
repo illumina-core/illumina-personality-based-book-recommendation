@@ -356,5 +356,25 @@ def recommend_books_by_personality():
 
     return jsonify({"rec": json.dumps(sorted_books)})
 
+@app.route('/get-genres', methods=['GET'])
+def get_genres():
+    genres = Books.objects().distinct('genres')
+    dic = {}
+    for alp in 'a b c d e f g h i j k l m n o p q r s t u v w x y z'.split():
+        dic[alp.upper()] = []
+        gen = []
+        for genre in genres:
+            if genre.lower()[0] == alp:
+                if len(gen) < 14:
+                    gen.append(genre)
+                else:
+                    dic[alp.upper()].append(gen)
+                    gen = []
+        if len(gen) > 0:
+            dic[alp.upper()].append(gen)
+    
+    return jsonify({'genreResults': dic})
+
+
 if __name__ == '__main__':
     app.run(debug=True)

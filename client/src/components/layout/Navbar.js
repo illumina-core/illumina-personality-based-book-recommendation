@@ -72,21 +72,21 @@ export class Navbar extends Component {
                                     <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
                                         <div className="dropdown-item ">
                                             <input type="radio"
-                                            checked={this.state.search_type === 'opt1' && true}
+                                            defaultChecked={this.state.search_type === 'opt1' && true}
                                             name="search_type"
                                             value='opt1'
                                             onClick={this.onChange}/> Book Title
                                         </div>
                                         <div className="dropdown-item ">
                                             <input type="radio"
-                                            checked={this.state.search_type === 'opt2' && true}
+                                            defaultChecked={this.state.search_type === 'opt2' && true}
                                             name="search_type"
                                             value='opt2'
                                             onClick={this.onChange}/> Gernes
                                         </div>
                                         <div className="dropdown-item ">
                                             <input type="radio"
-                                            checked={this.state.search_type === 'opt3' && true}
+                                            defaultChecked={this.state.search_type === 'opt3' && true}
                                             name="search_type"
                                             value='opt3'
                                             onClick={this.onChange}/> Author
