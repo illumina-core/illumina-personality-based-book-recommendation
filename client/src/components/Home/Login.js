@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-
 import { login } from '../Services'
+import './Home.css';
 
 export class Login extends Component {
 
@@ -31,7 +31,7 @@ export class Login extends Component {
                 alert("Invalid login id or password")
             }
             else{
-                alert(res.data.username + " has logged in SUccessfully!")
+                alert(res.data.username + " has logged in successfully!")
                 localStorage.setItem('logged_in', true)
                 localStorage.setItem('username', res.data.username)
                 localStorage.setItem('profile_pic', res.data.profile_pic)
@@ -46,8 +46,8 @@ export class Login extends Component {
     render() {
         return (
             <div>
-                <button type="button" className="btn btn-outline-success my-2 my-sm-0 mr-2" data-toggle="modal" data-target="#login">
-                    Login
+                <button type="button" className="btn btn-outline-primary my-2 my-sm-0 mr-2" data-toggle="modal" data-target="#login">
+                    Sign In
                 </button>
 
                 

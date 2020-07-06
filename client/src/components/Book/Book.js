@@ -5,6 +5,7 @@ import AddReview from './AddReview'
 import { Link } from 'react-router-dom'
 import { get_book, add_book_to_shelf, remove_review } from '../Services'
 import { Navbar } from '../layout/Navbar'
+import { Navbar } from '../layout/Footer'
 import  Rating  from './Rating'
 
 
@@ -234,6 +235,7 @@ export class Book extends Component {
                     </div>
                 </div>
             </div>
+            <Footer />
             </div>
         )
     }

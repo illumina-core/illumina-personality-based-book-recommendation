@@ -10,7 +10,7 @@ export class TopBookshelves extends Component {
     const responsive = {  
       desktop: {
         breakpoint: { max: 3000, min: 1024 },
-        items: 4
+        items: 5
       },
       tablet: {
         breakpoint: { max: 1024, min: 464 },
@@ -39,19 +39,20 @@ export class TopBookshelves extends Component {
           >
             {
               this.props.shelves.map((shelf) =>(
-                <div key={shelf.shelf_title} className="container-fluid">
-                  <div className="row">
+                <div key={shelf.shelf_title} className="container-fluid" style={{paddingTop:'10px', paddingBottom:'20px'}}>
+                    <div className="row">
+                    <a href={this.props.url + "/book-shelves/" + shelf.shelf_title}>
+                      <img className="img" alt={shelf.shelf_title} src={shelf.shelf_pic} style={{width: '250px', height: '250px', border:'2px solid black'}} />
+                    </a>
+                  </div>
+                  <div className="row" style={{paddingTop:'10px'}}>
                       <h4 className="text-center w-100">
                         <a className="text-dark text-decoration-none" href={this.props.url + "/book-shelves/" + shelf.shelf_title}>
                           {shelf.shelf_title}
                         </a>
                       </h4>
                   </div>
-                  <div className="row">
-                    <a href={this.props.url + "/book-shelves/" + shelf.shelf_title}>
-                      <img className="img-fluid p-1" alt={shelf.shelf_title} src={shelf.shelf_pic} style={car_style} />
-                    </a>
-                  </div>
+
                 </div>
               ))
             }

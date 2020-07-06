@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { register } from '../Services'
+import './Home.css';
 
 export class Register extends Component {
 
@@ -42,7 +43,7 @@ export class Register extends Component {
     render() {
         return (
             <div>
-                <button type="button" className="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#register">
+                <button type="button" className="btn btn-outline-primary my-2 my-sm-0" data-toggle="modal" data-target="#register">
                     Register
                 </button>
                 
