@@ -80,89 +80,92 @@ export class Book extends Component {
         } = this.state.data
         
         return (
-            <div>
+            <div style={{backgroundColor:'#EAEDF1'}}>
             <Navbar />
             
             <div id="book" className="container-fluid mx-auto" style={{width:'80%', backgroundColor:'#EAEDF1', paddingTop:'35px', paddingBottom:'35px'}}>
                 <div className="row">
 
                     <div className="col-md-4">
+
                         <div id='book_image' className='container'>
-                        <div className='row' style={{paddingBottom:'20px'}}>
-                            <div className="col" align="center">            
-                                <img src={cover_image} className="rounded" alt="genres" style={{width: '260px', border: '2px solid #151B2D'}}/>
+                            <div className='row' style={{paddingBottom:'20px'}}>
+                                <div className="col" align="center">            
+                                    <img src={cover_image} className="rounded" alt="genres" style={{width: '260px', border: '2px solid #151B2D'}}/>
+                                </div>
                             </div>
                         </div>
-                        </div>
+
                         <div  id='book_sidebar' className='container'>
-                        <div className='row'>
-                            <div className="col" align="center">
-                                <h4 className="font-weight-light" style={{marginBottom:'0px'}}>Rating: {avg_rating}</h4>
+                            <div className='row'>
+                                <div className="col" align="center">
+                                    <h4 className="font-weight-light" style={{marginBottom:'0px'}}>Rating: {avg_rating}</h4>
+                                </div>
                             </div>
-                        </div>
-                        <div className='row'>
-                            <div className="col pt-2" align="center">Rate Book!</div>
-                        </div>
-                        <div className='row'>
-                            <div className="col">
-                                {/* ================ RATING ==================*/}
-                                {localStorage.logged_in && 
-                                <Rating 
-                                className={"mx-auto"}
-                                value={this.state.user_rating} 
-                                id={this.state.id} 
-                                edit={true} 
-                                size={25}
-                                />
-                                }
+                            <div className='row'>
+                                <div className="col pt-2" align="center">Rate Book!</div>
                             </div>
-                        </div>
-                        <div className='row mb-2'>
-                            <div className="col" align="center">
-                                <div className="dropdown">
-                                    <button type="button" className="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown">
-                                    Add to Bookshelf
-                                    </button>
-                                    <div className="dropdown-menu p-0">
-                                    {
-                                        this.state.shelves.map((shelf) =>(
-                                            <button key={shelf} 
-                                            value={shelf + '||' + this.state.id}
-                                            onClick={e => this.handleInput(e, "value")}
-                                            className="dropdown-item border border-top-0 border-right-0 border-left-0"
-                                            >{shelf}</button>
-                                        ))
+                            <div className='row'>
+                                <div className="col">
+                                    {/* ================ RATING ==================*/}
+                                    {localStorage.logged_in && 
+                                    <Rating 
+                                    className={"mx-auto"}
+                                    value={this.state.user_rating} 
+                                    id={this.state.id} 
+                                    edit={true} 
+                                    size={25}
+                                    />
                                     }
                                 </div>
-                                </div>
                             </div>
-                        </div>
 
-                        {/* Add review */}
-                        {localStorage.logged_in && <AddReview id={this.state.id}/>}
-                        
-                        <div className='row'>
-                            <div className="col" align="center">
-                                <div>
-                                    {/* <button data-toggle="collapse" data-target="#demo" className="font-weight-light"
-                                    style={{fontSize:'18px'}}><u>Where to Read</u></button> */}
-
-                                    <h5 class="font-weight-light" data-toggle="collapse" data-target="#demo" color="primary" id="toggler" style={{fontSize:'18px'}}>
-                                        <u>Where to Read</u>
-                                    </h5>
-                                    
-                                    <div id="demo" className="collapse">
-                                        
-                                    <p className="font-weight-light">
+                            <div className='row mb-2'>
+                                <div className="col" align="center">
+                                    <div className="dropdown">
+                                        <button type="button" className="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown">
+                                        Add to Bookshelf
+                                        </button>
+                                        <div className="dropdown-menu p-0">
                                         {
-                                        Object.entries(this.state.links).map( ([key, value]) =>  
-                                            <a key={key} href={value} style={{display: 'block'}}>{key}</a>
-                                        )}
-                                    </p>
+                                            this.state.shelves.map((shelf) =>(
+                                                <button key={shelf} 
+                                                value={shelf + '||' + this.state.id}
+                                                onClick={e => this.handleInput(e, "value")}
+                                                className="dropdown-item border border-top-0 border-right-0 border-left-0"
+                                                >{shelf}</button>
+                                            ))
+                                        }
+                                    </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+
+                            {/* Add review */}
+                            {localStorage.logged_in && <AddReview id={this.state.id}/>}
+                        
+                            <div className='row'>
+                                <div className="col" align="center">
+                                    <div>
+                                        {/* <button data-toggle="collapse" data-target="#demo" className="font-weight-light"
+                                        style={{fontSize:'18px'}}><u>Where to Read</u></button> */}
+
+                                        <h5 class="font-weight-light" data-toggle="collapse" data-target="#demo" color="primary" id="toggler" style={{fontSize:'18px'}}>
+                                            <u>Where to Read</u>
+                                        </h5>
+                                        
+                                        <div id="demo" className="collapse">
+                                            
+                                        <p className="font-weight-light">
+                                            {
+                                            Object.entries(this.state.links).map( ([key, value]) =>  
+                                                <a key={key} href={value} style={{display: 'block'}}>{key}</a>
+                                            )}
+                                        </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div className='col-md-8' >
