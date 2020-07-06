@@ -36,26 +36,13 @@ export class SearchResult extends Component {
         return (
             <React.Fragment>
                   <Navbar />
-                  <div className="container-fluid">
-                    <div className="row">
-                      <div className="alert alert-info alert-dismissible w-100">
-                        <button type="button" className="close" data-dismiss="alert">&times;</button>
-                        <h3>Search Result</h3>
-                      </div>
-                    </div>
-                    <div className="row">
-                    <Pagination
-                      hideDisabled
-                      activePage={this.state.activePage}
-                      itemsCountPerPage={1}
-                      totalItemsCount={this.state.total}
-                      pageRangeDisplayed={5}
-                      innerClass={'pagination mx-auto mt-2'}
-                      itemClass={'page-item'}
-                      linkClass={'page-link'}
-                      onChange={this.handlePageChange.bind(this)}
-                    />
-                    </div>
+                  <div className="row" style={{backgroundColor:"#151B2D", color:'#fff', paddingTop:'5px', paddingBottom:'5px'}}>
+
+                  <h4 className="font-weight-light" style={{paddingLeft:'190px'}}>Search Results</h4>
+
+                  </div>
+                  <div className="container-fluid mx-auto" style={{width:'80%'}}>
+
 
                     {
                     this.state.books.slice(10*(this.state.activePage-1), 10*this.state.activePage).map((book) => (
