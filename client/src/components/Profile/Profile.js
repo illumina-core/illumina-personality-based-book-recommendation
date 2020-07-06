@@ -18,7 +18,7 @@ export class Profile extends Component {
                     <Navbar />
                 </div>
 
-                <div className="container-fluid p-0">
+                <div className="container-fluid p-0 mx-auto" style={{width:'80%'}}>
                     <div id="user_header" className="row">
                         <div className="col-md-auto">
                             <img alt="" src = "./images/letter.jpg" id="profile_pic" className="rounded img"/>
@@ -30,7 +30,7 @@ export class Profile extends Component {
                             </div>
                             
                             <div className="row">
-                                <button className="btn btn-secondary">Edit Profile</button>
+                                <button className="btn btn-outline-secondary">Edit Profile</button>
                             </div>
                         </div>
 
@@ -48,10 +48,18 @@ export class Profile extends Component {
                             <span></span>
                         </div>
                         <div className="col">
-                            <button className="btn btn-lg btn-secondary">Personalize Me</button></div>
+                            <div className="row justify-content-center">
+                                <div class="form-group" style={{ paddingTop:'15px'}}>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" style={{width:'500px', height:'180px'}}></textarea>
+                                </div>
+                            </div>
+                            <div className="row justify-content-center">
+                                <button className="btn btn-lg btn-outline-secondary">Personalize Me</button>
+                            </div>
+                        </div>
                     </div>
                     <div className="row" style={{borderTop:'1.5px solid #151B2D'}}>
-                        here
+                        
                     </div>
                 </div>
             </div>
