@@ -7,7 +7,7 @@ import { get_book, add_book_to_shelf, remove_review } from '../Services'
 import { Navbar } from '../layout/Navbar'
 import { Footer } from '../layout/Footer'
 import  Rating  from './Rating'
-
+import './Book.css';
 
 export class Book extends Component {
 
@@ -82,22 +82,22 @@ export class Book extends Component {
         return (
             <div>
             <Navbar />
-            <div style={{height:'35px', backgroundColor:'#EAEDF1'}} />
-            <div id="book" className="container-fluid">
+            
+            <div id="book" className="container-fluid mx-auto" style={{width:'80%', backgroundColor:'#EAEDF1', paddingTop:'35px', paddingBottom:'35px'}}>
                 <div className="row">
 
                     <div className="col-md-4">
                         <div id='book_image' className='container'>
                         <div className='row' style={{paddingBottom:'20px'}}>
                             <div className="col" align="center">            
-                                <img src={cover_image} className="rounded" alt="genres"/>
+                                <img src={cover_image} className="rounded" alt="genres" style={{width: '260px', border: '2px solid #151B2D'}}/>
                             </div>
                         </div>
                         </div>
                         <div  id='book_sidebar' className='container'>
                         <div className='row'>
                             <div className="col" align="center">
-                                <h4 className="font-weight-light" style={{marginBottom:'0px'}}>Average Rating: {avg_rating}</h4>
+                                <h4 className="font-weight-light" style={{marginBottom:'0px'}}>Rating: {avg_rating}</h4>
                             </div>
                         </div>
                         <div className='row'>
@@ -120,7 +120,7 @@ export class Book extends Component {
                         <div className='row mb-2'>
                             <div className="col" align="center">
                                 <div className="dropdown">
-                                    <button type="button" className="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
+                                    <button type="button" className="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown">
                                     Add to Bookshelf
                                     </button>
                                     <div className="dropdown-menu p-0">
@@ -144,9 +144,15 @@ export class Book extends Component {
                         <div className='row'>
                             <div className="col" align="center">
                                 <div>
-                                    <button data-toggle="collapse" data-target="#demo" className="font-weight-light"
-                                    style={{fontSize:'18px'}}><u>Where to Read</u></button>
+                                    {/* <button data-toggle="collapse" data-target="#demo" className="font-weight-light"
+                                    style={{fontSize:'18px'}}><u>Where to Read</u></button> */}
+
+                                    <h5 class="font-weight-light" data-toggle="collapse" data-target="#demo" color="primary" id="toggler" style={{fontSize:'18px'}}>
+                                        <u>Where to Read</u>
+                                    </h5>
+                                    
                                     <div id="demo" className="collapse">
+                                        
                                     <p className="font-weight-light">
                                         {
                                         Object.entries(this.state.links).map( ([key, value]) =>  
@@ -185,7 +191,7 @@ export class Book extends Component {
                                 <h6 className="font-weight-light">                                
                                     {
                                     Object.entries(this.state.extra).map( ([key, value]) =>  
-                                        <div key={key}><b>{key}</b> : {value}</div>
+                                        <div key={key} style={{paddingBottom:'5px'}}><b>{key}</b> : {value}</div>
                                     )}
                                 </h6>
                             </div>
@@ -220,11 +226,11 @@ export class Book extends Component {
                                         </div>
                                         {
                                             localStorage.logged_in && 
-                                        <div className="col-2">
+                                        <div className="col-auto">
                                             <button
                                             className="btn btn-danger"
                                             onClick={e => this.removeReview(e)}
-                                            ><i className="fa fa-trash" aria-hidden="true" /> Remove</button>
+                                            ><i className="fa fa-trash" aria-hidden="true" /></button>
                                         </div>
                                         }
                                 </div>
