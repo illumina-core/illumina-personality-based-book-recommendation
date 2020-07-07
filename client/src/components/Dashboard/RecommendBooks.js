@@ -19,9 +19,13 @@ export class RecommendBooks extends Component {
   render() {
     const url = window.location.protocol + "//" + window.location.host
     return (
-    <div className="container-fluid" style={{paddingTop:'16px'}}>
+    <div className="container-fluid mx-auto" style={{width:'80%', border:'1.5px solid #2C3554'}}>
 
-      <div className="row" style={{paddingBottom:'12px'}}>
+      <div className="row">
+          <h3 className="font-weight-light recommend_heading" style={{width:'300px', paddingTop:'15px', paddingBottom:'15px', backgroundColor:'#151B2D', color:'white', border:'1.5px solid #151B2D', borderRadius:'0px 50px 50px 0px'}}>Check out these books</h3>
+      </div>
+
+      <div className="row" style={{paddingTop:'15px', paddingBottom:'12px'}}>
       {
         this.state.recs.slice(0, 2).map((book) =>(
           <div className="col" key={book['_id']['$oid']}>

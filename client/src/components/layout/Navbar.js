@@ -46,8 +46,8 @@ export class Navbar extends Component {
         const url = window.location.protocol + "//" + window.location.host
         return (
             <div className="container-fluid">
-                <div className="row">
-                <nav className="navbar navbar-expand-lg navbar-light bg-light w-100">
+                <div className="row" style={{backgroundColor:'#F8F9FA', borderBottom:'2px solid #151B2D'}}>
+                <nav className="navbar navbar-expand-lg navbar-light bg-#F8F9FA mx-auto" style={{width:'80%'}}>
                     <button className="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" 
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -56,34 +56,34 @@ export class Navbar extends Component {
                     <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
                         <ul className="navbar-nav w-75">
                             <li className="nav-item active">
-                                <a className="nav-link" href={url}>ILLUMINA</a>
+                                <a className="navbar-brand nav-link" href={url} >Illumina</a>
                             </li>
-                            <li className="nav-item mx-auto w-50">
+                            <li className="nav-item  w-50">
 
                             <form className="form-inline my-2 my-lg-0" onSubmit={this.onSubmit}>
-                                <input className="form-control mr-sm-2 w-75" type="search"  name="search"
+                                <input className="form-control mr-sm-2 w-90" type="search"  name="search"
                                 value={this.state.search}
                                 onChange={this.onChange}
-                                placeholder="Search" aria-label="Search"/>
+                                placeholder="Search" aria-label="Search" style={{border:'1.5px solid #151B2D'}}/>
 
                                 <div className="btn-group">
-                                    <button className="btn btn-outline-success" type="submit">Search</button>
-                                    <button type="button" className="btn btn-outline-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
+                                    <button className="btn btn-outline-primary" type="submit">Search</button>
+                                    <button type="button" className="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
                                     
-                                    <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                    <div className="dropdown-menu" aria-labelledby="dropdownMenu2" style={{border:'1.5px solid #151B2D'}}>
                                         <div className="dropdown-item ">
                                             <input type="radio"
                                             defaultChecked={this.state.search_type === 'opt1' && true}
                                             name="search_type"
                                             value='opt1'
-                                            onClick={this.onChange}/> Book Title
+                                            onClick={this.onChange}/> Book 
                                         </div>
-                                        <div className="dropdown-item ">
+                                        <div className="dropdown-item">
                                             <input type="radio"
                                             defaultChecked={this.state.search_type === 'opt2' && true}
                                             name="search_type"
                                             value='opt2'
-                                            onClick={this.onChange}/> Gernes
+                                            onClick={this.onChange}/> Genre
                                         </div>
                                         <div className="dropdown-item ">
                                             <input type="radio"

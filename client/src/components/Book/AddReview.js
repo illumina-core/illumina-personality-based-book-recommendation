@@ -35,7 +35,7 @@ export class AddReview extends Component {
         return (
             <div className='row'>
             <div className="col" align="center">
-                <button type="button" className="btn btn-secondary mb-2" data-toggle="modal" data-target="#myModal">
+                <button type="button" className="btn btn-outline-secondary mb-2" data-toggle="modal" data-target="#myModal" style={{paddingRight:'40px', paddingLeft:'40px'}}>
                 Add Review
                 </button>
                 <div className="modal" id="myModal">

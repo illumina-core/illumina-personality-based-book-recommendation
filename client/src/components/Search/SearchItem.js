@@ -35,20 +35,20 @@ export class SearchItem extends Component {
             </div>
 
             <div className="col-8">
-                <h2 className="font-weight-light" >
-                    <Link to={'/book/' + _id['$oid']}>
+                <h3 className="font-weight-light" style={{fontSize:'27px'}}>
+                    <Link to={'/book/' + _id['$oid']} style={{color:'#151B2D'}}>
                         {book_title}
                     </Link>
-                </h2>
-                <h5 className="font-weight-light" ><b>Authors:</b> {authors.toString()}</h5>
-                <h5 className="font-weight-light" ><b>Genres:</b> {genres.toString()}</h5>
+                </h3>
+                <h5 className="font-weight-light" style={{fontSize:'18px'}}><b>Authors:</b> {authors.toString()}</h5>
+                <h5 className="font-weight-light" style={{fontSize:'18px'}}><b>Genres:</b> {genres.toString()}</h5>
             </div>
 
             <div className="col-md-auto">
                 <h5 className="font-weight-light" style={{paddingTop:'8px', paddingBottom:'5px', textAlign:'center'}}>Rating: <b>{avg_rating}</b></h5>
                 {localStorage.logged_in && 
                     <div className="dropdown">  
-                        <button type="button" className="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
+                        <button type="button" className="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown">
                             Add to Bookshelf
                         </button>
                         <div className="dropdown-menu p-0">

@@ -1,0 +1,128 @@
+#book{
+    background-color: #EAEDF1;
+    padding-bottom: 30px;
+}
+
+/***************BOOK IMAGE**********************/
+#book_image img{
+    width: 260px;
+    border: 2px solid #151B2D;
+}
+
+/***************BOOK SIDEBAR********************/
+#book_sidebar{
+    /* padding-left: 55px;
+    padding-right: 55px; */
+    background-color: white;
+    border: 1.5px solid #2C3554;
+}
+
+.r1{
+    background-color: white;
+    border: 1.5px solid #2C3554;
+    border-bottom: none;
+    padding-top: 10px;
+}
+
+.r2{
+    background-color: white;
+    border: 1.5px solid #2C3554;
+    border-bottom: none;
+    border-top: none;
+}
+
+.r3{
+    background-color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: 1.5px solid #2C3554;
+    border-bottom: none;
+    border-top: none;
+}
+
+.r4{
+    background-color: white;
+    padding-bottom: 10px;
+    border: 1.5px solid #2C3554;
+    border-bottom: none;
+    border-top: none;
+}
+
+.r5{
+    background-color: white;
+    padding-bottom: 10px;
+    border: 1.5px solid #2C3554;
+    border-top: none;
+}
+
+/***************BOOK INFO********************/
+#book_info{
+    background-color: #151B2D;
+    padding-top: 18px;
+    border: 1.5px solid #151B2D;
+}
+
+#book_info h2{
+    font-size: 34px;
+    color: white;
+}
+
+#book_info h3{
+    color: white;
+}
+
+#book_info h5{
+    padding-bottom: 13px;
+    color: white;
+}
+
+#book_info p{
+    padding-top: 8px;
+    color: black;
+    text-align: justify;
+}
+
+#addi_info h5{
+    padding-bottom: 0px;
+    color: black;
+}
+
+.adjust{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/***************REVIEWS********************/
+#review_header{
+    padding-top: 4px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: white;
+    border-top: 1px solid #151B2D;
+    border-bottom: 1px solid #151B2D;
+}
+
+#review_header h5{
+    padding-top: 4px;
+    padding-bottom: 4px;
+    font-size: 21px;
+    color: black;
+}
+
+#review{
+    padding-top: 10px;
+}
+
+#review img{
+    width: 40px;
+    border: 1.5px solid #151B2D;
+}
+
+#review_text{
+    text-align: justify;
+}
+
+#star{
+    padding-right: 6px;
+    color: #FFD700;
+}

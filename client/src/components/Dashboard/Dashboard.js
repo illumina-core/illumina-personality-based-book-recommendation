@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import Navbar from '../layout/Navbar'
+import Footer from '../layout/Footer'
 import RecommendBooks from './RecommendBooks';
 import RecentActivities from './RecentActivities';
 import TopBookshelves from './TopBookshelves';
@@ -42,7 +43,7 @@ export class Dashboard extends Component {
             <div className="container-fluid">
                 <div className="row" id="header">
                     <div className="container">
-                        <div className="row"><h4 className="">Welcome back {username}</h4></div>
+                        <div className="row"><h4 className="font-weight-light">Welcome back {username}</h4></div>
                         <div className="row">
                         <div className="col-auto pl-0">
                             <button className="btn btn-outline-secondary .bg-transparent"> Recommend me a book!</button>
@@ -53,18 +54,22 @@ export class Dashboard extends Component {
                         </div>
                     </div>  
                 </div>
+
+                
                 <div className="row" id="topbookshelves">
-                    <div className="container-fluid">
-                        <div className="row">
-                            <h3 className="font-weight-light">
-                                <a className="nav-link" href={url + '/book-shelves'}>Book Shelves</a>
-                            </h3>
+                    <div className="container-fluid mx-auto" style={{width:'80%'}}>
+                        <div className="row justify-content-center align-items-center" >
+                            <h2 className="font-weight-light" style={{textAlign: 'center', paddingTop:'25px'}}>
+                                <a className="nav-link" href={url + '/book-shelves'} style={{color:'#151B2D', fontSize:'35px'}}>Bookshelves</a>
+                            </h2>
                         </div>
                         <TopBookshelves shelves={this.state.shelves} url={url}/>
                     </div>
                 </div>
+
+
                 <div className="row" id="recommend_books">
-                    <h4 className="font-weight-light">Check out these books</h4>
+                    
                     <RecommendBooks />
                 </div>
                 {/* <div className="row" id="recent_activities">
@@ -72,6 +77,7 @@ export class Dashboard extends Component {
                     <RecentActivities />
                 </div> */}
             </div>
+            <Footer />
             </div>
         )
     }

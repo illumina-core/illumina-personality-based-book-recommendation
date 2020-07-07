@@ -20,12 +20,12 @@ export class UserMenu extends Component {
         const url = window.location.protocol + "//" + window.location.host
         return (
             <li className="nav-item dropdown ml-auto">
-                <Link to="#" className="nav-link dropdown-toggle" id="navDropDownLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <Link to="#" className="nav-link dropdown-toggle " id="navDropDownLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <img alt="" src={localStorage.profile_pic} 
-                width="32" height="32" className="rounded-circle img-fluid" style={{border: '2px solid black'}} />
+                width="32" height="32" class="rounded img-fluid" style={{border: '2px solid black'}}/>
                 &nbsp;{localStorage.username}
                 </Link>
-                <div className="dropdown-menu" aria-labelledby="navDropDownLink">
+                <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navDropDownLink" style={{border:'1.5px solid #151B2D'}}>
                     <a className="dropdown-item" href={url + '/dashboard'}>Dashboard</a>
                     <div className="dropdown-divider"></div>
                     <a className="dropdown-item" href={url + '/profile'}>Profile</a>
