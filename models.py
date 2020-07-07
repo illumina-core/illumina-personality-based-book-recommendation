@@ -46,6 +46,7 @@ class Users(Document):
     profile_pic = StringField(default="../images/default_user.png")
     date_of_birth = DateTimeField()
     description = StringField(default="i am a default user")
+    cluster = IntField(default=-1)
     personality_index = DictField(default={
         'OPN': 0.0,
         'CON': 0.0,

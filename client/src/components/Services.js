@@ -101,7 +101,12 @@ export const remove_shelf = shelf =>{
     })
 }
 
-export const get_other_user = username =>{
+export const get_genres = () =>{
     return axios
-    .get('get_other_user?user=' + username)
+    .get('get-genres')
+}
+
+export const recommend_books_by_personality = () =>{
+    return axios
+    .get('recommend-books-by-personality')
 }
