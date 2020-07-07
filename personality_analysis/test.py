@@ -1,7 +1,5 @@
 from ppredict import PPredictor
 from cpredict import CPredictor
-from clusters import Clusters
-from pmodel import PModel
 
 P = PPredictor()
 C = CPredictor()

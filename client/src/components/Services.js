@@ -110,3 +110,10 @@ export const recommend_books_by_personality = () =>{
     return axios
     .get('recommend-books-by-personality')
 }
+
+export const assign_user_personality = (per_desc) =>{
+    return axios
+    .post('assign-user-personality', {
+        per_desc: per_desc
+    })
+}

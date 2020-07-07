@@ -23,7 +23,9 @@ export class AddShelf extends Component {
     }
 
     onSubmit = () =>{
-        add_shelf(this.state.shelf).catch(err =>{
+        add_shelf(this.state.shelf).then(res =>{
+            alert('shelf added')
+        }).catch(err =>{
             alert(err)
         })
     }

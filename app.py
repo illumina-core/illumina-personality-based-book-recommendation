@@ -6,6 +6,11 @@ from datetime import datetime
 import random
 from collections import Counter
 
+from ppredict import PPredictor
+from cpredict import CPredictor
+from clusters import Clusters
+from pmodel import PModel
+
 from mongoengine import connect
 from mongoengine.queryset.visitor import Q
 from mongoengine import DoesNotExist, NotUniqueError
@@ -13,6 +18,7 @@ from mongoengine import DoesNotExist, NotUniqueError
 from scipy.spatial import distance
 
 from models import Shelves, Books, Users, Reviews
+
 
 app = Flask(__name__)
 
@@ -205,6 +211,10 @@ def rate_book():
 def add_shelf():
     shelf = request.get_json()['shelf']
     user = Users.objects(username=session['user']).get()
+    for s in user.shelves:
+        if s.shelf_title == shelf:
+            return jsonify({"nope": 'shelf already present'})
+
     user.shelves.append(Shelves(
         shelf_title=shelf
     ))
@@ -322,15 +332,15 @@ def remove_shelf():
 def recommend_books_by_personality():
     data = Users.objects(username=session['user']).only(
         'personality_index',
-        # 'cluster',
+        'cluster',
         'shelves'
     ).get()
 
-    # if True:
-    #     return  jsonify({'nope': 'You have not gotten your personality yet'})
+    if data['cluster'] == -1:
+        return  jsonify({'nope': 'You have not gotten your personality yet'})
 
     per = data['personality_index']
-    books = Books.objects(cluster = 12 #data['cluster']
+    books = Books.objects(cluster = data['cluster']
                 ).aggregate(*[
             {
                 '$project': {
@@ -387,6 +397,27 @@ def get_genres():
             dic[alp.upper()].append(gen)
     
     return jsonify({'genreResults': dic})
+
+@app.route('/assign-user-personality', methods=['POST'])
+def assign_user_personality():
+    per_desc = request.get_json()['per_desc']
+    P = PPredictor()
+    C = CPredictor()
+
+    keys = ['OPN', 'CON', 'EXT', 'AGR', 'NEU']
+    prediction =  P.user_predict([per_desc])
+    personlaity = {keys[x]: prediction[x] for x in range(0,5)}
+
+    cluster = C.user_cluster_predict([prediction])[0]
+    
+    user = Users.objects(username=session['user']).get()
+    user.personality_index = personlaity
+
+    user.cluster = cluster
+    user.description = per_desc
+    user.save()
+
+    return jsonify({'done': True})
 
 
 if __name__ == '__main__':
