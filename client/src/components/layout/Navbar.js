@@ -22,22 +22,23 @@ export class Navbar extends Component {
 
     onSubmit(e){
         e.preventDefault()
-
-        if(this.state.search_type === 'opt1'){
-            window.location.href = window.location.protocol + "//" + window.location.host + 
-            "/search?title=" + this.state.search;
+        if(this.state.search){
+            if(this.state.search_type === 'opt1'){
+                window.location.href = window.location.protocol + "//" + window.location.host + 
+                "/search?title=" + this.state.search;
+            }
+            else if(this.state.search_type === 'opt2'){
+                window.location.href = window.location.protocol + "//" + window.location.host + 
+                "/search?genre=" + this.state.search;
+            }
+            else if(this.state.search_type === 'opt3'){
+                window.location.href = window.location.protocol + "//" + window.location.host + 
+                "/search?author=" + this.state.search;
+            }
         }
-        else if(this.state.search_type === 'opt2'){
+        if(this.state.search_type === 'opt4'){
             window.location.href = window.location.protocol + "//" + window.location.host + 
-            "/search?genre=" + this.state.search;
-        }
-        else if(this.state.search_type === 'opt3'){
-            window.location.href = window.location.protocol + "//" + window.location.host + 
-            "/search?author=" + this.state.search;
-        }
-        else if(this.state.search_type === 'opt4'){
-            window.location.href = window.location.protocol + "//" + window.location.host + 
-            "/search?title=" + this.state.search;
+            "/search?personality";
         }
     }
    
@@ -91,6 +92,19 @@ export class Navbar extends Component {
                                             value='opt3'
                                             onClick={this.onChange}/> Author
                                         </div>
+                                        {
+                                            localStorage.logged_in &&
+                                            <React.Fragment>
+                                                <div className="dropdown-divider" />
+                                                <button 
+                                                className="dropdown-item" 
+                                                name="search_type"
+                                                value='opt4'
+                                                onClick={this.onChange}>
+                                                    Personality Recommendaion
+                                                </button>
+                                            </React.Fragment>
+                                        }
                                     </div>
                                 </div>
                             </form>

@@ -4,7 +4,7 @@ import { Navbar } from '../layout/Navbar'
 import { SearchItem } from './SearchItem'
 
 import Pagination from "react-js-pagination";
-import { search_book } from '../Services'
+import { search_book, recommend_books_by_personality } from '../Services'
 
 export class SearchResult extends Component {
 
@@ -19,20 +19,33 @@ export class SearchResult extends Component {
     }
 
     componentDidMount(){        
-        search_book(window.location.href.split('?')[1]).then(res =>{  
-            this.setState({books: JSON.parse(res.data.books)})
-            this.setState({total: parseInt(res.data.total)})
-            if(localStorage.logged_in){
-              this.setState({shelves: res.data.shelves})
-            }
+      if(this.props.location.search.split('?')[1].split('=')[0] === 'personality'){
+        recommend_books_by_personality().then(res =>{
+          this.setState({books: res.data.books})
+          this.setState({total: res.data.total})
+          this.setState({shelves: res.data.shelves})
         })
-      }   
+      }
+      else{
+        search_book(window.location.href.split('?')[1]).then(res =>{  
+          if(res.data.nope){
+            window.location.href = window.location.protocol + "//" + window.location.host;
+          }
+          this.setState({books: JSON.parse(res.data.books)})
+          this.setState({total: parseInt(res.data.total)})
+          if(localStorage.logged_in){
+            this.setState({shelves: res.data.shelves})
+          }
+        })
+      }
+    }   
 
     handlePageChange(pageNumber) {
         this.setState({ activePage: pageNumber })
       }
 
     render() {
+      const type = this.props.location.search.split('?')[1].split('=')[0]
         return (
             <React.Fragment>
                   <Navbar />
@@ -40,7 +53,13 @@ export class SearchResult extends Component {
                     <div className="row">
                       <div className="alert alert-info alert-dismissible w-100">
                         <button type="button" className="close" data-dismiss="alert">&times;</button>
-                        <h3>Search Result</h3>
+                        <h3>
+                          Search Result
+                          {type === 'personality' && " for Personality Recommendation"}
+                          {type === 'title' && " for Book Title"}
+                          {type === 'genre' && " for Genre"}
+                          {type === 'author' && " for Author"}
+                        </h3>
                       </div>
                     </div>
                     <div className="row">

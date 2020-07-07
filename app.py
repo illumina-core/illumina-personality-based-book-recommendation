@@ -322,14 +322,19 @@ def remove_shelf():
 def recommend_books_by_personality():
     data = Users.objects(username=session['user']).only(
         'personality_index',
-        'cluster'
+        # 'cluster',
+        'shelves'
     ).get()
 
-    per = data['personality_index']
+    if True:
+        return  jsonify({'nope': 'You have not gotten your personality yet'})
 
-    books = Books.objects(cluster = data['cluster']).aggregate(*[
+    per = data['personality_index']
+    books = Books.objects(cluster = 12 #data['cluster']
+                ).aggregate(*[
             {
                 '$project': {
+                    'id': 1,
                     'book_title': 1,
                     'cover_image': 1,
                     'avg_rating': 1,
@@ -352,9 +357,17 @@ def recommend_books_by_personality():
     dis = sorted(dis.items(), key=lambda x: x[1])
     sorted_books = []
     for x in dis:
-        sorted_books.append(books[x[0]]['book_title'])
+        oid = str(books[x[0]]['_id'])
+        del books[x[0]]['_id']
+        books[x[0]]['_id'] = {'$oid': oid}
+        
+        sorted_books.append(books[x[0]])
 
-    return jsonify({"rec": json.dumps(sorted_books)})
+    shelves = []
+    for shelf in data['shelves']:
+        shelves.append(shelf['shelf_title'])
+
+    return  jsonify({"books":sorted_books, "total": 2, "shelves": shelves})
 
 @app.route('/get-genres', methods=['GET'])
 def get_genres():
