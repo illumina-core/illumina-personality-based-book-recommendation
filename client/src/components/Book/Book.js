@@ -172,7 +172,7 @@ export class Book extends Component {
                         <div id = "book_info" className='container'>
                         <div className="adjust row">
                             <h2 className="font-weight-light">
-                                <Link to={this.state.id} style={{color:'#151B2D'}}>
+                                <Link to={this.state.id} style={{color:'#fff'}}>
                                 {book_title}
                                 </Link>
                             </h2>
