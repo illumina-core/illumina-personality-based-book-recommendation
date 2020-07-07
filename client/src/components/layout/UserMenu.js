@@ -22,7 +22,7 @@ export class UserMenu extends Component {
             <li className="nav-item dropdown ml-auto">
                 <Link to="#" className="nav-link dropdown-toggle " id="navDropDownLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <img alt="" src={localStorage.profile_pic} 
-                width="32" height="32" class="rounded img-fluid" style={{border: '2px solid black'}}/>
+                width="32" height="32" className="rounded img-fluid" style={{border: '2px solid black'}}/>
                 &nbsp;{localStorage.username}
                 </Link>
                 <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navDropDownLink" style={{border:'1.5px solid #151B2D'}}>
