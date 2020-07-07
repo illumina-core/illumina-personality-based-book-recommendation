@@ -21,6 +21,9 @@ export class SearchResult extends Component {
     componentDidMount(){        
       if(this.props.location.search.split('?')[1].split('=')[0] === 'personality'){
         recommend_books_by_personality().then(res =>{
+          if(res.data.nope){
+            window.location.href = window.location.protocol + "//" + window.location.host;
+          }
           this.setState({books: res.data.books})
           this.setState({total: res.data.total})
           this.setState({shelves: res.data.shelves})
@@ -28,9 +31,6 @@ export class SearchResult extends Component {
       }
       else{
         search_book(window.location.href.split('?')[1]).then(res =>{  
-          if(res.data.nope){
-            window.location.href = window.location.protocol + "//" + window.location.host;
-          }
           this.setState({books: JSON.parse(res.data.books)})
           this.setState({total: parseInt(res.data.total)})
           if(localStorage.logged_in){

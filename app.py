@@ -326,8 +326,8 @@ def recommend_books_by_personality():
         'shelves'
     ).get()
 
-    if True:
-        return  jsonify({'nope': 'You have not gotten your personality yet'})
+    # if True:
+    #     return  jsonify({'nope': 'You have not gotten your personality yet'})
 
     per = data['personality_index']
     books = Books.objects(cluster = 12 #data['cluster']
