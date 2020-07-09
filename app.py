@@ -353,7 +353,7 @@ def recommend_books_by_personality():
             #         'personality_index': 1
             #     }
             # },
-            { '$sample': { 'size': 20 } }
+            { '$sample': { 'size': 5 } }
         ])
 
     books = list(books)
@@ -377,7 +377,7 @@ def recommend_books_by_personality():
     for shelf in data['shelves']:
         shelves.append(shelf['shelf_title'])
 
-    return  jsonify({"books":sorted_books, "total": 2, "shelves": shelves})
+    return  jsonify({"books":sorted_books, "total": 1, "shelves": shelves})
 
 @app.route('/get-genres', methods=['GET'])
 def get_genres():
