@@ -30,7 +30,9 @@ export class UserMenu extends Component {
                     <div className="dropdown-divider"></div>
                     <a className="dropdown-item" href={url + '/profile'}>Profile</a>
                     <div className="dropdown-divider"></div>
-                    <a className="dropdown-item" href={url + '/edit'}>Edit Profile</a>
+                    <a className="dropdown-item" href={url + '/book-shelves'}>My Bookshelves</a>
+                    <div className="dropdown-divider"></div>
+                    <a className="dropdown-item" href={url + '/genres'}>Genres</a>
                     <div className="dropdown-divider"></div>
                     <button className="dropdown-item" onClick={this.logOut.bind(this)}>Logout</button>
                 </div>

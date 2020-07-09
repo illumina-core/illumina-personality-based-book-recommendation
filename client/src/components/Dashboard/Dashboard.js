@@ -46,7 +46,11 @@ export class Dashboard extends Component {
                         <div className="row"><h4 className="font-weight-light">Welcome back {username}</h4></div>
                         <div className="row">
                         <div className="col-auto pl-0">
-                            <button className="btn btn-outline-secondary .bg-transparent"> Recommend me a book!</button>
+                            <button className="btn btn-outline-secondary .bg-transparent"> 
+                                <a href={url + '/search?personality'} style={{color:'white'}}>Recommend me a book!</a>
+                            </button>
+
+                            
                         </div>
                         <div className="col">
                             <button className="btn btn-outline-secondary .bg-transparent"> Check out my personality</button>
