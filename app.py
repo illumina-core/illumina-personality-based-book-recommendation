@@ -342,17 +342,17 @@ def recommend_books_by_personality():
     per = data['personality_index']
     books = Books.objects(cluster = data['cluster']
                 ).aggregate(*[
-            {
-                '$project': {
-                    'id': 1,
-                    'book_title': 1,
-                    'cover_image': 1,
-                    'avg_rating': 1,
-                    'genres': 1,
-                    'authors': 1,
-                    'personality_index': 1
-                }
-            },
+            # {
+            #     '$project': {
+            #         'id': 1,
+            #         'book_title': 1,
+            #         'cover_image': 1,
+            #         'avg_rating': 1,
+            #         'genres': 1,
+            #         'authors': 1,
+            #         'personality_index': 1
+            #     }
+            # },
             { '$sample': { 'size': 20 } }
         ])
 
