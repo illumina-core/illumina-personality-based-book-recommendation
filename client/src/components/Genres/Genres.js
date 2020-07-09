@@ -16,7 +16,7 @@ export class Genres extends Component {
                     {
                       genres.map((genre) =>(
                         <li className="list-group-item">
-                          <a className="text-decoration-none" href={url + "/search?genre=" + genre}>
+                          <a className="text-decoration-none" href={url + "/search?genre=" + genre} style={{color:'#151B2D'}}>
                             {genre}
                           </a>
                         </li>

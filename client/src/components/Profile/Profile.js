@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Navbar from '../layout/Navbar';
+import Footer from '../layout/Footer';
 import './Profile.css';
 import { assign_user_personality, getUser } from '../Services'
 
@@ -32,12 +33,10 @@ export class Profile extends Component {
 
     render() {
         return (
-            <div className="container-fluid">
-                <div className="row">
-                    <Navbar />
-                </div>
-
-                <div className="container-fluid p-0 mx-auto" style={{width:'80%'}}>
+        <div>
+            <Navbar />
+                
+            <div className="container-fluid p-0 mx-auto" style={{width:'80%'}}>
                     <div id="user_header" className="row">
                         <div className="col-md-auto">
                             <img alt="" src = "./images/letter.jpg" id="profile_pic" className="rounded img"/>
@@ -92,7 +91,12 @@ export class Profile extends Component {
                         
                     </div>
                 </div>
-            </div>
+            
+            <div style={{paddingBottom:'270px'}}></div>
+
+            <Footer />
+                
+        </div>
         )
     }
 }

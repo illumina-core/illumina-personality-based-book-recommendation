@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import { Navbar } from '../layout/Navbar'
 import { SearchItem } from './SearchItem'
+import { SearchPersonalityItem } from './SearchPersonalityItem'
 
 import Pagination from "react-js-pagination";
 import { search_book, recommend_books_by_personality } from '../Services'
@@ -64,6 +65,9 @@ export class SearchResult extends Component {
                   </div>
                   <div className="container-fluid mx-auto" style={{width:'80%'}}>
 
+                    {type === 'personality' && this.state.books.slice(10*(this.state.activePage-1), 10*this.state.activePage).map((book) => (
+                          <SearchPersonalityItem key={book['_id']['$oid']} book={book} shelves={this.state.shelves}/>
+                      ))}
 
                     {
                     this.state.books.slice(10*(this.state.activePage-1), 10*this.state.activePage).map((book) => (

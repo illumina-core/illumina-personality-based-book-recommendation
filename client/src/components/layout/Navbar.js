@@ -92,7 +92,7 @@ export class Navbar extends Component {
                                             value='opt3'
                                             onClick={this.onChange}/> Author
                                         </div>
-                                        {
+                                        {/* {
                                             localStorage.logged_in &&
                                             <React.Fragment>
                                                 <div className="dropdown-divider" />
@@ -104,7 +104,7 @@ export class Navbar extends Component {
                                                     Personality Recommendaion
                                                 </button>
                                             </React.Fragment>
-                                        }
+                                        } */}
                                     </div>
                                 </div>
                             </form>

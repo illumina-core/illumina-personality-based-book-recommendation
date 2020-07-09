@@ -57,7 +57,7 @@ export class Login extends Component {
                     
                          {/* Modal Header  */}
                         <div className="modal-header">
-                        <h4 className="modal-title">Login</h4>
+                        <h4 className="modal-title">Sign In</h4>
                         <button type="button" className="close" data-dismiss="modal">&times;</button>
                         </div>
                         

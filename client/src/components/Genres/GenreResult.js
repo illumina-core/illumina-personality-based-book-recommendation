@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Navbar from '../layout/Navbar'
 import { Genres } from './Genres'
 import { get_genres } from '../Services'
-
+import './Genre.css';
 
 export class GenreResult extends Component {
 
@@ -23,16 +23,14 @@ export class GenreResult extends Component {
     return (
       <div>
         <Navbar />
-        <div className="container-fluid pt-0" id="genres" >
-            <div className="row" style={{borderBottom:'1.5px solid #151B2D', backgroundColor: '#151B2D'}}>
-                <div className="col">
-                    <h3 className="font-weight-light" style={{color: 'white', fontSize: '27px', paddingTop: '5px'}}>Genres</h3>
-                </div>
+        <div style={{borderBottom:'1.5px solid #151B2D', backgroundColor: '#151B2D'}}>
+                <h4 className="font-weight-light" style={{color: 'white', fontSize: '27px', paddingTop: '5px', paddingLeft:'170px'}}>Genres</h4>
             </div>
+        <div className="container-fluid pt-0 mx-auto" id="genres" style={{width:'80%'}}>
             <div className="row">
-                <div className="col"  style={{border:'1px solid black'}}>
+                <div className="col" style={{border:'1px solid black', paddingLeft:'0px', paddingRight:'0px'}}>
                     <ul className="list-group list-group-horizontal">
-                        <li className="list-group-item" data-toggle="collapse" href="#genres_A" >                    
+                        <li className="list-group-item" data-toggle="collapse" href="#genres_A">                    
                             <h6>A</h6>
                         </li>
                         <li className="list-group-item" data-toggle="collapse" href="#genres_B" >                    
