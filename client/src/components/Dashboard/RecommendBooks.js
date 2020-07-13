@@ -38,12 +38,12 @@ export class RecommendBooks extends Component {
                     <div className="col-sm-8" >
                       <div className="card-body">
                         <h3 className="card-title">
-                          <a href={url + '/book/' + book['_id']['$oid']}>
+                          <a href={url + '/book/' + book['_id']['$oid']} style={{color:'#151B2D'}}>
                             {book.book_title}
                           </a>
                         </h3>
-                        <p className="card-subtitle"><b>Authors:</b> {book.authors.toString()}</p>
-                        <p className="card-subtitle"><b>Genres:</b> {book.genres.toString()}</p>
+                        <p className="font-weight-light card-subtitle"><b>Authors:</b> {book.authors.toString()}</p>
+                        <p className="font-weight-light card-subtitle"><b>Genres:</b> {book.genres.toString()}</p>
                       </div>
                     </div>
                 </div>
@@ -65,12 +65,12 @@ export class RecommendBooks extends Component {
                     <div className="col-sm-8" >
                       <div className="card-body">
                         <h3 className="card-title">
-                          <a href={url + '/book/' + book['_id']['$oid']}>
+                          <a href={url + '/book/' + book['_id']['$oid']} style={{color:'#151B2D'}}>
                             {book.book_title}
                           </a>
                         </h3>
-                        <p className="card-subtitle"><b>Authors:</b> {book.authors.toString()}</p>
-                        <p className="card-subtitle"><b>Genres:</b> {book.genres.toString()}</p>
+                        <p className="font-weight-light card-subtitle"><b>Authors:</b> {book.authors.toString()}</p>
+                        <p className="font-weight-light card-subtitle"><b>Genres:</b> {book.genres.toString()}</p>
                       </div>
                     </div>
                 </div>
@@ -83,7 +83,7 @@ export class RecommendBooks extends Component {
       {
         this.state.recs.slice(4, 6).map((book) =>(
           <div className="col" key={book['_id']['$oid']}>
-            <div className="card" style={{border:'1.5px solid #151B2D'}}>
+            <div className="card" style={{border:'1.5px solid #151B2D'}} style={{color:'#151B2D'}}>
                 <div className="row">
                     <div className="col-sm-4" >
                         <img className="card-img-top img-fluid" style={{width:'150px'}}
@@ -92,12 +92,12 @@ export class RecommendBooks extends Component {
                     <div className="col-sm-8" >
                       <div className="card-body">
                         <h3 className="card-title">
-                          <a href={url + '/book/' + book['_id']['$oid']}>
+                          <a href={url + '/book/' + book['_id']['$oid']} style={{color:'#151B2D'}}>
                             {book.book_title}
                           </a>
                         </h3>
-                        <p className="card-subtitle"><b>Authors:</b> {book.authors.toString()}</p>
-                        <p className="card-subtitle"><b>Genres:</b> {book.genres.toString()}</p>
+                        <p className="font-weight-light card-subtitle"><b>Authors:</b> {book.authors.toString()}</p>
+                        <p className="font-weight-light card-subtitle"><b>Genres:</b> {book.genres.toString()}</p>
                       </div>
                     </div>
                 </div>

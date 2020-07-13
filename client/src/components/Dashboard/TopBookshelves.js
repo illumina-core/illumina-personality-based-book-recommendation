@@ -42,7 +42,7 @@ export class TopBookshelves extends Component {
                 <div key={shelf.shelf_title} className="container-fluid" style={{paddingTop:'10px', paddingBottom:'20px'}}>
                     <div className="row">
                     <a href={this.props.url + "/book-shelves/" + shelf.shelf_title}>
-                      <img className="img" alt={shelf.shelf_title} src={shelf.shelf_pic} style={{width: '235px', height: '235px', border:'2px solid black'}} />
+                      <img className="img" alt={shelf.shelf_title} src={shelf.shelf_pic}  style={{width: '235px', height: '235px', border:'3.5px solid black'}} />
                     </a>
                   </div>
                   <div className="row" style={{paddingTop:'10px'}}>

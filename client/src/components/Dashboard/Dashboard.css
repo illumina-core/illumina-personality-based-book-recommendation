@@ -70,4 +70,10 @@
     padding-bottom: 15px;
 }
 
+.btn-outline-secondary:hover, .btn-outline-secondary:active, .btn-outline-secondary:focus {
+    color: #ffffff !important;
+    background-color: #151B2D !important;
+    border-color: #ffffff!important;
+  }
+
 

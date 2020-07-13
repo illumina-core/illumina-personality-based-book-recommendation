@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import UserMenu from './UserMenu'
 import { Login } from '../Home/Login'
 import { Register } from '../Home/Register'
+import './Navbar.css';
 
 export class Navbar extends Component {
 
@@ -90,7 +91,7 @@ export class Navbar extends Component {
                                             defaultChecked={this.state.search_type === 'opt3' && true}
                                             name="search_type"
                                             value='opt3'
-                                            onClick={this.onChange}/> Author
+                                            onClick={this.onChange} style={{color:'#151B2D'}}/> Author
                                         </div>
                                         {/* {
                                             localStorage.logged_in &&
