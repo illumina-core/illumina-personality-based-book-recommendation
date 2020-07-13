@@ -5,8 +5,20 @@
 }
 
 .btn-outline-primary:hover, .btn-outline-primary:focus, .btn-outline-primary:active, .btn-outline-primary.active, .open>.dropdown-toggle.btn-outline-primary {
+    color: #ffffff !important;
+    background-color: #151B2D !important;
+    border-color: #151B2D !important;
+}
+
+.btn-primary {
     color: #fff;
     background-color: #151B2D;
     border-color: #151B2D; 
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
+    color: #151B2D !important;
+    background-color: #ffffff !important;
+    border-color: #151B2D !important;
 }
 

@@ -5,7 +5,6 @@ import json
 from datetime import datetime
 import random
 from collections import Counter
-from base64 import b64decode
 
 from ppredict import PPredictor
 from cpredict import CPredictor
@@ -419,29 +418,6 @@ def assign_user_personality():
     user.save()
 
     return jsonify({'done': True})
-
-@app.route('/update-profile-data', methods=['POST'])
-def update_proflie_image():
-    # data_uri = request.get_json()['file'][0]['dataURL']
-    # header, encoded = data_uri.split(",", 1)
-    # data = b64decode(encoded)
-    
-    # with open('client/public/images/Test.png', 'wb') as fd:
-    #     fd.write(data)
-    # return  jsonify({"uploaded":"uploaded pic"})
-
-    data = request.get_json()['data']
-
-    user = Users.objects(username=session['user']).get()
-
-    session['user'] = data['username']
-
-    user.profile_pic = data['profile_pic']
-    user.username = data['username']
-    user.email = data['email']
-    user.save()
-
-    return  jsonify({"updated": True})
 
 
 if __name__ == '__main__':

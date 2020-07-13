@@ -34,13 +34,13 @@ export class Bookshelf extends Component {
     return (
       <div className="container-fluid pt-0" id="bks_book">
         <div className="row">
-          <div className="col-9" id="bks_heading"><h3><b>{this.props.shelf}</b></h3></div>
-          <div className="col-auto">
+          <div className="col-11" id="bks_heading" style={{paddingTop:'5px', paddingBottom:'5px'}}><h3 className="font-weight-light"><b>{this.props.shelf}</b></h3></div>
+          <div className="col-auto" style={{paddingTop:'5px', paddingBottom:'5px', paddingRight:'20px', paddingLeft:'2px'}}>
             <button
               className="btn btn-danger"
               value={this.props.shelf}
               onClick={e => this.removeShelf(e)}
-              ><i className="fa fa-trash" aria-hidden="true" /> Remove</button>
+              style={{backgroundColor:'white', border:'1px solid #151B2D', paddingLeft:'10px', paddingRight:'10px'}}><i className="fa fa-trash" aria-hidden="true" style={{color:'#151B2D'}}/></button>
           </div>
         </div >
 
@@ -51,10 +51,10 @@ export class Bookshelf extends Component {
                 <img alt={book.title} src={book.cover_image} className="rounded img-fluid" />
               </div>
 
-              <div className="col-9">
+              <div className="col-10">
                 <h4 className="font-weight-light">
-                  <a href={url + '/book/' + book.id}>
-                    {book.title}
+                  <a href={url + '/book/' + book.id} style={{color:'#151B2D'}}>
+                    <b>{book.title}</b>
                   </a>
                 </h4>
                 <h5 className="font-weight-light">{book.authors.toString()}</h5>
@@ -66,7 +66,8 @@ export class Bookshelf extends Component {
                   className="btn btn-danger"
                   value={book.id + '||' + this.props.shelf}
                   onClick={e => this.removeShelfBook(e, 'value')}
-                  ><i className="fa fa-trash" aria-hidden="true" /> Remove</button>
+                  style={{backgroundColor:'white', border:'1px solid #151B2D', paddingLeft:'10px', paddingRight:'10px'}}>
+                    <i className="fa fa-trash" aria-hidden="true" style={{color:'#151B2D'}}/></button>
               </div>}
             </div>
           ))

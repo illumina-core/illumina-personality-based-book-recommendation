@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import UserMenu from './UserMenu'
 import { Login } from '../Home/Login'
 import { Register } from '../Home/Register'
+import './Navbar.css';
 
 export class Navbar extends Component {
 
@@ -54,6 +55,7 @@ export class Navbar extends Component {
                     <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
+                    {/* x` */}
                         <ul className="navbar-nav w-75">
                             <li className="nav-item active">
                                 <a className="navbar-brand nav-link" href={url} >Illumina</a>
@@ -90,7 +92,7 @@ export class Navbar extends Component {
                                             defaultChecked={this.state.search_type === 'opt3' && true}
                                             name="search_type"
                                             value='opt3'
-                                            onClick={this.onChange}/> Author
+                                            onClick={this.onChange} style={{olor:'#151B2D'}}/> Author
                                         </div>
                                         {/* {
                                             localStorage.logged_in &&
