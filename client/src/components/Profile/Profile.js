@@ -17,6 +17,11 @@ export class Profile extends Component {
             email: '',
             profile_pic: '',
             cluster: -1,
+            CON: 0,
+            NEU: 0,
+            EXT: 0,
+            AGR: 0,
+            OPN: 0,
             uploaded: false
         }
     }
@@ -66,6 +71,11 @@ export class Profile extends Component {
             this.setState({email: user['email']})
             this.setState({profile_pic: user['profile_pic']})
             this.setState({cluster: user['cluster']})
+            this.setState({CON: user['personality_index']['CON']})
+            this.setState({NEU: user['personality_index']['NEU']})
+            this.setState({EXT: user['personality_index']['EXT']})
+            this.setState({AGR: user['personality_index']['AGR']})
+            this.setState({OPN: user['personality_index']['OPN']})
         })
     }
 
@@ -103,7 +113,7 @@ export class Profile extends Component {
                                                     <img src={this.state.profile_pic} onClick={onImageUpload} alt="img" width="80" height="80"  className="rounded img" style={{border: '2px solid white'}}/>
                                                 </div>
                                             }
-                                            <div class="btn-group">
+                                            <div className="btn-group">
                                                 <button className="btn" onClick={onImageUpload}>Upload Image</button>
                                                 <button className="btn" onClick={onImageRemoveAll}>Remove Image</button>
                                             </div>
@@ -134,22 +144,22 @@ export class Profile extends Component {
                                 {
                                     this.state.edit && 
                                     <React.Fragment>
-                                    <div class="input-group mb-3">
+                                    <div className="input-group mb-3">
                                         <input 
                                         value={this.state.username}
                                         onChange={this.onChange}
-                                        type="text" class="form-control" placeholder="username" name="username" />
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">username</span>
+                                        type="text" className="form-control" placeholder="username" name="username" />
+                                        <div className="input-group-append">
+                                            <span className="input-group-text">username</span>
                                         </div>
                                     </div>
-                                    <div class="input-group mb-3">
+                                    <div className="input-group mb-3">
                                         <input 
                                         value={this.state.email}
                                         onChange={this.onChange}
-                                        type="text" class="form-control" placeholder="email" name="email" />
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">email</span>
+                                        type="text" className="form-control" placeholder="email" name="email" />
+                                        <div className="input-group-append">
+                                            <span className="input-group-text">email</span>
                                         </div>
                                     </div>
                                     <button className="btn" onClick={this.onSubmitProfile}>Submit Changes</button>
@@ -202,47 +212,13 @@ export class Profile extends Component {
                                     key: 'me',
                                     label: 'My Scores',
                                     values: {
-                                        Conscientiousness: 3.5245650279688165,
-                                        Neuroticism: 2.6129679999038737,
-                                        Extraversion: 2.794568623583456,
-                                        Agreeableness: 3.755423601416593,
-                                        Openness: 4.345827060550908,
+                                        Conscientiousness: this.state.CON,
+                                        Neuroticism: this.state.NEU,
+                                        Extraversion: this.state.EXT,
+                                        Agreeableness: this.state.AGR,
+                                        Openness: this.state.OPN,
                                     },
-                                },
-                                // {
-                                //     key: 'temp1',
-                                //     label: 'temp1',
-                                //     values: {
-                                //         Conscientiousness: 3.505763210778742,
-                                //         Neuroticism: 2.37602776052686,
-                                //         Extraversion: 3.43042389119491,
-                                //         Agreeableness: 3.7470608387112776,
-                                //         Openness: 4.0366246454403845,
-                                //     },
-                                // },
-                                // {
-                                //     key: 'temp2',
-                                //     label: 'temp2',
-                                //     values: {
-                                //         Conscientiousness: 3.6133705746103457,
-                                //         Neuroticism: 2.5229510811299973,
-                                //         Extraversion: 3.5482717591744084,
-                                //         Agreeableness: 3.91170613378943,
-                                //         Openness: 4.247675437024291,
-                                //     },
-                                // },
-                                {
-                                    key: 'temp3',
-                                    label: 'temp3',
-                                    values: {
-                                        Conscientiousness: 3.496248355474754,
-                                        Neuroticism: 2.4761285524453447,
-                                        Extraversion: 3.3476599180089828,
-                                        Agreeableness: 3.4712547582394007,
-                                        Openness: 4.274853906536047,
-                                    },
-                                },
-                    
+                                }
                                 ],
                             }}
                         />
