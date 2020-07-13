@@ -119,17 +119,17 @@ export class Profile extends Component {
                                 //         Openness: 4.247675437024291,
                                 //     },
                                 // },
-                                {
-                                    key: 'temp3',
-                                    label: 'temp3',
-                                    values: {
-                                        Conscientiousness: 3.496248355474754,
-                                        Neuroticism: 2.4761285524453447,
-                                        Extraversion: 3.3476599180089828,
-                                        Agreeableness: 3.4712547582394007,
-                                        Openness: 4.274853906536047,
-                                    },
-                                },
+                                // {
+                                //     key: 'temp3',
+                                //     label: 'temp3',
+                                //     values: {
+                                //         Conscientiousness: 3.496248355474754,
+                                //         Neuroticism: 2.4761285524453447,
+                                //         Extraversion: 3.3476599180089828,
+                                //         Agreeableness: 3.4712547582394007,
+                                //         Openness: 4.274853906536047,
+                                //     },
+                                // },
                     
                                 ],
                             }}
