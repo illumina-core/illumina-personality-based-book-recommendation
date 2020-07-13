@@ -25,13 +25,12 @@ export class BookShelves extends Component {
 
   render() {
     return (
-      <div style={{backgroundColor:'#EAEDF1'}}>
+      <div>
         <Navbar />
-        <div className="row" style={{borderBottom:'1.5px solid #151B2D', backgroundColor: '#151B2D'}}>
-            <div className="col"><h3 className="font-weight-light" style={{color: 'white', fontSize: '27px', paddingTop: '5px', paddingLeft:'170px'}}>My Bookshelves</h3></div>
+        <div className="container-fluid h-100 pb-0" id="bookshelves">
+          <div className="row" style={{borderBottom:'1.5px solid #151B2D', backgroundColor: '#151B2D'}}>
+            <div className="col"><h3 className="text-light">My Bookshelves</h3></div>
           </div>
-        <div className="container-fluid h-100 pb-0 mx-auto" id="bookshelves" style={{width:'80%', backgroundColor:'white'}}>
-
           
           <div className="row" id="bookshelf_icons">
             <div className="col-1"  id="icons_col">

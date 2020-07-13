@@ -6,9 +6,6 @@ export class Home extends Component {
 
 
     render() {
-
-        const url = window.location.protocol + "//" + window.location.host
-
         return (
             <div>
                <Navbar />
@@ -30,36 +27,24 @@ export class Home extends Component {
                             <h2 className="font-weight-light" style={{textAlign: 'center',}}>Browse Genres</h2>    
                             <div className="card-deck" style={{paddingTop:'20px', paddingBottom:'20px'}}>
                                 <div className="card">
-                                    <a href={url + '/search?genre=Adventure'}>
                                     <img className="card-img-top" width="100%" src="./images/genre_adventure.jpg" alt="Card  cap" style={{border:'2.5px solid #151B2D'}}/>
-                                    </a>
                                 </div>
                                 <div className="card">
-                                    <a href={url + '/search?genre=Science%20Fiction'}>
                                     <img className="card-img-top" width="100%"  src="./images/genre_sf1.jpg" alt="Card  cap" style={{border:'2.5px solid #151B2D'}}/>
-                                    </a>
                                 </div>
                                 <div className="card">
-                                    <a href={url + '/search?genre=History'}>
                                     <img className="card-img-top" width="100%"  src="./images/genre_history.jpg" alt="Card  cap" style={{border:'2.5px solid #151B2D'}}/>
-                                    </a>
                                 </div>
                             </div>
                             <div className="card-deck">
                                 <div className="card">
-                                    <a href={url + '/search?genre=Fantasy'}>
                                     <img className="card-img-top" width="100%" src="./images/genre_fantasy.jpg" alt="Card  cap" style={{border:'2.5px solid #151B2D'}}/>
-                                    </a>
                                 </div>
                                 <div className="card">
-                                    <a href={url + '/search?genre=Poetry'}>
                                     <img className="card-img-top" width="100%"  src="./images/genre_poetry.jpg" alt="Card  cap" style={{border:'2.5px solid #151B2D'}}/>
-                                    </a>
                                 </div>
                                 <div className="card">
-                                    <a href={url + '/search?genre=Graphic%20Novels'}>
                                     <img className="card-img-top" width="100%"  src="./images/genre_gn.jpg" alt="Card  cap" style={{border:'2.5px solid #151B2D'}}/>
-                                    </a>
                                 </div>
                             </div>
                             <div style={{textAlign: 'center', paddingTop: '20px', paddingBottom: '75px'}}>

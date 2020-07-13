@@ -123,7 +123,7 @@ export class Book extends Component {
                             <div className='row mb-2'>
                                 <div className="col" align="center">
                                     <div className="dropdown">
-                                        <button type="button" className="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown">
+                                        <button type="button" className="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown">
                                         Add to Bookshelf
                                         </button>
                                         <div className="dropdown-menu p-0">
@@ -159,7 +159,7 @@ export class Book extends Component {
                                         <p className="font-weight-light">
                                             {
                                             Object.entries(this.state.links).map( ([key, value]) =>  
-                                                <a key={key} href={value} style={{display: 'block', color:'#151B2D'}}>{key}</a>
+                                                <a key={key} href={value} style={{display: 'block'}}>{key}</a>
                                             )}
                                         </p>
                                         </div>
@@ -233,8 +233,7 @@ export class Book extends Component {
                                             <button
                                             className="btn btn-danger"
                                             onClick={e => this.removeReview(e)}
-                                            style={{backgroundColor:'white', border:'1px solid #151B2D', paddingLeft:'10px', paddingRight:'10px'}}
-                                            ><i className="fa fa-trash" aria-hidden="true" style={{color:'#151B2D'}}/></button>
+                                            ><i className="fa fa-trash" aria-hidden="true" /></button>
                                         </div>
                                         }
                                 </div>
