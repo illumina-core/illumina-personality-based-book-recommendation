@@ -55,11 +55,10 @@ export class SearchResult extends Component {
                   <div className="row" style={{backgroundColor:"#151B2D", color:'#fff', paddingTop:'5px', paddingBottom:'5px'}}>
 
                   <h4 className="font-weight-light" style={{paddingLeft:'190px'}}>
-                    Search Results
-                    {type === 'personality' && " for Personality Recommendation"}
-                    {type === 'title' && " for Book Title"}
-                    {type === 'genre' && " for Genre"}
-                    {type === 'author' && " for Author"}
+                    {type === 'personality' && "Personality Recommendations"}
+                    {type === 'title' && " Search Results for Book Title"}
+                    {type === 'genre' && " Search Results for Genre"}
+                    {type === 'author' && "Search Results for Author"}
                   </h4>
 
                   </div>
@@ -69,11 +68,17 @@ export class SearchResult extends Component {
                           <SearchPersonalityItem key={book['_id']['$oid']} book={book} shelves={this.state.shelves}/>
                       ))}
 
-                    {
-                    this.state.books.slice(10*(this.state.activePage-1), 10*this.state.activePage).map((book) => (
-                        <SearchItem key={book['_id']['$oid']} book={book} shelves={this.state.shelves}/>
-                    ))
-                    }
+                    {type === 'title' && this.state.books.slice(10*(this.state.activePage-1), 10*this.state.activePage).map((book) => (
+                          <SearchItem key={book['_id']['$oid']} book={book} shelves={this.state.shelves}/>
+                      ))}
+
+                    {type === 'genre' && this.state.books.slice(10*(this.state.activePage-1), 10*this.state.activePage).map((book) => (
+                          <SearchItem key={book['_id']['$oid']} book={book} shelves={this.state.shelves}/>
+                      ))}
+
+                    {type === 'author' && this.state.books.slice(10*(this.state.activePage-1), 10*this.state.activePage).map((book) => (
+                          <SearchItem key={book['_id']['$oid']} book={book} shelves={this.state.shelves}/>
+                      ))}
 
                     <div className="row">
                     <Pagination
@@ -86,6 +91,7 @@ export class SearchResult extends Component {
                       itemClass={'page-item'}
                       linkClass={'page-link'}
                       onChange={this.handlePageChange.bind(this)}
+                      
                     />
                     </div>
                   </div>                
