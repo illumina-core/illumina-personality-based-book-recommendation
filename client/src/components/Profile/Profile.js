@@ -84,7 +84,7 @@ export class Profile extends Component {
         <div>
             <Navbar />
                 
-            <div className="container-fluid">
+            <div className="container-fluid mx-auto" style={{width:'80%'}}>
                     <div id="user_header" className="row">
                             {
                                 this.state.edit && 
@@ -181,15 +181,18 @@ export class Profile extends Component {
                     </div>
                     
                     <div id="heading" className="row">
-                        <h4 className="font-weight-light">My Personality</h4>
+                        <h3 className="font-weight-light"><b>My Personality</b></h3>
                     </div>
                     
-                    <div id="personality" className="row" style={{borderLeft:'1.5px solid #151B2D', borderRight:'1.5px solid #151B2D', paddingTop:'15px'}}>
+                    <div id="personality" className="row" style={{borderLeft:'1.5px solid #151B2D', borderRight:'1.5px solid #151B2D', paddingTop:'15px', paddingBottom:'10px'}}>
+                        <div  className="container-fluid">
+                            <div className="row">
                         <div className="col">
-                        <Radar
-                            width={500}
-                            height={500}
-                            padding={70}
+                                <div style={{width:'500px', border:'2.5px solid black'}}>
+                                <Radar
+                            width={300}
+                            height={300}
+                            padding={50}
                             domainMax={5}
                             highlighted={null}
                             onHover={(point) => {
@@ -222,8 +225,9 @@ export class Profile extends Component {
                                 ],
                             }}
                         />
+                                </div>
                         </div>
-                        <div className="col">
+                        {/* <div className="col">
                         {
                             this.state.edit && 
                         <form onSubmit={this.onSubmit}>
@@ -252,11 +256,52 @@ export class Profile extends Component {
                         </form>
                         }
 
+                        </div> */}
+                        <div className="col">
+                            <h3 className="font-weight-light" style={{paddingBottom:'3px'}}>
+                                You belong to Group: <b>B</b></h3>
+                            <h4 className="font-weight-light" style={{paddingTop:'5px', paddingBottom:'2px'}}>Recommended Genres for you are: </h4>
+                            <div style={{paddingTop:'20px', paddingBottom:'30px'}}>
+                                <ul className="list-group" >
+                                    <div className="row">
+                                        <div className="col">
+                                            <li className="list-group-item">
+                                            Poetry
+                                            </li>
+                                            <li className="list-group-item">
+                                                Poetry
+                                            </li>
+                                            <li className="list-group-item">
+                                                Poetry
+                                            </li>
+                                        </div>
+                                        <div className="col">
+                                            <li className="list-group-item">
+                                            Poetry
+                                            </li>
+                                            <li className="list-group-item">
+                                                Poetry
+                                            </li>
+                                            <li className="list-group-item">
+                                                Poetry
+                                            </li>
+                                        </div>
+                                    </div>
+                                </ul>
+                            </div>
+
+                            <button className="btn-lg btn-secondary .bg-transparent"> 
+                                <a >Recommend me a book!</a>
+                            </button>
+
+
+                        </div>
+                        </div>
                         </div>
                     </div>
                 </div>
             
-            <div style={{paddingBottom:'70px'}} />
+            <div />
             <Footer />
         </div>
         )
