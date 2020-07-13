@@ -117,3 +117,10 @@ export const assign_user_personality = (per_desc) =>{
         per_desc: per_desc
     })
 }
+
+export const update_profile_data = (data) =>{
+    return axios
+    .post('update-profile-data', {
+        data: data
+    })
+}

@@ -1,15 +1,22 @@
 import React, { Component } from 'react'
 import Navbar from '../layout/Navbar';
 import Footer from '../layout/Footer';
+import ImageUploading from "react-images-uploading";
 import './Profile.css';
-import { assign_user_personality, getUser } from '../Services'
+import { assign_user_personality, getUser, update_profile_data } from '../Services'
 
 export class Profile extends Component {
 
     constructor(){
         super()
         this.state ={
-            per_desc: ''
+            per_desc: '',
+            edit: false,
+            username: '',
+            email: '',
+            profile_pic: '',
+            cluster: -1,
+            uploaded: false
         }
     }
 
@@ -25,9 +32,39 @@ export class Profile extends Component {
         })
     }
 
+    onSubmitProfile = () => {
+        const data = {
+            username: this.state.username,
+            email: this.state.email,
+            profile_pic: this.state.profile_pic
+        }
+
+        update_profile_data(data).then(res =>{
+            this.setState({edit: false})
+            localStorage.setItem('username', this.state.username)
+            localStorage.setItem('profile_pic', this.state.profile_pic)
+            window.location.reload()
+        })
+    }
+
+    edit = () => {
+        this.setState({edit: true})
+    }
+
+    upload = (imageList) => {
+        this.setState({uploaded: true})
+        if(imageList.length > 0)
+            this.setState({profile_pic: imageList[0]['dataURL']})
+    }
+
     componentDidMount(){
         getUser().then(res =>{
-            this.setState({per_desc: JSON.parse(res.data.user)['description']})
+            const user = JSON.parse(res.data.user)
+            this.setState({per_desc: user['description']})
+            this.setState({username: user['username']})
+            this.setState({email: user['email']})
+            this.setState({profile_pic: user['profile_pic']})
+            this.setState({cluster: user['cluster']})
         })
     }
 
@@ -36,19 +73,94 @@ export class Profile extends Component {
         <div>
             <Navbar />
                 
-            <div className="container-fluid p-0 mx-auto" style={{width:'80%'}}>
+            <div className="container-fluid">
                     <div id="user_header" className="row">
-                        <div className="col-md-auto">
-                            <img alt="" src = "./images/letter.jpg" id="profile_pic" className="rounded img"/>
-                        </div>
+                            {
+                                this.state.edit && 
+                                <div className="col">
+                                    <ImageUploading 
+                                    onChange={this.upload} 
+                                    maxNumber={1}
+                                    maxFileSize={5 * 1024 * 1024}
+                                    acceptType={["jpg", "gif", "png", "PNG"]}
+                                    >
+                                        {({ imageList, onImageUpload, onImageRemoveAll }) => (
+                                        
+                                        <div className="upload__image-wrapper" >
+                                            
+                                            {imageList.map(image => (
+                                            <div key={image.key} className="image-item" style={{paddingBottom:'10px'}}>
+                                                {
+                                                    this.state.uploaded &&
+                                                    <img src={image.dataURL} onClick={onImageUpload} alt="img" width="80" height="80"  className="rounded img" style={{border: '2px solid white'}}/>
+                                                }
+                                            </div>
+                                            ))}
+                                            {
+                                                !this.state.uploaded && 
+                                                <div className="image-item" style={{paddingBottom:'10px'}}>
+                                                    <img src={this.state.profile_pic} onClick={onImageUpload} alt="img" width="80" height="80"  className="rounded img" style={{border: '2px solid white'}}/>
+                                                </div>
+                                            }
+                                            <div class="btn-group">
+                                                <button className="btn" onClick={onImageUpload}>Upload Image</button>
+                                                <button className="btn" onClick={onImageRemoveAll}>Remove Image</button>
+                                            </div>
+                                        </div>
+                                        )}
+                                    </ImageUploading>
+                                </div>
+                            }
+                            {
+                                !this.state.edit && <div className="col">
+                                    <img alt="" src = {this.state.profile_pic} id="profile_pic" className="rounded img"/>
+                                </div>
+                            }
 
-                        <div className="col-md-5" style={{marginRight:'50px'}}>
+                        <div className={
+                            (() => {
+                                switch (this.state.edit) {
+                                  case true:  return "col";
+                                  case false: return "col-5";
+                                }
+                              })()
+                        } style={{marginRight:'50px'}}>
                             <div className="row">
-                                <h4 className="font-weight-light">Mbrz</h4>
+                                {
+                                    !this.state.edit && 
+                                    <h4 className="font-weight-light">{this.state.username}</h4>
+                                }
+                                {
+                                    this.state.edit && 
+                                    <React.Fragment>
+                                    <div class="input-group mb-3">
+                                        <input 
+                                        value={this.state.username}
+                                        onChange={this.onChange}
+                                        type="text" class="form-control" placeholder="username" name="username" />
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">username</span>
+                                        </div>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <input 
+                                        value={this.state.email}
+                                        onChange={this.onChange}
+                                        type="text" class="form-control" placeholder="email" name="email" />
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">email</span>
+                                        </div>
+                                    </div>
+                                    <button className="btn" onClick={this.onSubmitProfile}>Submit Changes</button>
+                                    </React.Fragment>
+                                }
                             </div>
                             
                             <div className="row">
-                                <button className="btn btn-outline-secondary">Edit Profile</button>
+                                {
+                                    !this.state.edit && 
+                                    <button onClick={this.edit} className="btn btn-outline-secondary">Edit Profile</button>
+                                }
                             </div>
                         </div>
 
@@ -66,7 +178,8 @@ export class Profile extends Component {
                             <span></span>
                         </div>
                         <div className="col">
-
+                        {
+                            this.state.edit && 
                         <form onSubmit={this.onSubmit}>
                             <div className="row justify-content-center">
                                 <div className="form-group" style={{ paddingTop:'15px'}}>
@@ -81,21 +194,24 @@ export class Profile extends Component {
                                 </div>
                             </div>
                             <div className="row justify-content-center">
-                                <button type="submit" className="btn btn-lg btn-outline-secondary">Personalize Me</button>
+                                <button type="submit" className="btn btn-lg btn-outline-secondary">
+                                    {
+                                        this.state.cluster['cluster'] === -1 && 'Personalize Me'
+                                    }
+                                    {
+                                        this.state.cluster['cluster'] !== -1 && 'Change Personality'
+                                    }
+                                </button>
                             </div>
                         </form>
+                        }
 
                         </div>
                     </div>
-                    <div className="row" style={{borderTop:'1.5px solid #151B2D'}}>
-                        
-                    </div>
                 </div>
             
-            <div style={{paddingBottom:'270px'}}></div>
-
+            <div style={{paddingBottom:'70px'}} />
             <Footer />
-                
         </div>
         )
     }
