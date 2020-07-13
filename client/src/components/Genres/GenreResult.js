@@ -26,10 +26,13 @@ export class GenreResult extends Component {
         <div style={{borderBottom:'1.5px solid #151B2D', backgroundColor: '#151B2D'}}>
                 <h4 className="font-weight-light" style={{color: 'white', fontSize: '27px', paddingTop: '5px', paddingLeft:'170px'}}>Genres</h4>
             </div>
-        <div className="container-fluid pt-0 mx-auto" id="genres" style={{width:'80%'}}>
+        <div className="container-fluid">
             <div className="row">
-                <div className="col" style={{border:'1px solid black', paddingLeft:'0px', paddingRight:'0px'}}>
+                <div className="col" style={{border:'1px solid black'}}>
                     <ul className="list-group list-group-horizontal">
+                        <li className="list-group-item border border-left-0 border-bottom-0" data-toggle="collapse" href="#genres_A">                    
+                            <h6>&nbsp;</h6>
+                        </li>
                         <li className="list-group-item" data-toggle="collapse" href="#genres_A">                    
                             <h6>A</h6>
                         </li>
