@@ -5,7 +5,6 @@ import json
 from datetime import datetime
 import random
 from collections import Counter
-from base64 import b64decode
 
 from ppredict import PPredictor
 from cpredict import CPredictor
@@ -277,22 +276,34 @@ def get_book_recommendation():
 
     genres = list(dict(Counter(genres).most_common()).keys())
 
-    if len(genres) > 5:
-        genres = genres[:5]
-
-    books = Books.objects(
-        Q(avg_rating__gte=4.5) & Q(genres__in=list(genres)) & Q(id__nin=list(set(ignore_books)))
-        ).only(
-        'book_title',
-        'id',
-        'cover_image',
-        'authors',
-        'genres',
-        'avg_rating'
-    ).to_json()
+    books = None
+    if len(ignore_books) > 0:
+        if len(genres) > 5:
+            genres = genres[:5]
     
+        books = Books.objects(
+            Q(avg_rating__gte=4.5) & Q(genres__in=list(genres)) & Q(id__nin=list(set(ignore_books)))
+            ).only(
+            'book_title',
+            'id',
+            'cover_image',
+            'authors',
+            'genres',
+            'avg_rating'
+        ).to_json()
+    
+    else:
+        books = Books.objects(avg_rating__gte=4.5).only(
+            'book_title',
+            'id',
+            'cover_image',
+            'authors',
+            'genres',
+            'avg_rating'
+        ).to_json()
+
     books = json.loads(books)
-    books = random.sample(books,6)
+    books = random.sample(books,8)
 
     return jsonify({"rec": json.dumps(books)})
 
@@ -422,14 +433,6 @@ def assign_user_personality():
 
 @app.route('/update-profile-data', methods=['POST'])
 def update_proflie_image():
-    # data_uri = request.get_json()['file'][0]['dataURL']
-    # header, encoded = data_uri.split(",", 1)
-    # data = b64decode(encoded)
-    
-    # with open('client/public/images/Test.png', 'wb') as fd:
-    #     fd.write(data)
-    # return  jsonify({"uploaded":"uploaded pic"})
-
     data = request.get_json()['data']
 
     user = Users.objects(username=session['user']).get()
