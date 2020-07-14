@@ -258,39 +258,44 @@ export class Profile extends Component {
 
                         </div> */}
                         <div className="col">
-                            <h3 className="font-weight-light" style={{paddingBottom:'3px'}}>
-                                You belong to Group: <b>B</b></h3>
+                            <section>
+                                <h3 className="font-weight-light" style={{paddingBottom:'3px'}}>You belong to Group: <b>B</b></h3>
+                                <div class="profile-hover">
+                                    <p className="font-weight-light" style={{padding:'10px', fontSize:'18px'}}>Your group is decided on your personality. Your group determines the best genres suitable for you and books you would enjoy.</p>
+                                </div>
+                            </section>
+                            
                             <h4 className="font-weight-light" style={{paddingTop:'5px', paddingBottom:'2px'}}>Recommended Genres for you are: </h4>
                             <div style={{paddingTop:'20px', paddingBottom:'30px'}}>
-                                <ul className="list-group" >
-                                    <div className="row">
-                                        <div className="col">
-                                            <li className="list-group-item">
-                                            Poetry
-                                            </li>
-                                            <li className="list-group-item">
-                                                Poetry
-                                            </li>
-                                            <li className="list-group-item">
-                                                Poetry
-                                            </li>
+                                <ul className="container-fluid" >
+                                    <div className="row mb-3">
+                                        <div className="col-md mr-2 topshelf">
+                                            <h4 className="font-weight-light">Poetry</h4>
                                         </div>
-                                        <div className="col">
-                                            <li className="list-group-item">
-                                            Poetry
-                                            </li>
-                                            <li className="list-group-item">
-                                                Poetry
-                                            </li>
-                                            <li className="list-group-item">
-                                                Poetry
-                                            </li>
+                                        <div className="col-md mr-2 topshelf">
+                                            <h4 className="font-weight-light">Poetry</h4>
+                                        </div>
+                                    </div>
+                                    <div className="row mb-3">
+                                        <div className="col-md mr-2 topshelf">
+                                            <h4 className="font-weight-light">Poetry</h4>
+                                        </div>
+                                        <div className="col-md mr-2 topshelf">
+                                            <h4 className="font-weight-light">Poetry</h4>
+                                        </div>
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-md mr-2 topshelf">
+                                            <h4 className="font-weight-light">Poetry</h4>
+                                        </div>
+                                        <div className="col-md mr-2 topshelf">
+                                            <h4 className="font-weight-light">Poetry</h4>
                                         </div>
                                     </div>
                                 </ul>
                             </div>
 
-                            <button className="btn-lg btn-secondary .bg-transparent"> 
+                            <button className="btn-lg btn-secondary"> 
                                 <a >Recommend me a book!</a>
                             </button>
 
