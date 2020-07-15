@@ -4,8 +4,8 @@ import './Bookshelf.css';
 
 export class Bookshelf extends Component {
 
-  removeShelfBook(e) {
-    const arr = e.target.value.split('||')
+  removeShelfBook(val) {
+    const arr = val.split('||')
     const data = {
         book: arr[0],
         shelf: arr[1]
@@ -65,10 +65,11 @@ export class Bookshelf extends Component {
               <div className="col-auto">
                   <button
                   className="btn btn-danger"
-                  value={book.id + '||' + this.props.shelf}
-                  onClick={e => this.removeShelfBook(e, 'value')}
+                  onClick={this.removeShelfBook.bind(this, book.id + '||' + this.props.shelf)}
                   style={{backgroundColor:'white', border:'1px solid #151B2D', paddingLeft:'10px', paddingRight:'10px'}}
-                  ><i className="fa fa-trash" aria-hidden="true" style={{color:'#151B2D'}}/></button>
+                  >
+                    <i className="fa fa-trash" aria-hidden="true" style={{color:'#151B2D'}}/>
+                  </button>
               </div>}
             </div>
           ))

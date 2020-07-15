@@ -31,7 +31,7 @@ export class Book extends Component {
             book: arr[1]
         }
         add_book_to_shelf(data).then(res =>{
-            alert('Book added')
+            alert(res.data.result)
         }).catch(err =>{
             alert(err)
         })

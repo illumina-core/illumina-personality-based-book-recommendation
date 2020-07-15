@@ -228,12 +228,13 @@ def add_book_to_shelf():
     book = request.get_json()['book']
 
     user = Users.objects(username=session['user']).get()
+    book = Books.objects(id=book).get()
 
-    user.shelves.get(shelf_title=shelf).shelved_books.append(
-        Books.objects(id=book).get()
-    )
-    user.save()
-    return jsonify({"result": True})
+    if book in user.shelves.get(shelf_title=shelf).shelved_books:
+        user.shelves.get(shelf_title=shelf).shelved_books.append(book)
+        user.save()
+        return jsonify({"result": 'Book Added'})
+    return jsonify({"result": 'Book already present inside shelf'})
 
 @app.route('/get-user-shelf', methods=['GET'])
 @app.route('/book-shelves/get-user-shelf', methods=['GET'])
@@ -317,7 +318,7 @@ def remove_review():
 
     return jsonify({'result': True})
 
-@app.route('/book-shelves/remove-shelf-book', methods=['POST'])
+@app.route('/remove-shelf-book', methods=['POST'])
 def remove_shelf_book():
     book = request.get_json()['book']
     shelf = request.get_json()['shelf']
