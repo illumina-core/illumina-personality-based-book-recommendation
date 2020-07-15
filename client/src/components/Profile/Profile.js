@@ -259,7 +259,7 @@ export class Profile extends Component {
                         </div> */}
                         <div className="col">
                             <section>
-                                <h3 className="font-weight-light" style={{paddingBottom:'3px'}}>You belong to Group: <b>B</b></h3>
+                                <h3 className="font-weight-light" style={{paddingBottom:'3px'}}>You belong to Group: <b>{this.state.cluster}</b></h3>
                                 <div class="profile-hover">
                                     <p className="font-weight-light" style={{padding:'10px', fontSize:'18px'}}>Your group is decided on your personality. Your group determines the best genres suitable for you and books you would enjoy.</p>
                                 </div>
@@ -298,7 +298,6 @@ export class Profile extends Component {
                             <button className="btn-lg btn-secondary"> 
                                 <a >Recommend me a book!</a>
                             </button>
-
 
                         </div>
                         </div>

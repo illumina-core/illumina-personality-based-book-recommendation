@@ -10,7 +10,8 @@ export class Register extends Component {
             username: '',
             email: '',
             password: '',
-            dob: ''
+            dob: '',
+            per_desc: ''
         }
         this.onChange = this.onChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
@@ -27,7 +28,8 @@ export class Register extends Component {
             username: this.state.username,
             email: this.state.email,
             password: this.state.password,
-            dob: this.state.dob
+            dob: this.state.dob,
+            per_desc: this.state.per_desc
         }
 
         register(newUser).then(res => {
@@ -53,7 +55,7 @@ export class Register extends Component {
                     
                          {/* Modal Header  */}
                         <div className="modal-header">
-                        <h4 className="modal-title">Register</h4>
+                        <h4 className="modal-title">Register an account</h4>
                         <button type="button" className="close" data-dismiss="modal">&times;</button>
                         </div>
                         
@@ -100,6 +102,42 @@ export class Register extends Component {
 
                             {/* Modal footer */}
                             <div className="modal-footer">
+                                <button type="button" class="btn btn btn-primary btn-next" data-toggle="modal" data-dismiss="modal" data-target="#personality_text">Next</button>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            
+                <div className="modal fade" id="personality_text">
+                    <div className="modal-dialog">
+                    <div className="modal-content">
+                    
+                         {/* Modal Header  */}
+                        <div className="modal-header">
+                        <h4 className="modal-title">Tell us about yourself</h4>
+                        <button type="button" className="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        
+                        {/* Modal body */}
+                        <div className="modal-body">
+                        <form className="was-validated" onSubmit={this.onSubmit}>
+                            <div className="form-group">
+
+                                <textarea class="form-control"                                 
+                                value={this.state.per_desc}
+                                onChange={this.onChange}
+                                placeholder="Describe yourself in a paragraph" name="per_desc" id="per_desc" rows="15">
+                                </textarea>
+
+                                <div className="valid-feedback">Valid.</div>
+                                <div className="invalid-feedback">Please enter a valid description.</div> 
+                            </div>                            
+
+                            {/* Modal footer */}
+                            <div className="modal-footer">
+                                <button type="button" class="btn btn btn-primary btn-prev" data-toggle="modal" data-dismiss="modal" data-target="#register">Prev</button>
                                 <button type="submit" className="btn btn-primary">Submit</button>
                             </div>
                         </form>
@@ -107,6 +145,9 @@ export class Register extends Component {
                     </div>
                     </div>
                 </div>
+            
+
+
             </div>
         )
     }
