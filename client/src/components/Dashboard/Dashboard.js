@@ -53,13 +53,14 @@ export class Dashboard extends Component {
                             
                         </div>
                         <div className="col">
-                            <button className="btn btn-outline-secondary .bg-transparent"> Check out my personality</button>
+                            <button className="btn btn-outline-secondary .bg-transparent">
+                                <a href={url + '/profile'} style={{color:'white'}}>Check out my personality</a> 
+                            </button>
                         </div>
                         </div>
                     </div>  
                 </div>
 
-                
                 <div className="row" id="topbookshelves">
                     <div className="container-fluid mx-auto" style={{width:'80%'}}>
                         <div className="row justify-content-center align-items-center" >

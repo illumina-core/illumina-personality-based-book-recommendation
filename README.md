@@ -1,8 +1,8 @@
 # illumina-personality-based-book-recommendation [FYP]
- A personality based book recommendation website.
+Illumina is personality-based book recommendation system that recommends users reading materials based on their personality in relation to the big five traits (extraversion, agreeableness, openness, conscientiousness, and neuroticism). 
  
  # FRONT END
- The front end is made using react js. With a mixture of class and functional based components.
+ Illumina's front end is made using react js. With a mixture of class and functional based components.
  
  # BACK END
- The back end is made in python using flask. The database is stored in mongoAtlas and is connected using mongoengine, which can be considered as a wrapper for the generic pymongo class.
+ Illumina's back end is made in Python using Flask. The database is stored in mongoAtlas and is connected using mongoengine.
