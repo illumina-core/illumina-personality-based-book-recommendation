@@ -3,7 +3,7 @@ import Navbar from '../layout/Navbar';
 import Footer from '../layout/Footer';
 import ImageUploading from "react-images-uploading";
 import './Profile.css';
-import { assign_user_personality, getUser, update_profile_data } from '../Services'
+import { update_profile_data, getUser } from '../Services'
 import Radar from 'react-d3-radar';
 
 export class Profile extends Component {
@@ -28,14 +28,6 @@ export class Profile extends Component {
 
     onChange = (e) =>{
         this.setState({[e.target.name]: e.target.value})
-    }
-
-    onSubmit = () =>{
-        assign_user_personality(this.state.per_desc).then(res =>{
-            alert('Personality assigned')
-        }).catch(err =>{
-            console.log(err)
-        })
     }
 
     onSubmitProfile = () => {

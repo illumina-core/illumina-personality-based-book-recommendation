@@ -42,6 +42,16 @@ def register():
     email = request.get_json()['email']
     password = request.get_json()['password']
     date_of_birth = request.get_json()['dob']
+    per_desc = request.get_json()['per_desc']
+
+    P = PPredictor()
+    C = CPredictor()
+
+    keys = ['OPN', 'CON', 'EXT', 'AGR', 'NEU']
+    prediction =  P.user_predict([per_desc])
+    personlaity = {keys[x]: prediction[x] for x in range(0,5)}
+
+    cluster = C.user_cluster_predict([prediction])[0]
 
     password = bcrypt.generate_password_hash(request.get_json()['password']).decode('utf-8')
 
@@ -50,7 +60,10 @@ def register():
             username=username,
             email=email,
             date_of_birth=date_of_birth,
-            password=password
+            password=password,
+            personality_index = personlaity,
+            cluster = cluster,
+            description = per_desc
         ).save()
     except NotUniqueError:
         return jsonify({"error":"Username or Email is not unique"})
@@ -410,27 +423,6 @@ def get_genres():
             dic[alp.upper()].append(gen)
     
     return jsonify({'genreResults': dic})
-
-@app.route('/assign-user-personality', methods=['POST'])
-def assign_user_personality():
-    per_desc = request.get_json()['per_desc']
-    P = PPredictor()
-    C = CPredictor()
-
-    keys = ['OPN', 'CON', 'EXT', 'AGR', 'NEU']
-    prediction =  P.user_predict([per_desc])
-    personlaity = {keys[x]: prediction[x] for x in range(0,5)}
-
-    cluster = C.user_cluster_predict([prediction])[0]
-    
-    user = Users.objects(username=session['user']).get()
-    user.personality_index = personlaity
-
-    user.cluster = cluster
-    user.description = per_desc
-    user.save()
-
-    return jsonify({'done': True})
 
 @app.route('/update-profile-data', methods=['POST'])
 def update_proflie_image():

@@ -6,7 +6,8 @@ export const register = newUser => {
         username: newUser.username,
         email: newUser.email,
         password: newUser.password,
-        dob: newUser.dob
+        dob: newUser.dob,
+        per_desc: newUser.per_desc
     })
 }
 
@@ -109,13 +110,6 @@ export const get_genres = () =>{
 export const recommend_books_by_personality = () =>{
     return axios
     .get('recommend-books-by-personality')
-}
-
-export const assign_user_personality = (per_desc) =>{
-    return axios
-    .post('assign-user-personality', {
-        per_desc: per_desc
-    })
 }
 
 export const update_profile_data = (data) =>{
