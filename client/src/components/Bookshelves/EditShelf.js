@@ -1,53 +1,60 @@
 import React, { Component } from 'react'
 import ImageUploading from "react-images-uploading";
 import ReactTooltip from "react-tooltip"
-import {add_shelf} from '../Services'
+import { update_shelf } from "../Services"
 
-export class AddShelf extends Component {
+export class EditShelf extends Component {
 
     constructor(){
         super()
         this.state ={
             shelf: '',
-            pic: ''
+            pic: "",
+            uploaded: false
         }
     }
-   
+
     onChange = (e) =>{
         this.setState({[e.target.name]: e.target.value})
     }
 
     upload = (imageList) => {
+        this.setState({uploaded: true})
         if(imageList.length > 0)
             this.setState({pic: imageList[0]['dataURL']})
     }
 
-    onSubmit = (e) =>{
+    onSubmit = (e) => {
         e.preventDefault()
         const data = {
-            'shelf': this.state.shelf,
-            'pic': this.state.pic
+            "old_title": this.props.shelf.shelf_title,
+            "new_title": this.state.shelf,
+            "pic": this.state.pic
         }
 
-        add_shelf(data).then(res =>{
+        update_shelf(data).then(res =>{
             alert(res.data.result)
             window.location.reload()
-        }).catch(err =>{
-            alert(err)
         })
+    }
+
+    componentDidMount(){
+        this.setState({pic: this.props.shelf.shelf_pic})
+        this.setState({shelf: this.props.shelf.shelf_title})
     }
 
     render() {
         return (
             <React.Fragment>
-            <button type="button" className="btn w-100 bg-light border" data-toggle="modal" data-target="#myModal">
-                <i className="fa fa-plus" aria-hidden="true" />
+            <button style={{backgroundColor:'white', border:'1px solid #151B2D', paddingLeft:'10px', paddingRight:'10px'}}
+             type="button" className="btn bg-white" data-toggle="modal" data-target={'#' + this.props.shelf.shelf_title + 'shelf'}>
+                <i className="fa fa-edit" aria-hidden="true" />
             </button>
-            <div className="modal" id="myModal">
+            <div className="modal" id={this.props.shelf.shelf_title + 'shelf'}>
                 <div className="modal-dialog">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h4 className="modal-title">Create Shelf</h4>
+                        <h4 className="modal-title">Edit Shelf</h4>
                         <button type="button" className="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div className="modal-body">
@@ -105,4 +112,4 @@ export class AddShelf extends Component {
     }
 }
 
-export default AddShelf
+export default EditShelf

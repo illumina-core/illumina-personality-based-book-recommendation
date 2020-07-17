@@ -38,7 +38,6 @@ export class BookShelves extends Component {
 
               <div className="container-fluid">
                 <div className="row py-1">
-                  {/* add shelf */}
                   <AddShelf />
                 </div>
               </div>
@@ -46,14 +45,15 @@ export class BookShelves extends Component {
               {
                 this.state.shelves.map((shelf) =>( 
                   <div id="icon_div" key={shelf.shelf_title}>
-                    <img 
-                    className="img-fluid btn-light" 
-                    alt={shelf.shelf_title} 
-                    data-tip={shelf.shelf_title} 
-                    src={shelf.shelf_pic} 
-                    data-toggle="collapse" 
-                    data-target={"#" + shelf.shelf_title} 
-                    />
+                      <img 
+                      className="img-fluid btn-light" 
+                      alt={shelf.shelf_title} 
+                      data-tip={shelf.shelf_title} 
+                      src={shelf.shelf_pic} 
+                      data-toggle="collapse" 
+                      aria-expanded="false"
+                      data-target={"#" + shelf.shelf_title.replace(/\s+/g, '')} 
+                      />
                   <ReactTooltip />
                   </div>
                   ))
@@ -66,14 +66,14 @@ export class BookShelves extends Component {
                 <React.Fragment key={shelf.shelf_title}>
                   {
                   this.props.match.params.shelf_title === shelf.shelf_title &&
-                  <div id={shelf.shelf_title} className="collapse show">
-                    <Bookshelf books={shelf.books} shelf={shelf.shelf_title} />
+                  <div id={shelf.shelf_title.replace(/\s+/g, '')} className="collapse show">
+                    <Bookshelf books={shelf.books} shelf={shelf} />
                   </div>
                   }
                   {
                   this.props.match.params.shelf_title !== shelf.shelf_title &&
-                  <div id={shelf.shelf_title} className="collapse">
-                    <Bookshelf books={shelf.books} shelf={shelf.shelf_title} />
+                  <div id={shelf.shelf_title.replace(/\s+/g, '')} className="collapse">
+                    <Bookshelf books={shelf.books} shelf={shelf} />
                   </div>
                   }
                 </React.Fragment>

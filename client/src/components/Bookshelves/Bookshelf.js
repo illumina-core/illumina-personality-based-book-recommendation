@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { remove_shelf_book, remove_shelf } from '../Services'
+import { EditShelf } from './EditShelf'
 import './Bookshelf.css';
 
 export class Bookshelf extends Component {
@@ -18,9 +19,9 @@ export class Bookshelf extends Component {
     })
   }
 
-  removeShelf(e){
-    remove_shelf(this.props.shelf).then(res =>{
-        alert('Shelf removed')
+  removeShelf(shelf){
+    remove_shelf(shelf).then(res =>{
+        alert(res.data.result)
         window.location.reload()
     }).catch(err =>{
         alert(err)
@@ -34,14 +35,15 @@ export class Bookshelf extends Component {
     return (
       <div className="container-fluid pt-0" id="bks_book">
         <div className="row">
-          <div className="col-11" id="bks_heading" style={{paddingTop:'5px', paddingBottom:'5px'}}><h3 className="font-weight-light"><b>{this.props.shelf}</b></h3></div>
-          <div className="col-auto" style={{paddingTop:'5px', paddingBottom:'5px', paddingRight:'20px', paddingLeft:'2px'}}>
-            <button
-              className="btn btn-danger"
-              value={this.props.shelf}
-              onClick={e => this.removeShelf(e)}
+          <div className="col-10" id="bks_heading" style={{paddingTop:'5px', paddingBottom:'5px'}}><h3 className="font-weight-light"><b>{this.props.shelf.shelf_title}</b></h3></div>
+          <div className="col" style={{paddingTop:'5px', paddingBottom:'5px', paddingRight:'20px', paddingLeft:'2px'}}>
+            <button className="btn mr-1"
+              onClick={this.removeShelf.bind(this, this.props.shelf.shelf_title)}
               style={{backgroundColor:'white', border:'1px solid #151B2D', paddingLeft:'10px', paddingRight:'10px'}}
               ><i className="fa fa-trash" aria-hidden="true" style={{color:'#151B2D'}}/></button>
+
+            <EditShelf shelf={this.props.shelf} style={{display: "inline-block"}}/>
+              
           </div>
         </div >
 
@@ -64,8 +66,8 @@ export class Bookshelf extends Component {
               {localStorage.logged_in && 
               <div className="col-auto">
                   <button
-                  className="btn btn-danger"
-                  onClick={this.removeShelfBook.bind(this, book.id + '||' + this.props.shelf)}
+                  className="btn"
+                  onClick={this.removeShelfBook.bind(this, book.id + '||' + this.props.shelf.shelf_title)}
                   style={{backgroundColor:'white', border:'1px solid #151B2D', paddingLeft:'10px', paddingRight:'10px'}}
                   >
                     <i className="fa fa-trash" aria-hidden="true" style={{color:'#151B2D'}}/>

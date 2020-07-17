@@ -222,17 +222,25 @@ def rate_book():
 @app.route('/book-shelves/add-shelf', methods=['POST'])
 @app.route('/add-shelf', methods=['POST'])
 def add_shelf():
-    shelf = request.get_json()['shelf']
+    data = request.get_json()['data']
+    
     user = Users.objects(username=session['user']).get()
     for s in user.shelves:
-        if s.shelf_title == shelf:
-            return jsonify({"nope": 'shelf already present'})
+        if s.shelf_title == data['shelf']:
+            return jsonify({"result": 'shelf already present'})
 
-    user.shelves.append(Shelves(
-        shelf_title=shelf
-    ))
+    if len(data['pic']) > 0:
+        user.shelves.append(Shelves(
+            shelf_title=data['shelf'],
+            shelf_pic=data['pic']
+        ))
+    else:
+        user.shelves.append(Shelves(
+            shelf_title=data['shelf']
+        ))
+
     user.save()
-    return jsonify({"result": True})
+    return jsonify({"result": "Shelf created"})
 
 @app.route('/add-book-to-shelf', methods=['POST'])
 @app.route('/book/add-book-to-shelf', methods=['POST'])
@@ -243,7 +251,7 @@ def add_book_to_shelf():
     user = Users.objects(username=session['user']).get()
     book = Books.objects(id=book).get()
 
-    if book in user.shelves.get(shelf_title=shelf).shelved_books:
+    if book not in user.shelves.get(shelf_title=shelf).shelved_books:
         user.shelves.get(shelf_title=shelf).shelved_books.append(book)
         user.save()
         return jsonify({"result": 'Book Added'})
@@ -439,6 +447,19 @@ def update_proflie_image():
 
     return  jsonify({"updated": True})
 
+@app.route('/book-shelves/update-shelf', methods=['POST'])
+@app.route('/update-shelf', methods=['POST'])
+def update_shelf():
+    data = request.get_json()['data']
+
+    user = Users.objects(username=session['user']).get()
+    shelf = user.shelves.get(shelf_title=data['old_title'])
+    shelf.shelf_title = data['new_title']
+    shelf.shelf_pic = data['pic']
+
+    user.save()
+
+    return jsonify({'result': 'Shelf has been updated'})
 
 if __name__ == '__main__':
     app.run(debug=True)

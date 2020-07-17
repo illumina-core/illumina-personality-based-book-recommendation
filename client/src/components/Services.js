@@ -55,11 +55,9 @@ export const rate_book = rating => {
     })
 
 }
-export const add_shelf = shelf => {
+export const add_shelf = data => {
     return axios
-    .post('add-shelf', {
-        shelf: shelf
-    })
+    .post('add-shelf', { data: data })
 }
     
 export const add_book_to_shelf = data =>{
@@ -117,4 +115,9 @@ export const update_profile_data = (data) =>{
     .post('update-profile-data', {
         data: data
     })
+}
+
+export const update_shelf = (data) =>{
+    return axios
+    .post('update-shelf', { data: data })
 }
