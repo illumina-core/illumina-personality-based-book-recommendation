@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import UserMenu from './UserMenu'
 import { FaFacebook } from "react-icons/fa"
 import { FaTwitter } from "react-icons/fa"
 import { FaInstagram } from "react-icons/fa"
@@ -16,10 +15,10 @@ export class Footer extends Component {
                     <div className="collapse navbar-collapse" id="navbarText">
                         <ul className="navbar-nav mr-auto">
                             <li className="nav-item">
-                                <a className="nav-link" href="#" style={{color:'white'}}>About Us</a>
+                                <a className="nav-link" href="https://github.com/illumina-core/illumina-personality-based-book-recommendation" style={{color:'white'}}>About Us</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="#" style={{color:'white'}}>Contact</a>
+                                <a className="nav-link" href="https://www.facebook.com/" style={{color:'white'}}>Contact</a>
                             </li>
                         </ul>
                         <ul className="navbar-nav ml-auto">

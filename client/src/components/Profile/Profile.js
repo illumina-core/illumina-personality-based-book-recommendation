@@ -125,6 +125,7 @@ export class Profile extends Component {
                                 switch (this.state.edit) {
                                   case true:  return "col";
                                   case false: return "col-5";
+                                  default : return "";
                                 }
                               })()
                         } style={{marginRight:'50px'}}>

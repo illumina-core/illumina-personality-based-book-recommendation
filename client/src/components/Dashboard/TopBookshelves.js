@@ -22,9 +22,6 @@ export class TopBookshelves extends Component {
       }
     }
     
-    const car_style = {
-      border:'1.5px solid black'
-    }
     return (
       <div>
         {

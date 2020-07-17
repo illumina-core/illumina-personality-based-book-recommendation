@@ -22,7 +22,7 @@ export class Home extends Component {
                                 <h4 className="font-weight-light text-white" style={{fontSize:'35px', textShadow:'0 0 20px #151B2D', paddingTop:'10px'}}>Discover books suitable for your personality</h4>
                                 <h4 className="font-weight-light text-white" style={{fontSize:'35px', textShadow:'0 0 20px #151B2D', paddingTop:'10px'}}>Curate your personal bookshelves</h4>
                                 <h4 className="font-weight-light text-white" style={{fontSize:'35px', textShadow:'0 0 20px #151B2D', paddingTop:'10px'}}>Explore new tastes and genres</h4>
-                                <h4 className="font-weight-light text-white" style={{fontSize:'35px', textShadow:'0 0 20px #151B2D', paddingTop:'10px', paddingBottom:'50px'}}></h4>
+                                <br />
                                 <a href="https://github.com/illumina-core/illumina-personality-based-book-recommendation" className="font-weight-light" style={{fontSize:'35px', color:'#fff', textShadow:'0 0 20px #151B2D'}}>Learn how the project works</a>
 
                             </div>

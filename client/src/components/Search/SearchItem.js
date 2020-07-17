@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 
-import { Link } from 'react-router-dom'
 import { add_book_to_shelf } from '../Services'
 
 export class SearchItem extends Component {
