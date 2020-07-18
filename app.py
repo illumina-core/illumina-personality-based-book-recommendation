@@ -465,9 +465,13 @@ def update_shelf():
 def get_genre_recommendation():
 
     cluster = Users.objects(username=session['user']).get().cluster
-    genres = Books.objects(cluster=cluster).item_frequencies('genres')
+    genres = []
+    for gens in Books.objects(cluster=cluster).only('genres'):
+        genres += gens.genres
+
+    genres = list(dict(Counter(genres).most_common()).keys())
     
-    return jsonify({'result': genres.to_json()})
+    return jsonify({'result': genres[:6]})
 
 if __name__ == '__main__':
     app.run(debug=True)
