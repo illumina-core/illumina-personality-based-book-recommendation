@@ -45,8 +45,15 @@ class Users(Document):
     email = EmailField(unique=True)
     profile_pic = StringField(default="../images/default_user.png")
     date_of_birth = DateTimeField()
-    description = StringField(default="i am a default user")
-    personality_index = ListField(FloatField(required=True), default=[0.0,0.0,0.0,0.0,0.0])
+    description = StringField(default="")
+    cluster = IntField(default=-1)
+    personality_index = DictField(default={
+        'OPN': 0.0,
+        'CON': 0.0,
+        'EXT': 0.0,
+        'AGR': 0.0,
+        'NEU': 0.0
+    })
     friends_list = ListField(ReferenceField('self',  dbref=True))
     shelves = EmbeddedDocumentListField(Shelves, default=[
         Shelves(

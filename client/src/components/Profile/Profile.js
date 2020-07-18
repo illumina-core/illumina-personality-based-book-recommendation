@@ -3,7 +3,7 @@ import Navbar from '../layout/Navbar';
 import Footer from '../layout/Footer';
 import ImageUploading from "react-images-uploading";
 import './Profile.css';
-import { update_profile_data, getUser } from '../Services'
+import { update_profile_data, getUser, get_genre_recommendation } from '../Services'
 import Radar from 'react-d3-radar';
 
 export class Profile extends Component {
@@ -22,7 +22,8 @@ export class Profile extends Component {
             EXT: 0,
             AGR: 0,
             OPN: 0,
-            uploaded: false
+            uploaded: false,
+            rec_genres: []
         }
     }
 
@@ -69,9 +70,14 @@ export class Profile extends Component {
             this.setState({AGR: user['personality_index']['AGR']})
             this.setState({OPN: user['personality_index']['OPN']})
         })
+
+        get_genre_recommendation().then(res =>{
+            console.log(JSON.parse(res.data.result))
+        })
     }
 
     render() {
+        const url = window.location.protocol + "//" + window.location.host
         return (
         <div>
             <Navbar />
@@ -289,7 +295,7 @@ export class Profile extends Component {
                             </div>
 
                             <button className="btn-lg btn-secondary"> 
-                                <a >Recommend me a book!</a>
+                                <a href={url + "/search?personality"}>Recommend me a book!</a>
                             </button>
 
                         </div>

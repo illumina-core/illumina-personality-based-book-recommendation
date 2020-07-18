@@ -1,7 +1,7 @@
 import pymongo
 import pickle
 import numpy as np
-from clusters import Clusters
+from personality_analysis.clusters import Clusters
 from sklearn.preprocessing import MinMaxScaler
 
 class CPredictor():
