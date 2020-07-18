@@ -72,6 +72,8 @@ export class Profile extends Component {
     }
 
     render() {
+        const url = window.location.protocol + "//" + window.location.host
+
         return (
         <div>
             <Navbar />
@@ -263,33 +265,33 @@ export class Profile extends Component {
                                 <ul className="container-fluid" >
                                     <div className="row mb-3">
                                         <div className="col-md mr-2 topshelf">
-                                            <h4 className="font-weight-light">Poetry</h4>
+                                            <h4 className="font-weight-light">Fantasy</h4>
                                         </div>
                                         <div className="col-md mr-2 topshelf">
-                                            <h4 className="font-weight-light">Poetry</h4>
+                                            <h4 className="font-weight-light">Japan</h4>
                                         </div>
                                     </div>
                                     <div className="row mb-3">
                                         <div className="col-md mr-2 topshelf">
-                                            <h4 className="font-weight-light">Poetry</h4>
+                                            <h4 className="font-weight-light">Folk Tales</h4>
                                         </div>
                                         <div className="col-md mr-2 topshelf">
-                                            <h4 className="font-weight-light">Poetry</h4>
+                                            <h4 className="font-weight-light">Thriller</h4>
                                         </div>
                                     </div>
                                     <div className="row">
                                         <div className="col-md mr-2 topshelf">
-                                            <h4 className="font-weight-light">Poetry</h4>
+                                            <h4 className="font-weight-light">Manga</h4>
                                         </div>
                                         <div className="col-md mr-2 topshelf">
-                                            <h4 className="font-weight-light">Poetry</h4>
+                                            <h4 className="font-weight-light">History</h4>
                                         </div>
                                     </div>
                                 </ul>
                             </div>
 
                             <button className="btn-lg btn-secondary"> 
-                                <a >Recommend me a book!</a>
+                                <a href={url + '/search?personality'} style={{color:'white'}}>Recommend me a book!</a>
                             </button>
 
                         </div>

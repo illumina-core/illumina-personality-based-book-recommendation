@@ -86,7 +86,7 @@ export class Register extends Component {
                                 <input type="password" minLength="5" className="form-control" 
                                 value={this.state.password}
                                 onChange={this.onChange}
-                                placeholder="Enter email" name="password" required/>
+                                placeholder="Enter password" name="password" required/>
                                 <div className="valid-feedback">Valid.</div>
                                 <div className="invalid-feedback">Please enter a password with a minimum length 5.</div> 
                             </div>
