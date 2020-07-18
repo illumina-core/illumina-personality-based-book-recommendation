@@ -8,7 +8,6 @@ import { Dashboard } from './components/Dashboard/Dashboard'
 import { BookShelves } from './components/Bookshelves/BookShelves'
 import { Profile } from './components/Profile/Profile'
 import { GenreResult } from './components/Genres/GenreResult'
-import { AdminPanel } from './components/AdminPanel/AdminPanel'
 import { CustomRoute } from './components/CustomRoute'
 
 export class App extends Component {
@@ -21,7 +20,6 @@ export class App extends Component {
           <CustomRoute exact path="/genres" component={GenreResult} />
           <CustomRoute exact path="/book/:id" component={Book} />
           <CustomRoute exact path="/search" component={SearchResult} />
-          <CustomRoute exact path="/admin" component={AdminPanel} />
           <CustomRoute exact condition="logged_in" path="/dashboard" component={Dashboard} />
           <CustomRoute exact condition="logged_in" path="/profile" component={Profile} />
           <CustomRoute exact condition="logged_in" path="/book-shelves" component={BookShelves} />
