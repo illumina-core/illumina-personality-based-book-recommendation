@@ -34,6 +34,10 @@ host = f'mongodb+srv://{username}:{password}@illumina-lmf8b.gcp.mongodb.net/{db}
 
 connect(host=host)
 
+@app.route('/')
+def hello_world():
+    return render_template('index.html')
+
 @app.route('/register', methods=["POST"])
 @app.route('/book/register', methods=["POST"])
 @app.route('/book-shelves/register', methods=['POST'])
@@ -433,7 +437,7 @@ def get_genres():
     return jsonify({'genreResults': dic})
 
 @app.route('/update-profile-data', methods=['POST'])
-def update_proflie_image():
+def update_proflie_data():
     data = request.get_json()['data']
 
     user = Users.objects(username=session['user']).get()
