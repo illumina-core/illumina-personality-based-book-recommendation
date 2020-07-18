@@ -3,7 +3,7 @@ import Navbar from '../layout/Navbar';
 import Footer from '../layout/Footer';
 import ImageUploading from "react-images-uploading";
 import './Profile.css';
-import { update_profile_data, getUser } from '../Services'
+import { update_profile_data, getUser, get_genre_recommendation } from '../Services'
 import Radar from 'react-d3-radar';
 
 export class Profile extends Component {
@@ -22,7 +22,8 @@ export class Profile extends Component {
             EXT: 0,
             AGR: 0,
             OPN: 0,
-            uploaded: false
+            uploaded: false,
+            rec_genres: []
         }
     }
 
@@ -69,9 +70,14 @@ export class Profile extends Component {
             this.setState({AGR: user['personality_index']['AGR']})
             this.setState({OPN: user['personality_index']['OPN']})
         })
+
+        get_genre_recommendation().then(res =>{
+            this.setState({rec_genres: res.data.result})
+        })
     }
 
     render() {
+        const url = window.location.protocol + "//" + window.location.host
         return (
         <div>
             <Navbar />
@@ -263,33 +269,45 @@ export class Profile extends Component {
                                 <ul className="container-fluid" >
                                     <div className="row mb-3">
                                         <div className="col-md mr-2 topshelf">
-                                            <h4 className="font-weight-light">Poetry</h4>
+                                            <h4 className="font-weight-light">
+                                                <a href={url + '/search?genre=' + this.state.rec_genres[0]}>{this.state.rec_genres[0]}</a>
+                                            </h4>
                                         </div>
                                         <div className="col-md mr-2 topshelf">
-                                            <h4 className="font-weight-light">Poetry</h4>
+                                            <h4 className="font-weight-light">
+                                                <a href={url + '/search?genre=' + this.state.rec_genres[1]}>{this.state.rec_genres[1]}</a>
+                                            </h4>
                                         </div>
                                     </div>
                                     <div className="row mb-3">
                                         <div className="col-md mr-2 topshelf">
-                                            <h4 className="font-weight-light">Poetry</h4>
+                                            <h4 className="font-weight-light">
+                                                <a href={url + '/search?genre=' + this.state.rec_genres[2]}>{this.state.rec_genres[2]}</a>
+                                            </h4>
                                         </div>
                                         <div className="col-md mr-2 topshelf">
-                                            <h4 className="font-weight-light">Poetry</h4>
+                                            <h4 className="font-weight-light">
+                                                <a href={url + '/search?genre=' + this.state.rec_genres[3]}>{this.state.rec_genres[3]}</a>
+                                            </h4>
                                         </div>
                                     </div>
                                     <div className="row">
                                         <div className="col-md mr-2 topshelf">
-                                            <h4 className="font-weight-light">Poetry</h4>
+                                            <h4 className="font-weight-light">
+                                                <a href={url + '/search?genre=' + this.state.rec_genres[4]}>{this.state.rec_genres[4]}</a>
+                                            </h4>
                                         </div>
                                         <div className="col-md mr-2 topshelf">
-                                            <h4 className="font-weight-light">Poetry</h4>
+                                            <h4 className="font-weight-light">
+                                                <a href={url + '/search?genre=' + this.state.rec_genres[5]}>{this.state.rec_genres[5]}</a>
+                                            </h4>
                                         </div>
                                     </div>
                                 </ul>
                             </div>
 
                             <button className="btn-lg btn-secondary"> 
-                                <a >Recommend me a book!</a>
+                                <a href={url + "/search?personality"}>Recommend me a book!</a>
                             </button>
 
                         </div>

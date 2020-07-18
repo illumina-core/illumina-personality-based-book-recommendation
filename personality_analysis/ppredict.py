@@ -1,7 +1,7 @@
 import pymongo
 import pickle
-from preprocess import Preprocess
-from pmodel import PModel
+from personality_analysis.preprocess import Preprocess
+from personality_analysis.pmodel import PModel
 from sklearn.preprocessing import MinMaxScaler
 
 class PPredictor():

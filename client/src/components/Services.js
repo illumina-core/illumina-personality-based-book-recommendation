@@ -121,3 +121,8 @@ export const update_shelf = (data) =>{
     return axios
     .post('update-shelf', { data: data })
 }
+
+export const get_genre_recommendation = () =>{
+    return axios
+    .get('get-genre-recommendation')
+}

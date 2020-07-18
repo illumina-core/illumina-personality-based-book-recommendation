@@ -6,10 +6,10 @@ from datetime import datetime
 import random
 from collections import Counter
 
-from ppredict import PPredictor
-from cpredict import CPredictor
-from clusters import Clusters
-from pmodel import PModel
+from personality_analysis.ppredict import PPredictor
+from personality_analysis.cpredict import CPredictor
+from personality_analysis.clusters import Clusters
+from personality_analysis.pmodel import PModel
 
 from mongoengine import connect
 from mongoengine.queryset.visitor import Q
@@ -17,7 +17,7 @@ from mongoengine import DoesNotExist, NotUniqueError
 
 from scipy.spatial import distance
 
-from models import Shelves, Books, Users, Reviews
+from data_preprocessing.models import Shelves, Books, Users, Reviews
 
 
 app = Flask(__name__)
@@ -460,6 +460,18 @@ def update_shelf():
     user.save()
 
     return jsonify({'result': 'Shelf has been updated'})
+
+@app.route('/get-genre-recommendation', methods=['GET'])
+def get_genre_recommendation():
+
+    cluster = Users.objects(username=session['user']).get().cluster
+    genres = []
+    for gens in Books.objects(cluster=cluster).only('genres'):
+        genres += gens.genres
+
+    genres = list(dict(Counter(genres).most_common()).keys())
+    
+    return jsonify({'result': genres[:6]})
 
 if __name__ == '__main__':
     app.run(debug=True)

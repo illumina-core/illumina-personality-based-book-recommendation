@@ -9,7 +9,7 @@ from sklearn.svm import SVR
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import mean_squared_log_error
 from sklearn.metrics import mean_squared_error
-from preprocess import Preprocess
+from personality_analysis.preprocess import Preprocess
 
 class PModel():
     def __init__(self):
