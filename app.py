@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, session
+from flask import Flask, jsonify, request, session, render_template
 from flask_bcrypt import Bcrypt 
 from flask_cors import CORS
 import json
@@ -35,7 +35,7 @@ host = f'mongodb+srv://{username}:{password}@illumina-lmf8b.gcp.mongodb.net/{db}
 connect(host=host)
 
 @app.route('/')
-def hello_world():
+def index():
     return render_template('index.html')
 
 @app.route('/register', methods=["POST"])
