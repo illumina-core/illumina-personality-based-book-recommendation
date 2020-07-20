@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { AddBook } from './AddBook'
 import Navbar from '../layout/Navbar';
 import Footer from '../layout/Footer';
 
@@ -27,28 +28,7 @@ export class AdminPanel extends Component {
                         
                         <div className="row collapse" id="collapseExample" style={{border:'1.5px solid #151B2D', borderTop:'none'}}>
                             <div className="col">
-                                <form>
-                                    <div class="form-group">
-                                        <label for="exampleFormControlInput1">Book Title</label>
-                                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Book Title" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleFormControlTextarea1">Book Description</label>
-                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleFormControlInput1">Author</label>
-                                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Author Name" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleFormControlInput1">Genre</label>
-                                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Genre" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleFormControlInput1">Rating</label>
-                                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Rating" />
-                                    </div>
-                                </form>
+                                <AddBook />
                             </div>
                         </div>
                     
@@ -60,9 +40,9 @@ export class AdminPanel extends Component {
 
                         <div className="row collapse" id="collapseExample1" style={{border:'1.5px solid #151B2D', borderTop:'none'}}>
                             <div className="col" style={{padding:'5px'}}>
-                            <input class="form-control" type="text" placeholder="Search Book Database" aria-label="Search" style={{width:'500px', border:'1.5px solid #151B2D'}}/>
-                            <button type="button" class="btn btn-outline-dark">Edit Book Details</button>
-                            <button type="button" class="btn btn-outline-dark">Delete Book</button>
+                            <input className="form-control" type="text" placeholder="Search Book Database" aria-label="Search" style={{width:'500px', border:'1.5px solid #151B2D'}}/>
+                            <button type="button" className="btn btn-outline-dark">Edit Book Details</button>
+                            <button type="button" className="btn btn-outline-dark">Delete Book</button>
                             </div>
                         </div>
 
@@ -74,8 +54,8 @@ export class AdminPanel extends Component {
 
                         <div className="row collapse" id="collapseExample2" style={{border:'1.5px solid #151B2D', borderTop:'none'}}>
                             <div className="col" style={{padding:'5px'}}>
-                            <input class="form-control" type="text" placeholder="Search User Database" aria-label="Search" style={{width:'500px', border:'1.5px solid #151B2D'}}/>
-                            <button type="button" class="btn btn-outline-dark">Delete User</button>
+                            <input className="form-control" type="text" placeholder="Search User Database" aria-label="Search" style={{width:'500px', border:'1.5px solid #151B2D'}}/>
+                            <button type="button" className="btn btn-outline-dark">Delete User</button>
                             </div>
                         </div>
 

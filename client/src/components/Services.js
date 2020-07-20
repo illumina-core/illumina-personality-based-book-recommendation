@@ -126,3 +126,8 @@ export const get_genre_recommendation = () =>{
     return axios
     .get('get-genre-recommendation')
 }
+
+export const add_book = (data) =>{
+    return axios
+    .post('add-book', { data: data })
+}

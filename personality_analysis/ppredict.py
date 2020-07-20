@@ -12,7 +12,7 @@ class PPredictor():
 
     def load_models(self):
         for trait in self.traits:
-            with open('data/static/' + trait + '_model.pkl', 'rb') as f:
+            with open('personality_analysis/data/static/' + trait + '_model.pkl', 'rb') as f:
                 self.models[trait] = pickle.load(f)
 
     def review_predict(self, X, traits='All', predictions='All'):

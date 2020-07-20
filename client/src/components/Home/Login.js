@@ -30,6 +30,14 @@ export class Login extends Component {
             if(res.data.err){
                 alert("Invalid login id or password")
             }
+            else if (res.data.admin){
+                alert(res.data.username + " has logged in successfully!")
+                localStorage.setItem('logged_in', true)
+                localStorage.setItem('admin', true)
+                localStorage.setItem('username', res.data.username)
+                localStorage.setItem('profile_pic', res.data.profile_pic)
+                window.location.reload()
+            }
             else{
                 alert(res.data.username + " has logged in successfully!")
                 localStorage.setItem('logged_in', true)

@@ -90,6 +90,8 @@ def login():
 
     if bcrypt.check_password_hash(response['password'], password):
         session['user'] = response['username']
+        if response.admin:
+            return jsonify({'admin': True, 'username': response['username'] , 'profile_pic': response['profile_pic']})
 
         return jsonify({'username': response['username'] , 'profile_pic': response['profile_pic']})
     else:
@@ -207,17 +209,19 @@ def rate_book():
     rating = request.get_json()['rating']
  
     book = Books.objects(id=book_id).get()
+    user = Users.objects(username=session['user']).get()
 
     try:
         book.reviews.get(username=session['user'])['rating'] = rating
         book.reviews.get(username=session['user'])['created'] = datetime.utcnow()
     except DoesNotExist:
-        user = Users.objects(username=session['user']).only('username', 'profile_pic').get()
         book.reviews.append(Reviews(
             username=user['username'],
             profile_pic=user['profile_pic'],
             rating = rating
         ))
+        user.history.append(book)
+        
 
     book.save()
 
@@ -340,6 +344,7 @@ def remove_review():
     book = Books.objects(id=book).get()
     book.reviews.remove(book.reviews.get(username=session['user']))
     book.save()
+    Users.objects(username=session['user']).get().history.remove(book).save()
 
     return jsonify({'result': True})
 
@@ -476,6 +481,23 @@ def get_genre_recommendation():
     genres = list(dict(Counter(genres).most_common()).keys())
     
     return jsonify({'result': genres[:6]})
+
+@app.route('/add-book', methods=['GET'])
+def add_book():
+    data = request.get_json()['data']
+
+    Books(
+        book_title = data['book_title'],
+        description = data['description'],
+        authors = data['authors'],
+        genres = data['genres'],
+        links = data['links'],
+        cover_image = data['cover_image'],
+        extra_details = data['extra_details']
+    ).save()
+    
+    return jsonify({'result': 'Book Added'})
+
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -8,6 +8,9 @@ export class UserMenu extends Component {
     logOut (e) {
         e.preventDefault()
         localStorage.removeItem('logged_in')
+        if(localStorage.admin){
+            localStorage.removeItem('admin')
+        }
         localStorage.removeItem('username')
         localStorage.removeItem('profile_pic')
         
@@ -26,6 +29,13 @@ export class UserMenu extends Component {
                 &nbsp;{localStorage.username}
                 </Link>
                 <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navDropDownLink" style={{border:'1.5px solid #151B2D'}}>
+                    {
+                        localStorage.admin && 
+                        <React.Fragment>
+                            <a className="dropdown-item" href={url + '/admin'}>Admin Panel</a>
+                            <div className="dropdown-divider"></div>
+                        </React.Fragment>
+                    }
                     <a className="dropdown-item" href={url + '/dashboard'}>Dashboard</a>
                     <div className="dropdown-divider"></div>
                     <a className="dropdown-item" href={url + '/profile'}>Profile</a>

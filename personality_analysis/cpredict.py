@@ -6,7 +6,7 @@ from sklearn.preprocessing import MinMaxScaler
 
 class CPredictor():
     def __init__(self):
-        with open('data/static/cluster_model.pkl', 'rb') as f:
+        with open('personality_analysis/data/static/cluster_model.pkl', 'rb') as f:
             self.model = pickle.load(f)
 
     def user_cluster_predict(self, X):

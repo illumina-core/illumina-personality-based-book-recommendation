@@ -20,7 +20,13 @@ class Books(Document):
     cover_image = StringField(required=True, default="../images/default_book.png")
     avg_rating = FloatField(default=0.0) 
     links = DictField()       # {'link name': url}
-    personality_index = DictField()
+    personality_index = DictField(default={
+        'OPN': 0.0,
+        'CON': 0.0,
+        'EXT': 0.0,
+        'AGR': 0.0,
+        'NEU': 0.0
+    })
     reviews = EmbeddedDocumentListField(Reviews)
     cluster = IntField(default=0)
     extra_details = DictField()
@@ -47,6 +53,8 @@ class Users(Document):
     date_of_birth = DateTimeField()
     description = StringField(default="")
     cluster = IntField(default=-1)
+    admin = BooleanField(default=False)
+    history = ListField(ReferenceField('Books', dbref=True))
     personality_index = DictField(default={
         'OPN': 0.0,
         'CON': 0.0,

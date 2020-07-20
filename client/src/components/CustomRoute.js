@@ -9,6 +9,10 @@ export const CustomRoute = (props) => {
         return setReturnedRoute(
         localStorage.logged_in ? <Route {...props} /> : <Redirect to="/" />
         );
+      case "admin":
+        return setReturnedRoute(
+        localStorage.logged_in && localStorage.admin ? <Route {...props} /> : <Redirect to="/" />
+        );
       default:
         return setReturnedRoute(<Route {...props} />);
     }
