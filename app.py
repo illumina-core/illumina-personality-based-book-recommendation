@@ -112,34 +112,13 @@ def search_book():
     
     books = None
     if title != None:
-        books = Books.objects(book_title__icontains=title).only(
-            'book_title',
-            'id',
-            'cover_image',
-            'avg_rating',
-            'genres',
-            'authors'
-        ).order_by('-avg_rating')
+        books = Books.objects(book_title__icontains=title).order_by('-avg_rating')
 
     elif genre != None:
-        books = Books.objects(genres__icontains=genre).only(
-            'book_title',
-            'id',
-            'cover_image',
-            'avg_rating',
-            'genres',
-            'authors'
-        ).order_by('-avg_rating')
+        books = Books.objects(genres__icontains=genre).order_by('-avg_rating')
 
     elif author != None:
-        books = Books.objects(authors__icontains=author).only(
-            'book_title',
-            'id',
-            'cover_image',
-            'avg_rating',
-            'genres',
-            'authors'
-        ).order_by('-avg_rating')
+        books = Books.objects(authors__icontains=author).order_by('-avg_rating')
 
     lim = 10
     total = books.count()
@@ -482,21 +461,49 @@ def get_genre_recommendation():
     
     return jsonify({'result': genres[:6]})
 
-@app.route('/add-book', methods=['GET'])
+@app.route('/add-book', methods=['POST'])
 def add_book():
     data = request.get_json()['data']
 
-    Books(
-        book_title = data['book_title'],
-        description = data['description'],
-        authors = data['authors'],
-        genres = data['genres'],
-        links = data['links'],
-        cover_image = data['cover_image'],
-        extra_details = data['extra_details']
-    ).save()
+    try:
+        Books(
+            book_title = data['book_title'],
+            description = data['description'],
+            authors = data['authors'],
+            genres = data['genres'],
+            links = data['links'],
+            cover_image = data['cover_image'],
+            extra_details = data['extra_details']
+        ).save()
+    except NotUniqueError:
+        return jsonify({'result': 'Book Description not unique'})    
     
     return jsonify({'result': 'Book Added'})
+
+@app.route('/update-book', methods=['POST'])
+def update_book():
+    data = request.get_json()['data']
+
+    book = Books.objects(id=data['id']).get()
+
+    book.book_title = data['book_title']
+    book.description = data['description']
+    book.authors = data['authors']
+    book.genres = data['genres']
+    book.links = data['links']
+    book.cover_image = data['cover_image']
+    book.extra_details = data['extra_details']
+    book.save()
+    
+    return jsonify({'result': 'Book Updated'})
+
+@app.route('/delete-book', methods=['POST'])
+def delete_book():
+    id = request.get_json()['id']
+    
+    Books.objects(id=id).get().delete()
+    
+    return jsonify({'result': 'Book Deleted'})
 
 
 if __name__ == '__main__':

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { AddBook } from './AddBook'
 import Navbar from '../layout/Navbar';
 import Footer from '../layout/Footer';
+import EditBook from './EditBook';
 
 
 export class AdminPanel extends Component {
@@ -39,11 +40,7 @@ export class AdminPanel extends Component {
                         </div>
 
                         <div className="row collapse" id="collapseExample1" style={{border:'1.5px solid #151B2D', borderTop:'none'}}>
-                            <div className="col" style={{padding:'5px'}}>
-                            <input className="form-control" type="text" placeholder="Search Book Database" aria-label="Search" style={{width:'500px', border:'1.5px solid #151B2D'}}/>
-                            <button type="button" className="btn btn-outline-dark">Edit Book Details</button>
-                            <button type="button" className="btn btn-outline-dark">Delete Book</button>
-                            </div>
+                            <EditBook />
                         </div>
 
                         <div className="row" style={{border:'1.5px solid #151B2D', borderTop:'none'}}>
@@ -66,12 +63,7 @@ export class AdminPanel extends Component {
                         </div>
                             </div>
                         </div>
-
-
-                    
-                    
                     </div>
-                
                 <div />
                 <Footer />
             </div>

@@ -40,10 +40,16 @@ export class AddBook extends Component {
     }
 
     addBook = (e) => {
+        e.preventDefault()
         const link_key = document.getElementsByName('link_key')
         const link_value = document.getElementsByName('link_value')
         const links = {}
         for(var x = 0; x < link_key.length; x++){
+            if(link_key[x].value.length === 0){
+                continue
+            } if(link_value[x].value.length === 0){
+                continue
+            }
             links[link_key[x].value] = link_value[x].value
         }
         
@@ -51,12 +57,18 @@ export class AddBook extends Component {
         const extra_detail_value = document.getElementsByName('extra_details_value')
         const extra_details = {}
         for(var x = 0; x < extra_detail_key.length; x++){
+            if(extra_detail_key[x].value.length === 0){
+                continue
+            } 
+            if(extra_detail_value[x].value.length === 0){
+                continue
+            }
             extra_details[extra_detail_key[x].value] = extra_detail_value[x].value
         }
 
         const data = {
             'book_title': this.state.book_title,
-            'descriptioin': this.state.description,
+            'description': this.state.description,
             'authors': this.state.authors.split(','),
             'genres': this.state.genres.split(','),
             'cover_image': this.state.cover_image,
@@ -66,6 +78,7 @@ export class AddBook extends Component {
 
         add_book(data).then(res =>{
             alert(res.data.result)
+            window.location.reload()
         })
     }
 
@@ -78,13 +91,13 @@ export class AddBook extends Component {
                     <div className="input-group-prepend">
                         <span className="input-group-text">Key</span>
                     </div>
-                    <input type="text" minLength="3" maxLength="20" required  name="link_key" className="form-control" placeholder="eg. Kindle"/>
+                    <input type="text" maxLength="20" required  name="link_key" className="form-control" placeholder="eg. Kindle"/>
                     <div className="valid-feedback">Valid.</div>
                     <div className="invalid-feedback">Please enter valid username/email of minimum 3 length.</div> 
                     <div className="input-group-prepend">
                         <span className="input-group-text">Value</span>
                     </div>
-                    <input type="text" minLength="5" maxLength="150" required name="link_value" className="form-control" placeholder="url"/>
+                    <input type="text" maxLength="150" required name="link_value" className="form-control" placeholder="url"/>
                     <div className="valid-feedback">Valid.</div>
                     <div className="invalid-feedback">Please enter valid username/email of minimum 3 length.</div> 
                 </div>
@@ -98,13 +111,13 @@ export class AddBook extends Component {
                     <div className="input-group-prepend">
                         <span className="input-group-text">Key</span>
                     </div>
-                    <input type="text" minLength="3" maxLength="20" required name="extra_details_key" className="form-control" placeholder="eg. Original Title"/>
+                    <input type="text" maxLength="20" required name="extra_details_key" className="form-control" placeholder="eg. Original Title"/>
                     <div className="valid-feedback">Valid.</div>
                     <div className="invalid-feedback">Please enter valid username/email of minimum 3 length.</div> 
                     <div className="input-group-prepend">
                         <span className="input-group-text">Value</span>
                     </div>
-                    <input type="text" minLength="5" maxLength="150" required name="extra_details_value" className="form-control" placeholder="eg. This is the value"/>
+                    <input type="text" maxLength="150" required name="extra_details_value" className="form-control" placeholder="eg. This is the value"/>
                     <div className="valid-feedback">Valid.</div>
                     <div className="invalid-feedback">Please enter valid username/email of minimum 3 length.</div> 
                 </div>

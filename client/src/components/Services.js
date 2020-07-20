@@ -131,3 +131,13 @@ export const add_book = (data) =>{
     return axios
     .post('add-book', { data: data })
 }
+
+export const update_book = (data) =>{
+    return axios
+    .post('update-book', { data: data })
+}
+
+export const delete_book = (id) =>{
+    return axios
+    .post('delete-book', { id: id })
+}
