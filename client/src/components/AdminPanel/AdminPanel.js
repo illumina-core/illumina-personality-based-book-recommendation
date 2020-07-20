@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { AddBook } from './AddBook'
+import { RemoveUser } from './RemoveUser'
 import Navbar from '../layout/Navbar';
 import Footer from '../layout/Footer';
 
@@ -53,10 +54,7 @@ export class AdminPanel extends Component {
                         </div>
 
                         <div className="row collapse" id="collapseExample2" style={{border:'1.5px solid #151B2D', borderTop:'none'}}>
-                            <div className="col" style={{padding:'5px'}}>
-                            <input className="form-control" type="text" placeholder="Search User Database" aria-label="Search" style={{width:'500px', border:'1.5px solid #151B2D'}}/>
-                            <button type="button" className="btn btn-outline-dark">Delete User</button>
-                            </div>
+                            <RemoveUser />
                         </div>
 
                         <div className="row" style={{border:'1.5px solid #151B2D', borderTop:'none'}}>

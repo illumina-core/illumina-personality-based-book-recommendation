@@ -498,6 +498,13 @@ def add_book():
     
     return jsonify({'result': 'Book Added'})
 
+@app.route('/remove-user', methods=['POST'])
+def remove_user():
+    user = request.get_json()['user']
+    user = Users.objects(username=username).get().delete()
+    # user.remove(user.get(username=user))
+    return jsonify({'result': True})
+
 
 if __name__ == '__main__':
     app.run(debug=True)
