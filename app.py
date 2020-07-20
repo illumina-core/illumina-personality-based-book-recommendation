@@ -451,7 +451,6 @@ def update_shelf():
 
 @app.route('/get-genre-recommendation', methods=['GET'])
 def get_genre_recommendation():
-
     cluster = Users.objects(username=session['user']).get().cluster
     genres = []
     for gens in Books.objects(cluster=cluster).only('genres'):
@@ -501,16 +500,23 @@ def update_book():
 def delete_book():
     id = request.get_json()['id']
     
-    Books.objects(id=id).get().delete()
-    
+    try:
+        Books.objects(id=id).get().delete()
+    except DoesNotExist:
+        return jsonify({'result': "Book Doesn't exist"})
+
     return jsonify({'result': 'Book Deleted'})
     
 @app.route('/remove-user', methods=['POST'])
 def remove_user():
     user = request.get_json()['user']
-    user = Users.objects(username=username).get().delete()
-    # user.remove(user.get(username=user))
-    return jsonify({'result': True})
+    try:
+        Users.objects(username=username).get().delete()
+    except DoesNotExist:
+        return jsonify({'result': f"User {user} doesn't exist"})
+
+    return jsonify({'result': f"User {user} Removed"})
+    
 
 
 if __name__ == '__main__':

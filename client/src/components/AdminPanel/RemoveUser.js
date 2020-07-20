@@ -16,11 +16,9 @@ export class RemoveUser extends Component {
     }
 
     removeUser = (e) => {
-        const data = {
-            'username': this.state.username,
-        }
+        e.preventDefault()
 
-        remove_user(data).then(res =>{
+        remove_user(this.state.username).then(res =>{
             alert(res.data.result)
         })
     }
@@ -33,12 +31,13 @@ export class RemoveUser extends Component {
                             <div className="col" style={{padding:'5px'}}>
                             <form className="was-validated"> 
                                 <div className="form-group">
-                                    <textarea className="form-control" 
+                                    <input
+                                    type="text"
+                                    className="form-control" 
                                     name="username"
                                     value={this.state.username}
                                     onChange={this.onChange}
                                     minLength="3" maxLength="1000"
-                                    rows="1" 
                                     placeholder="Search User Database"
                                     style={{width:'500px', border:'1.5px solid #151B2D'}}
                                     />
