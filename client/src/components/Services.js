@@ -140,4 +140,12 @@ export const update_book = (data) =>{
 export const delete_book = (id) =>{
     return axios
     .post('delete-book', { id: id })
+    
+}
+
+export const remove_user = user =>{
+    return axios
+    .post('remove-user', {
+        user: user
+    })
 }

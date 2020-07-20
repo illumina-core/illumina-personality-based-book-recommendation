@@ -504,6 +504,13 @@ def delete_book():
     Books.objects(id=id).get().delete()
     
     return jsonify({'result': 'Book Deleted'})
+    
+@app.route('/remove-user', methods=['POST'])
+def remove_user():
+    user = request.get_json()['user']
+    user = Users.objects(username=username).get().delete()
+    # user.remove(user.get(username=user))
+    return jsonify({'result': True})
 
 
 if __name__ == '__main__':
