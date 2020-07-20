@@ -18,6 +18,7 @@ const getSuggestions = value => {
         var data = JSON.parse(res.data.books)
         var books = []
         for (const [index, value] of data.entries()) {
+            
             books.push(value)
           }
         Books = books

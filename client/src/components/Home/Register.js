@@ -102,7 +102,7 @@ export class Register extends Component {
 
                             {/* Modal footer */}
                             <div className="modal-footer">
-                                <button type="button" class="btn btn btn-primary btn-next" data-toggle="modal" data-dismiss="modal" data-target="#personality_text">Next</button>
+                                <button type="button" className="btn btn btn-primary btn-next" data-toggle="modal" data-dismiss="modal" data-target="#personality_text">Next</button>
                             </div>
                         </form>
                         </div>
@@ -125,7 +125,7 @@ export class Register extends Component {
                         <form className="was-validated" onSubmit={this.onSubmit}>
                             <div className="form-group">
 
-                                <textarea class="form-control"                                 
+                                <textarea className="form-control"                                 
                                 value={this.state.per_desc}
                                 onChange={this.onChange}
                                 placeholder="Describe yourself in a paragraph" name="per_desc" id="per_desc" rows="15">
@@ -137,7 +137,7 @@ export class Register extends Component {
 
                             {/* Modal footer */}
                             <div className="modal-footer">
-                                <button type="button" class="btn btn btn-primary btn-prev" data-toggle="modal" data-dismiss="modal" data-target="#register">Prev</button>
+                                <button type="button" className="btn btn btn-primary btn-prev" data-toggle="modal" data-dismiss="modal" data-target="#register">Prev</button>
                                 <button type="submit" className="btn btn-primary">Submit</button>
                             </div>
                         </form>

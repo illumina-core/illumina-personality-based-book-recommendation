@@ -9,7 +9,6 @@ import EditBook from './EditBook';
 export class AdminPanel extends Component {
 
     render() {
-        const url = window.location.protocol + "//" + window.location.host
         return (
                 <div>
                     <Navbar />

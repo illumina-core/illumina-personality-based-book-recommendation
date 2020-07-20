@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 import Navbar from '../layout/Navbar'
 import Footer from '../layout/Footer'
 import RecommendBooks from './RecommendBooks';
-import RecentActivities from './RecentActivities';
 import TopBookshelves from './TopBookshelves';
 
 import { getUser } from '../Services'

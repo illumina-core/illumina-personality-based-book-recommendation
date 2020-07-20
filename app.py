@@ -511,7 +511,7 @@ def delete_book():
 def remove_user():
     user = request.get_json()['user']
     try:
-        Users.objects(username=username).get().delete()
+        Users.objects(username=user).get().delete()
     except DoesNotExist:
         return jsonify({'result': f"User {user} doesn't exist"})
 

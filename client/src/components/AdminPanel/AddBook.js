@@ -44,7 +44,8 @@ export class AddBook extends Component {
         const link_key = document.getElementsByName('link_key')
         const link_value = document.getElementsByName('link_value')
         const links = {}
-        for(var x = 0; x < link_key.length; x++){
+        var x = 0
+        for(x = 0; x < link_key.length; x++){
             if(link_key[x].value.length === 0){
                 continue
             } if(link_value[x].value.length === 0){
@@ -56,7 +57,7 @@ export class AddBook extends Component {
         const extra_detail_key = document.getElementsByName('extra_details_key')
         const extra_detail_value = document.getElementsByName('extra_details_value')
         const extra_details = {}
-        for(var x = 0; x < extra_detail_key.length; x++){
+        for(x = 0; x < extra_detail_key.length; x++){
             if(extra_detail_key[x].value.length === 0){
                 continue
             } 
@@ -85,7 +86,8 @@ export class AddBook extends Component {
     render() {
 
         const links = []
-        for (var i = 0; i < this.state.links; i++) {
+        var i = 0
+        for (i = 0; i < this.state.links; i++) {
             links.push(
                 <div className="input-group mb-3" key={i}>
                     <div className="input-group-prepend">
@@ -105,7 +107,7 @@ export class AddBook extends Component {
         }
 
         const extra_details = []
-        for (var i = 0; i < this.state.extra_details; i++) {
+        for (i = 0; i < this.state.extra_details; i++) {
             extra_details.push(
                 <div className="input-group mb-3" key={i}>
                     <div className="input-group-prepend">
