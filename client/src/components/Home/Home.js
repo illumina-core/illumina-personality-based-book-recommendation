@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
-
 import { Navbar } from '../layout/Navbar'
 import { Footer } from '../layout/Footer'
+import { Link } from 'react-router-dom'
 export class Home extends Component {
 
 
     render() {
-        const url = window.location.protocol + "//" + window.location.host
         
         return (
             <div>
@@ -24,7 +23,6 @@ export class Home extends Component {
                                 <h4 className="font-weight-light text-white" style={{fontSize:'35px', textShadow:'0 0 20px #151B2D', paddingTop:'10px'}}>Explore new tastes and genres</h4>
                                 <br />
                                 <a href="https://github.com/illumina-core/illumina-personality-based-book-recommendation" className="font-weight-light" style={{fontSize:'35px', color:'#fff', textShadow:'0 0 20px #151B2D'}}>Learn how the project works</a>
-
                             </div>
                         </div>
                     </div>
@@ -58,40 +56,40 @@ export class Home extends Component {
                             <h1 className="font-weight-light" style={{textAlign: 'center',}}>Browse Genres</h1>    
                             <div className="card-deck" style={{paddingTop:'20px', paddingBottom:'20px'}}>
                                 <div className="card">
-                                    <a href={url + '/search?genre=Adventure'}>
+                                    <Link to='/search?genre=Adventure'>
                                     <img className="card-img-top" width="100%" src="./images/genre_adventure.jpg" alt="Card  cap" style={{border:'3px solid #151B2D'}}/>
-                                    </a>
+                                    </Link>
                                 </div>
                                 <div className="card">
-                                    <a href={url + '/search?genre=Science%20Fiction'}>
+                                    <Link to='/search?genre=Science%20Fiction'>
                                     <img className="card-img-top" width="100%"  src="./images/genre_sf1.jpg" alt="Card  cap" style={{border:'3px  solid #151B2D'}}/>
-                                    </a>
+                                    </Link>
                                 </div>
                                 <div className="card">
-                                    <a href={url + '/search?genre=History'}>
+                                    <Link to='/search?genre=History'>
                                     <img className="card-img-top" width="100%"  src="./images/genre_history.jpg" alt="Card  cap" style={{border:'3px  solid #151B2D'}}/>
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                             <div className="card-deck">
                                 <div className="card">
-                                    <a href={url + '/search?genre=Fantasy'}>
+                                    <Link to='/search?genre=Fantasy'>
                                     <img className="card-img-top" width="100%" src="./images/genre_fantasy.jpg" alt="Card  cap" style={{border:'3px solid #151B2D'}}/>
-                                    </a>
+                                    </Link>
                                 </div>
                                 <div className="card">
-                                    <a href={url + '/search?genre=Poetry'}>
+                                    <Link to='/search?genre=Poetry'>
                                     <img className="card-img-top" width="100%"  src="./images/genre_poetry.jpg" alt="Card  cap" style={{border:'3px  solid #151B2D'}}/>
-                                    </a>
+                                    </Link>
                                 </div>
                                 <div className="card">
-                                    <a href={url + '/search?genre=Graphic%20Novels'}>
+                                    <Link to='/search?genre=Graphic%20Novels'>
                                     <img className="card-img-top" width="100%"  src="./images/genre_gn.jpg" alt="Card  cap" style={{border:'3px  solid #151B2D'}}/>
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                             <div style={{textAlign: 'center', paddingTop: '20px', paddingBottom: '75px'}}>
-                                <a href="genres" style={{color:'#151B2D', fontSize:'25px'}}>View All Genres</a>
+                                <Link to="/genres" style={{color:'#151B2D', fontSize:'25px'}}>View All Genres</Link>
                             </div>
                     </div>
                     </div>

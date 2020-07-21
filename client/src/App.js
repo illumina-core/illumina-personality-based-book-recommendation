@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router} from 'react-router-dom'
+import { BrowserRouter as Router, Redirect, Route} from 'react-router-dom'
 import { Switch } from "react-router-dom";
 import { Home } from '../src/components/Home/Home'
 import { SearchResult } from './components/Search/SearchResult'
@@ -14,6 +14,7 @@ import { AdminPanel } from './components/AdminPanel/AdminPanel'
 export class App extends Component {
 
   render() {
+
     return (
       <Router>
         <Switch>
