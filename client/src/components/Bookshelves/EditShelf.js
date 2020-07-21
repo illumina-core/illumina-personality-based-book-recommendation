@@ -46,10 +46,11 @@ export class EditShelf extends Component {
     render() {
         return (
             <React.Fragment>
-            <button style={{backgroundColor:'white', border:'1px solid #151B2D', paddingLeft:'10px', paddingRight:'10px'}}
+            <button data-tip="Edit Shelf" style={{backgroundColor:'white', border:'1px solid #151B2D', paddingLeft:'10px', paddingRight:'10px'}}
              type="button" className="btn bg-white" data-toggle="modal" data-target={'#' + this.props.shelf.shelf_title + 'shelf'}>
                 <i className="fa fa-edit" aria-hidden="true" />
             </button>
+            <ReactTooltip />
             <div className="modal" id={this.props.shelf.shelf_title + 'shelf'}>
                 <div className="modal-dialog">
                 <div className="modal-content">

@@ -40,9 +40,10 @@ export class AddShelf extends Component {
     render() {
         return (
             <React.Fragment>
-            <button type="button" className="btn w-100 bg-light border" data-toggle="modal" data-target="#myModal">
+            <button type="button" className="btn w-100 bg-light border" data-tip="Create Shelf"  data-toggle="modal" data-target="#myModal">
                 <i className="fa fa-plus" aria-hidden="true" />
             </button>
+            <ReactTooltip />
             <div className="modal" id="myModal">
                 <div className="modal-dialog">
                 <div className="modal-content">

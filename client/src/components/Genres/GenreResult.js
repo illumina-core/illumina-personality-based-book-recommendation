@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import Navbar from '../layout/Navbar'
 import { Genres } from './Genres'
 import { get_genres } from '../Services'
-import './Genre.css';
 
 export class GenreResult extends Component {
 

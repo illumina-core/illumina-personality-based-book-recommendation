@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { remove_shelf_book, remove_shelf } from '../Services'
 import { EditShelf } from './EditShelf'
 import './Bookshelf.css';
+import ReactTooltip from 'react-tooltip';
 
 export class Bookshelf extends Component {
 
@@ -71,12 +72,14 @@ export class Bookshelf extends Component {
                 </div>
                 <div className="col">
                   <button 
+                  data-tip="Remove Shelf"
                   className="btn mr-1"
                   onClick={this.removeShelf.bind(this, this.props.shelf.shelf_title)}
                   style={{backgroundColor:'white', border:'1px solid #151B2D', paddingLeft:'10px', paddingRight:'10px'}}
                   >
                     <i className="fa fa-trash" aria-hidden="true" style={{color:'#151B2D'}}/>
                   </button>
+                  <ReactTooltip />
                 </div>
                 <div className="col">
                   <EditShelf shelf={this.props.shelf} style={{display: "inline-block"}}/>
@@ -105,11 +108,13 @@ export class Bookshelf extends Component {
               <div className="col-auto">
                   <button
                   className="btn"
+                  data-tip="Remove Book"
                   onClick={this.removeShelfBook.bind(this, book.id + '||' + this.props.shelf.shelf_title)}
                   style={{backgroundColor:'white', border:'1px solid #151B2D', paddingLeft:'10px', paddingRight:'10px'}}
                   >
                     <i className="fa fa-trash" aria-hidden="true" style={{color:'#151B2D'}}/>
                   </button>
+                  <ReactTooltip />
               </div>
             </div>
           ))
