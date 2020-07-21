@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import { Link } from 'react-router-dom'
 import { add_book_to_shelf } from '../Services'
 
 export class SearchItem extends Component {
@@ -27,8 +27,6 @@ export class SearchItem extends Component {
             avg_rating
         } = this.props.book
         
-        const url = window.location.protocol + "//" + window.location.host
-
         return (
             <div className="row shadow p-4 mx-1 mt-3 bg-white">
             <div className="col-md-auto" >
@@ -37,9 +35,9 @@ export class SearchItem extends Component {
 
             <div className="col-8">
                 <h3 className="font-weight-light" style={{fontSize:'27px'}}>
-                    <a href={url + '/book/' + _id['$oid']} style={{color:'#151B2D'}}>
+                    <Link to={'/book/' + _id['$oid']} style={{color:'#151B2D'}}>
                         {book_title}
-                    </a>
+                    </Link>
                 </h3>
                 <h5 className="font-weight-light" style={{fontSize:'18px'}}><b>Authors:</b> {authors.toString()}</h5>
                 <h5 className="font-weight-light" style={{fontSize:'18px'}}><b>Genres:</b> {genres.toString()}</h5>

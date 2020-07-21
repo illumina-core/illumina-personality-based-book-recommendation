@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import UserMenu from './UserMenu'
+import { Link } from 'react-router-dom'
 import { Login } from '../Home/Login'
 import { Register } from '../Home/Register'
 import './Navbar.css';
@@ -10,41 +11,30 @@ export class Navbar extends Component {
         super()
         this.state ={
             search: '',
-            search_type: 'opt1'
+            search_link: '',
+            search_type: '/search?title='
         }
         this.onChange = this.onChange.bind(this)
-        this.onSubmit = this.onSubmit.bind(this)
     }
 
     onChange(e){
         this.setState({[e.target.name]: e.target.value})
-        console.log(this.state.search_type)
+        this.setState({search_link: e.target.value + this.state.search})
     }
 
-    onSubmit(e){
-        e.preventDefault()
-        if(this.state.search){
-            if(this.state.search_type === 'opt1'){
-                window.location.href = window.location.protocol + "//" + window.location.host + 
-                "/search?title=" + this.state.search;
-            }
-            else if(this.state.search_type === 'opt2'){
-                window.location.href = window.location.protocol + "//" + window.location.host + 
-                "/search?genre=" + this.state.search;
-            }
-            else if(this.state.search_type === 'opt3'){
-                window.location.href = window.location.protocol + "//" + window.location.host + 
-                "/search?author=" + this.state.search;
-            }
-        }
-        if(this.state.search_type === 'opt4'){
-            window.location.href = window.location.protocol + "//" + window.location.host + 
-            "/search?personality";
-        }
+    onSearch = (e) =>{
+        this.setState({search: e.target.value})
+        this.setState({search_link: this.state.search_type + e.target.value})
     }
    
+    click = (e) =>{
+        e.preventDefault()
+        window.location.href = window.location.protocol + "//" + window.location.host + 
+        this.state.search_link;
+    }
+
     render() {
-        const url = window.location.protocol + "//" + window.location.host
+    
         return (
             <div className="container-fluid">
                 <div className="row" style={{backgroundColor:'#F8F9FA', borderBottom:'2px solid #151B2D'}}>
@@ -57,18 +47,20 @@ export class Navbar extends Component {
                     <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
                         <ul className="navbar-nav w-75">
                             <li className="nav-item active">
-                                <a className="navbar-brand nav-link" href={url} >Illumina</a>
+                                <Link className="navbar-brand nav-link" to="/" >Illumina</Link>
                             </li>
                             <li className="nav-item  w-50">
 
-                            <form className="form-inline my-2 my-lg-0" onSubmit={this.onSubmit}>
+                            <form className="form-inline my-2 my-lg-0">
                                 <input className="form-control mr-sm-2 w-90" type="search"  name="search"
                                 value={this.state.search}
-                                onChange={this.onChange}
+                                onChange={this.onSearch}
                                 placeholder="Search" aria-label="Search" style={{border:'1.5px solid #151B2D'}}/>
 
                                 <div className="btn-group">
-                                    <button className="btn btn-outline-primary" type="submit">Search</button>
+                                    {/* <Link to={this.state.search_link}> */}
+                                    <button onClick={this.click} className="btn btn-outline-primary">Search</button>
+                                    {/* </Link> */}
                                     <button type="button" className="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
                                     
                                     <div className="dropdown-menu" aria-labelledby="dropdownMenu2" style={{border:'1.5px solid #151B2D'}}>
@@ -76,36 +68,23 @@ export class Navbar extends Component {
                                             <input type="radio"
                                             defaultChecked={this.state.search_type === 'opt1' && true}
                                             name="search_type"
-                                            value='opt1'
+                                            value="/search?title="
                                             onClick={this.onChange}/> Book 
                                         </div>
                                         <div className="dropdown-item">
                                             <input type="radio"
                                             defaultChecked={this.state.search_type === 'opt2' && true}
                                             name="search_type"
-                                            value='opt2'
+                                            value="/search?genre="
                                             onClick={this.onChange}/> Genre
                                         </div>
                                         <div className="dropdown-item ">
                                             <input type="radio"
                                             defaultChecked={this.state.search_type === 'opt3' && true}
                                             name="search_type"
-                                            value='opt3'
+                                            value="/search?author="
                                             onClick={this.onChange} style={{color:'#151B2D'}}/> Author
                                         </div>
-                                        {/* {
-                                            localStorage.logged_in &&
-                                            <React.Fragment>
-                                                <div className="dropdown-divider" />
-                                                <button 
-                                                className="dropdown-item" 
-                                                name="search_type"
-                                                value='opt4'
-                                                onClick={this.onChange}>
-                                                    Personality Recommendaion
-                                                </button>
-                                            </React.Fragment>
-                                        } */}
                                     </div>
                                 </div>
                             </form>

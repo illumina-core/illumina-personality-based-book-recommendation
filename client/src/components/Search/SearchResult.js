@@ -22,10 +22,6 @@ export class SearchResult extends Component {
     componentDidMount(){        
       if(this.props.location.search.split('?')[1].split('=')[0] === 'personality'){
         recommend_books_by_personality().then(res =>{
-          if(res.data.nope){
-            alert('Persoanlity not assigned')
-            window.location.href = window.location.protocol + "//" + window.location.host + "/profile";
-          }
           this.setState({books: res.data.books})
           this.setState({total: res.data.total})
           this.setState({shelves: res.data.shelves})

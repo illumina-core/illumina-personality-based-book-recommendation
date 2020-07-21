@@ -32,17 +32,17 @@ export class UserMenu extends Component {
                     {
                         localStorage.admin && 
                         <React.Fragment>
-                            <a className="dropdown-item" href={url + '/admin'}>Admin Panel</a>
+                            <Link className="dropdown-item"to='/admin'>Admin Panel</Link>
                             <div className="dropdown-divider"></div>
                         </React.Fragment>
                     }
-                    <a className="dropdown-item" href={url + '/dashboard'}>Dashboard</a>
+                    <Link className="dropdown-item" to='/dashboard'>Dashboard</Link>
                     <div className="dropdown-divider"></div>
-                    <a className="dropdown-item" href={url + '/profile'}>Profile</a>
+                    <Link className="dropdown-item" to='/profile'>Profile</Link>
                     <div className="dropdown-divider"></div>
-                    <a className="dropdown-item" href={url + '/book-shelves'}>My Bookshelves</a>
+                    <Link className="dropdown-item" to='/book-shelves'>My Bookshelves</Link>
                     <div className="dropdown-divider"></div>
-                    <a className="dropdown-item" href={url + '/genres'}>Genres</a>
+                    <Link className="dropdown-item" to='/genres'>Genres</Link>
                     <div className="dropdown-divider"></div>
                     <button className="dropdown-item" onClick={this.logOut.bind(this)}>Logout</button>
                 </div>

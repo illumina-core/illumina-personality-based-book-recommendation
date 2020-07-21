@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 export class Genres extends Component {
 
   render() {
-
-    const url = window.location.protocol + "//" + window.location.host
-    
     return (
       <div className="collapse" id={"genres_" + this.props.alph}>
         <div className="row pt-3" id={this.props.alph}>
@@ -16,9 +14,9 @@ export class Genres extends Component {
                     {
                       genres.map((genre) =>(
                         <li className="list-group-item" key={genre}>
-                          <a className="text-decoration-none" href={url + "/search?genre=" + genre} style={{color:'#151B2D'}}>
+                          <Link className="text-decoration-none" to={"/search?genre=" + genre} style={{color:'#151B2D'}}>
                             {genre}
-                          </a>
+                          </Link>
                         </li>
                       ))
                     }

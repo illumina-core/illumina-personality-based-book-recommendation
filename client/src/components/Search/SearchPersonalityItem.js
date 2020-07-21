@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import { Link } from 'react-router-dom'
 import { add_book_to_shelf } from '../Services'
 import './Search.css';
 
@@ -64,9 +64,9 @@ export class SearchPersonalityItem extends Component {
 
             <div className="col-md-8">
                 <h3 className="font-weight-light" style={{fontSize:'27px'}}>
-                    <a href={url + '/book/' + _id['$oid']} style={{color:'#151B2D'}}>
+                    <Link to={'/book/' + _id['$oid']} style={{color:'#151B2D'}}>
                         {book_title}
-                    </a>
+                    </Link>
                 </h3>
                 <h5 className="font-weight-light" style={{fontSize:'18px'}}><b>Authors:</b> {authors.toString()}</h5>
                 <h5 className="font-weight-light" style={{fontSize:'18px'}}><b>Genres:</b> {genres.toString()}</h5>
@@ -78,15 +78,9 @@ export class SearchPersonalityItem extends Component {
                     <h5 className="font-weight-light collapse" style={{fontSize:'18px'}} id="collapseExample" aria-expanded="false">
                      {description.toString()}
                     </h5>
-                    <a role="button" class="collapsed" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style={{color:'#151B2D'}}></a>
+                    <Link role="button" class="collapsed" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style={{color:'#151B2D'}} />
                 </div>
-
-
             </div>
-
-            {/* <div className="col-md-auto">
-
-            </div> */}
         </div>
         )
     }
