@@ -124,13 +124,13 @@ export class EditBook extends Component {
                     </div>
                     <input type="text" maxLength="20"  name="link_key" className="form-control" placeholder="eg. Kindle"/>
                     <div className="valid-feedback">Valid.</div>
-                    <div className="invalid-feedback">Please enter valid username/email of minimum 3 length.</div> 
+                    <div className="invalid-feedback">Please enter a valid website.</div> 
                     <div className="input-group-prepend">
                         <span className="input-group-text">Value</span>
                     </div>
                     <input type="text" maxLength="150" name="link_value" className="form-control" placeholder="url"/>
                     <div className="valid-feedback">Valid.</div>
-                    <div className="invalid-feedback">Please enter valid username/email of minimum 3 length.</div> 
+                    <div className="invalid-feedback">Please enter a valid website link.</div> 
                 </div>
             )
         }
@@ -144,13 +144,13 @@ export class EditBook extends Component {
                     </div>
                     <input type="text" maxLength="20" name="extra_details_key" className="form-control" placeholder="eg. Original Title"/>
                     <div className="valid-feedback">Valid.</div>
-                    <div className="invalid-feedback">Please enter valid username/email of minimum 3 length.</div> 
+                    <div className="invalid-feedback">Please enter a valid extra detail label.</div> 
                     <div className="input-group-prepend">
                         <span className="input-group-text">Value</span>
                     </div>
                     <input type="text" maxLength="150" name="extra_details_value" className="form-control" placeholder="eg. This is the value"/>
                     <div className="valid-feedback">Valid.</div>
-                    <div className="invalid-feedback">Please enter valid username/email of minimum 3 length.</div> 
+                    <div className="invalid-feedback">Please enter valid extra detail information.</div> 
                 </div>
             )
         }
@@ -214,7 +214,7 @@ export class EditBook extends Component {
                             required
                             />
                             <div className="valid-feedback">Valid.</div>
-                            <div className="invalid-feedback">Please enter valid username/email of minimum 3 length.</div> 
+                            <div className="invalid-feedback">Please enter a valid book title.</div> 
                         </div>
                         <div className="form-group">
                             <label>Book Description</label>
@@ -227,7 +227,7 @@ export class EditBook extends Component {
                             required
                             />
                             <div className="valid-feedback">Valid.</div>
-                            <div className="invalid-feedback">Please enter valid username/email of minimum 3 length.</div> 
+                            <div className="invalid-feedback">PPlease enter a valid book description.</div> 
                         </div>
                         <div className="form-group">
                             <label>Author(s)</label>
@@ -240,7 +240,7 @@ export class EditBook extends Component {
                             required
                             placeholder="For multiple authors seperate by comma [,] eg. aut1,aut2" />
                             <div className="valid-feedback">Valid.</div>
-                            <div className="invalid-feedback">Please enter valid username/email of minimum 3 length.</div> 
+                            <div className="invalid-feedback">Please enter a valid author name.</div> 
                         </div>
                         <div className="form-group">
                             <label>Genre</label>
@@ -253,7 +253,7 @@ export class EditBook extends Component {
                             required
                             placeholder="For multiple genres seperate by comma [,] eg. gen1,gen2" />
                             <div className="valid-feedback">Valid.</div>
-                            <div className="invalid-feedback">Please enter valid username/email of minimum 3 length.</div> 
+                            <div className="invalid-feedback">Please enter a valid genre.</div> 
                         </div>
                         <div className="form-group">
                             <label>Links</label>
@@ -266,13 +266,13 @@ export class EditBook extends Component {
                                 </div>
                                 <input defaultValue={key} type="text" maxLength="20" name="link_key" className="form-control" placeholder="eg. Kindle"/>
                                 <div className="valid-feedback">Valid.</div>
-                                <div className="invalid-feedback">Please enter valid username/email of minimum 3 length.</div> 
+                                <div className="invalid-feedback">Please enter a valid website.</div> 
                                 <div className="input-group-prepend">
                                     <span className="input-group-text">Value</span>
                                 </div>
                                 <input defaultValue={value} type="text" maxLength="150" name="link_value" className="form-control" placeholder="url"/>
                                 <div className="valid-feedback">Valid.</div>
-                                <div className="invalid-feedback">Please enter valid username/email of minimum 3 length.</div> 
+                                <div className="invalid-feedback">Please enter a valid website.</div> 
                             </div>
                             )}
                             {links}
@@ -289,13 +289,13 @@ export class EditBook extends Component {
                                 </div>
                                 <input defaultValue={key} type="text" maxLength="20"  name="extra_details_key" className="form-control" placeholder="eg. Kindle"/>
                                 <div className="valid-feedback">Valid.</div>
-                                <div className="invalid-feedback">Please enter valid username/email of minimum 3 length.</div> 
+                                <div className="invalid-feedback">Please enter a valid detail.</div> 
                                 <div className="input-group-prepend">
                                     <span className="input-group-text">Value</span>
                                 </div>
                                 <input defaultValue={value} type="text" maxLength="150" name="extra_details_value" className="form-control" placeholder="url"/>
                                 <div className="valid-feedback">Valid.</div>
-                                <div className="invalid-feedback">Please enter valid username/email of minimum 3 length.</div> 
+                                <div className="invalid-feedback">Please enter a valid detail.</div> 
                             </div>
                             )}
                             {extra_details}
