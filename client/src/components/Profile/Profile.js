@@ -270,36 +270,36 @@ export class Profile extends Component {
                                     <div className="row mb-3">
                                         <div className="col-md mr-2 topshelf">
                                             <h4 className="font-weight-light">
-                                                <a href={url + '/search?genre=' + this.state.rec_genres[0]}>{this.state.rec_genres[0]}</a>
+                                                <a href={url + '/search?genre=' + this.state.rec_genres[0]} style={{color:'#151B2D'}}>{this.state.rec_genres[0]}</a>
                                             </h4>
                                         </div>
                                         <div className="col-md mr-2 topshelf">
                                             <h4 className="font-weight-light">
-                                                <a href={url + '/search?genre=' + this.state.rec_genres[1]}>{this.state.rec_genres[1]}</a>
+                                                <a href={url + '/search?genre=' + this.state.rec_genres[1]} style={{color:'#151B2D'}}>{this.state.rec_genres[1]}</a>
                                             </h4>
                                         </div>
                                     </div>
                                     <div className="row mb-3">
                                         <div className="col-md mr-2 topshelf">
                                             <h4 className="font-weight-light">
-                                                <a href={url + '/search?genre=' + this.state.rec_genres[2]}>{this.state.rec_genres[2]}</a>
+                                                <a href={url + '/search?genre=' + this.state.rec_genres[2]} style={{color:'#151B2D'}}>{this.state.rec_genres[2]}</a>
                                             </h4>
                                         </div>
                                         <div className="col-md mr-2 topshelf">
                                             <h4 className="font-weight-light">
-                                                <a href={url + '/search?genre=' + this.state.rec_genres[3]}>{this.state.rec_genres[3]}</a>
+                                                <a href={url + '/search?genre=' + this.state.rec_genres[3]} style={{color:'#151B2D'}}>{this.state.rec_genres[3]}</a>
                                             </h4>
                                         </div>
                                     </div>
                                     <div className="row">
                                         <div className="col-md mr-2 topshelf">
                                             <h4 className="font-weight-light">
-                                                <a href={url + '/search?genre=' + this.state.rec_genres[4]}>{this.state.rec_genres[4]}</a>
+                                                <a href={url + '/search?genre=' + this.state.rec_genres[4]} style={{color:'#151B2D'}}>{this.state.rec_genres[4]}</a>
                                             </h4>
                                         </div>
                                         <div className="col-md mr-2 topshelf">
                                             <h4 className="font-weight-light">
-                                                <a href={url + '/search?genre=' + this.state.rec_genres[5]}>{this.state.rec_genres[5]}</a>
+                                                <a href={url + '/search?genre=' + this.state.rec_genres[5]} style={{color:'#151B2D'}}>{this.state.rec_genres[5]}</a>
                                             </h4>
                                         </div>
                                     </div>
@@ -307,7 +307,7 @@ export class Profile extends Component {
                             </div>
 
                             <button className="btn-lg btn-secondary"> 
-                                <a href={url + "/search?personality"}>Recommend me a book!</a>
+                                <a href={url + "/search?personality"} style={{color:'#fff'}}>Recommend me a book!</a>
                             </button>
 
                         </div>
