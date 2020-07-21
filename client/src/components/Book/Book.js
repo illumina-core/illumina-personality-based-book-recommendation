@@ -159,7 +159,7 @@ export class Book extends Component {
                                         <p className="font-weight-light">
                                             {
                                             Object.entries(this.state.links).map( ([key, value]) =>  
-                                                <a key={key} href={value} style={{display: 'block', color:'#151B2D'}}>{key}</a>
+                                                <Link to={value} key={key} style={{display: 'block', color:'#151B2D'}}>{key}</Link>
                                             )}
                                         </p>
                                         </div>

@@ -4,7 +4,7 @@ import Navbar from '../layout/Navbar'
 import Footer from '../layout/Footer'
 import RecommendBooks from './RecommendBooks';
 import TopBookshelves from './TopBookshelves';
-
+import { Link } from 'react-router-dom';
 import { getUser } from '../Services'
 
 import './Dashboard.css';
@@ -33,8 +33,6 @@ export class Dashboard extends Component {
         const { 
             username
          } = this.state.user
-
-        const url = window.location.protocol + "//" + window.location.host
         
         return (
             <div>
@@ -46,14 +44,14 @@ export class Dashboard extends Component {
                         <div className="row">
                         <div className="col-auto pl-0">
                             <button className="btn btn-outline-secondary .bg-transparent"> 
-                                <a href={url + '/search?personality'} style={{color:'white'}}>Recommend me a book!</a>
+                                <Link to={'/search?personality'} style={{color:'white'}}>Recommend me a book!</Link>
                             </button>
 
                             
                         </div>
                         <div className="col">
                             <button className="btn btn-outline-secondary .bg-transparent">
-                                <a href={url + '/profile'} style={{color:'white'}}>Check out my personality</a> 
+                                <Link to={'/profile'} style={{color:'white'}}>Check out my personality</Link>
                             </button>
                         </div>
                         </div>
@@ -64,10 +62,10 @@ export class Dashboard extends Component {
                     <div className="container-fluid mx-auto" style={{width:'80%'}}>
                         <div className="row justify-content-center align-items-center" >
                             <h2 className="font-weight-light" style={{textAlign: 'center', paddingTop:'25px'}}>
-                                <a className="nav-link" href={url + '/book-shelves'} style={{color:'#151B2D', fontSize:'35px'}}>Bookshelves</a>
+                                <Link to={'/book-shelves'} className="nav-link" style={{color:'#151B2D', fontSize:'35px'}}>Bookshelves</Link>
                             </h2>
                         </div>
-                        <TopBookshelves shelves={this.state.shelves} url={url}/>
+                        <TopBookshelves shelves={this.state.shelves}/>
                     </div>
                 </div>
 

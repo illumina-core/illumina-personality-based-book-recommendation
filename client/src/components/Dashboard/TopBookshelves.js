@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import { Link } from 'react-router-dom';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
@@ -38,15 +38,15 @@ export class TopBookshelves extends Component {
               this.props.shelves.map((shelf) =>(
                 <div key={shelf.shelf_title} className="container-fluid" style={{paddingTop:'10px', paddingBottom:'20px'}}>
                     <div className="row">
-                    <a href={this.props.url + "/book-shelves/" + shelf.shelf_title}>
+                    <Link to={this.props.url + "/book-shelves/" + shelf.shelf_title}>
                       <img className="img" alt={shelf.shelf_title} src={shelf.shelf_pic}  style={{width: '235px', height: '235px', border:'3.5px solid black'}} />
-                    </a>
+                    </Link>
                   </div>
                   <div className="row" style={{paddingTop:'10px'}}>
                       <h4 className="text-center w-100">
-                        <a className="text-dark text-decoration-none" href={this.props.url + "/book-shelves/" + shelf.shelf_title}>
+                        <Link to={this.props.url + "/book-shelves/" + shelf.shelf_title} className="text-dark text-decoration-none">
                           {shelf.shelf_title}
-                        </a>
+                        </Link>
                       </h4>
                   </div>
 
