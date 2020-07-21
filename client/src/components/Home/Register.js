@@ -128,11 +128,12 @@ export class Register extends Component {
                                 <textarea className="form-control"                                 
                                 value={this.state.per_desc}
                                 onChange={this.onChange}
-                                placeholder="Describe yourself in a paragraph" name="per_desc" id="per_desc" rows="15">
+                                minLength="65" maxLength="1000" 
+                                placeholder="Tell us about yourself in a paragraph. The minimum character limit is 65 words. Please note this information will be used to determine your personality." name="per_desc" id="per_desc" rows="15">
                                 </textarea>
 
                                 <div className="valid-feedback">Valid.</div>
-                                <div className="invalid-feedback">Please enter a valid description.</div> 
+                                <div className="invalid-feedback">Your description is too short.</div> 
                             </div>                            
 
                             {/* Modal footer */}

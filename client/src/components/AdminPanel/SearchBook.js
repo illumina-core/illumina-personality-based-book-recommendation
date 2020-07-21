@@ -99,7 +99,7 @@ export class SearchBook extends Component {
 
     // Autosuggest will pass through all these props to the input.
     const inputProps = {
-      placeholder: 'Book Title',
+      placeholder: "Search Books Database",
       className: 'form-control mx-auto list-unstyled',
       value,
       id: "edit_book_id",
@@ -115,6 +115,7 @@ export class SearchBook extends Component {
         getSuggestionValue={getSuggestionValue}
         renderSuggestion={this.renderSuggestion}
         inputProps={inputProps}
+        style={{width:'500px', border:'1.5px solid #151B2D'}}
       />
     );
   }
