@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
+
 import { remove_shelf_book, remove_shelf } from '../Services'
 import { EditShelf } from './EditShelf'
 import './Bookshelf.css';
 import ReactTooltip from 'react-tooltip';
+import { Link } from 'react-router-dom';
 
 export class Bookshelf extends Component {
 
@@ -98,9 +100,7 @@ export class Bookshelf extends Component {
 
               <div className="col-10">
                 <h4 className="font-weight-light">
-                  <a href={url + '/book/' + book.id} style={{color:'#151B2D'}}>
-                    <b>{book.title}</b>
-                  </a>
+                  <Link to={'/book/' + book.id} style={{color:'#151B2D'}}><b>{book.title}</b></Link>
                 </h4>
                 <h5 className="font-weight-light">{book.authors.toString()}</h5>
               </div>

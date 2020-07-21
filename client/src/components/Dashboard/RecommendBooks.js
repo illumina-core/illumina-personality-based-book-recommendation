@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { get_book_recommendation } from '../Services'
-
+import { Link } from 'react-router-dom';
 export class RecommendBooks extends Component {
 
   constructor(){
@@ -17,7 +17,6 @@ export class RecommendBooks extends Component {
   }
 
   render() {
-    const url = window.location.protocol + "//" + window.location.host
     return (
     <div className="container-fluid mx-auto" style={{width:'80%', border:'1.5px solid #2C3554'}}>
 
@@ -38,9 +37,7 @@ export class RecommendBooks extends Component {
                     <div className="col-sm-8" >
                       <div className="card-body">
                         <h3 className="card-title">
-                          <a href={url + '/book/' + book['_id']['$oid']} style={{color:'#151B2D'}}>
-                            {book.book_title}
-                          </a>
+                          <Link to={'/book/' + book['_id']['$oid']} style={{color:'#151B2D'}}>{book.book_title}</Link>
                         </h3>
                         <p className="font-weight-light card-subtitle"><b>Authors:</b> {book.authors.toString()}</p>
                         <p className="font-weight-light card-subtitle"><b>Genres:</b> {book.genres.toString()}</p>
@@ -65,9 +62,7 @@ export class RecommendBooks extends Component {
                     <div className="col-sm-8" >
                       <div className="card-body">
                         <h3 className="card-title">
-                          <a href={url + '/book/' + book['_id']['$oid']} style={{color:'#151B2D'}}>
-                            {book.book_title}
-                          </a>
+                          <Link to={'/book/' + book['_id']['$oid']} style={{color:'#151B2D'}}>{book.book_title}</Link>
                         </h3>
                         <p className="font-weight-light card-subtitle"><b>Authors:</b> {book.authors.toString()}</p>
                         <p className="font-weight-light card-subtitle"><b>Genres:</b> {book.genres.toString()}</p>
@@ -92,9 +87,7 @@ export class RecommendBooks extends Component {
                     <div className="col-sm-8" >
                       <div className="card-body">
                         <h3 className="card-title">
-                          <a href={url + '/book/' + book['_id']['$oid']} style={{color:'#151B2D'}}>
-                            {book.book_title}
-                          </a>
+                          <Link to={'/book/' + book['_id']['$oid']} style={{color:'#151B2D'}}>{book.book_title}</Link>
                         </h3>
                         <p className="font-weight-light card-subtitle"><b>Authors:</b> {book.authors.toString()}</p>
                         <p className="font-weight-light card-subtitle"><b>Genres:</b> {book.genres.toString()}</p>
@@ -119,9 +112,7 @@ export class RecommendBooks extends Component {
                     <div className="col-sm-8" >
                       <div className="card-body">
                         <h3 className="card-title">
-                          <a href={url + '/book/' + book['_id']['$oid']} style={{color:'#151B2D'}}>
-                            {book.book_title}
-                          </a>
+                          <Link to={'/book/' + book['_id']['$oid']} style={{color:'#151B2D'}}>{book.book_title}</Link>
                         </h3>
                         <p className="font-weight-light card-subtitle"><b>Authors:</b> {book.authors.toString()}</p>
                         <p className="font-weight-light card-subtitle"><b>Genres:</b> {book.genres.toString()}</p>
