@@ -327,6 +327,7 @@ def remove_review():
 
     return jsonify({'result': True})
 
+@app.route('/book-shelves/remove-shelf-book', methods=['POST'])
 @app.route('/remove-shelf-book', methods=['POST'])
 def remove_shelf_book():
     book = request.get_json()['book']
