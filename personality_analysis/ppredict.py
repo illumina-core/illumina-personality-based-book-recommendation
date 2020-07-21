@@ -1,8 +1,8 @@
-import pymongo
+# import pymongo
+# from personality_analysis.preprocess import Preprocess
+# from personality_analysis.pmodel import PModel
+# from sklearn.preprocessing import MinMaxScaler
 import pickle
-from personality_analysis.preprocess import Preprocess
-from personality_analysis.pmodel import PModel
-from sklearn.preprocessing import MinMaxScaler
 
 class PPredictor():
     def __init__(self):
@@ -33,9 +33,9 @@ class PPredictor():
                 predictions.append(trait_scores.flatten()[0])
         return predictions
 
-if __name__ == '__main__':
-    P = PPredictor()
-    text = """
- i hate sociery and life. i think that we have created a stupid system of rules that only exist to delete creativity, we live in a cycle of lsavery where the onyl people who gain powera re those at top. EVERYONE IS FOOLISH AND I DESPISE THE ALL"""
-    prediction =  P.review_predict([text])
-    print(prediction)
+# if __name__ == '__main__':
+#     P = PPredictor()
+#     text = """
+#  i hate sociery and life. i think that we have created a stupid system of rules that only exist to delete creativity, we live in a cycle of lsavery where the onyl people who gain powera re those at top. EVERYONE IS FOOLISH AND I DESPISE THE ALL"""
+#     prediction =  P.review_predict([text])
+#     print(prediction)

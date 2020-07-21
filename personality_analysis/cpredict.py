@@ -2,7 +2,7 @@ import pymongo
 import pickle
 import numpy as np
 from personality_analysis.clusters import Clusters
-from sklearn.preprocessing import MinMaxScaler
+# from sklearn.preprocessing import MinMaxScaler
 
 class CPredictor():
     def __init__(self):
@@ -14,8 +14,8 @@ class CPredictor():
         prediction = self.model.predict(test)
         return prediction
 
-if __name__ == '__main__':
-    C = CPredictor()
-    test1 = [[3.036546454473845, 1.5057632104238742, 2.430427889119491, 3.7470608387187776, 4.37602776052686]]
-    prediction =  C.user_cluster_predict(test1)
-    print(prediction)
+# if __name__ == '__main__':
+#     C = CPredictor()
+#     test1 = [[3.036546454473845, 1.5057632104238742, 2.430427889119491, 3.7470608387187776, 4.37602776052686]]
+#     prediction =  C.user_cluster_predict(test1)
+#     print(prediction)

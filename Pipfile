@@ -13,8 +13,8 @@ scipy = "*"
 pandas = "*"
 flask-bcrypt = "*"
 flask-cors = "*"
-sklearn = "*"
 dnspython = "*"
+scikit-learn = "==0.22.1"
 
 [requires]
 python_version = "3.7"
