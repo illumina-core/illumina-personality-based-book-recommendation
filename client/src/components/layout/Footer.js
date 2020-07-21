@@ -9,7 +9,7 @@ export class Footer extends Component {
 
     render() {
         return (
-            <div style={{backgroundColor:'#151B2D'}}>
+            <div class="footer"style={{backgroundColor:'#151B2D'}}>
             <div className="container-fluid mx-auto" style={{width:'80%', paddingTop:'5px', paddingBottom:'5px', textAlign: 'center', backgroundColor:'#151B2D'}}> 
             <nav className="navbar navbar-expand-lg navbar-light bg-#F8F9FA">
                     <div className="collapse navbar-collapse" id="navbarText">

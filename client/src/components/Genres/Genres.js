@@ -11,11 +11,11 @@ export class Genres extends Component {
         <div className="row pt-3" id={this.props.alph}>
           {
             this.props.gen_array.map((genres) =>(
-                <div className="col">
+                <div className="col" key={genres}>
                   <ul className="list-group">
                     {
                       genres.map((genre) =>(
-                        <li className="list-group-item">
+                        <li className="list-group-item" key={genre}>
                           <a className="text-decoration-none" href={url + "/search?genre=" + genre} style={{color:'#151B2D'}}>
                             {genre}
                           </a>
