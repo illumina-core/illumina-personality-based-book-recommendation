@@ -37,7 +37,7 @@ export class Register extends Component {
                 alert(res.data.result)
             else
                 alert(res.data.error)
-            window.location.reload()
+            window.location.reload(false)
         })
     }
 

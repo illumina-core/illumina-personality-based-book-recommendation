@@ -16,7 +16,7 @@ export class Bookshelf extends Component {
     }
     remove_shelf_book(data).then(res =>{
         alert('Book removed')
-        window.location.reload()
+        window.location.reload(false)
     }).catch(err =>{
         alert(err)
     })
@@ -25,7 +25,7 @@ export class Bookshelf extends Component {
   removeShelf(shelf){
     remove_shelf(shelf).then(res =>{
         alert(res.data.result)
-        window.location.reload()
+        window.location.reload(false)
     }).catch(err =>{
         alert(err)
     })

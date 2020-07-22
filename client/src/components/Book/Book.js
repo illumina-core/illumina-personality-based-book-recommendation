@@ -150,7 +150,7 @@ export class Book extends Component {
                                         {/* <button data-toggle="collapse" data-target="#demo" className="font-weight-light"
                                         style={{fontSize:'18px'}}><u>Where to Read</u></button> */}
 
-                                        <h5 class="font-weight-light" data-toggle="collapse" data-target="#demo" color="primary" id="toggler" style={{fontSize:'18px'}}>
+                                        <h5 className="font-weight-light" data-toggle="collapse" data-target="#demo" color="primary" id="toggler" style={{fontSize:'18px'}}>
                                             <u>Where to Read</u>
                                         </h5>
                                         

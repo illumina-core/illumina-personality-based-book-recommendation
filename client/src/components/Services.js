@@ -21,17 +21,17 @@ export const login = newUser => {
 
 export const search_book = query => {
     return axios
-    .get('search?' + query)
+    .post('search?' + query)
 }
 
 export const get_book = id => {
     return axios
-    .get(id)
+    .post(id)
 }
 
 export const getUser = () => {
     return axios
-    .get('get-user')
+    .post('get-user')
 }
 
 export const logout = () => {
@@ -70,12 +70,12 @@ export const add_book_to_shelf = data =>{
 
 export const get_user_shelf = () =>{
     return axios
-    .get('get-user-shelf')
+    .post('get-user-shelf')
 }
 
 export const get_book_recommendation = () =>{
     return axios
-    .get('get-book-recommendation')
+    .post('get-book-recommendation')
 }
 
 export const remove_review = book =>{
@@ -100,14 +100,14 @@ export const remove_shelf = shelf =>{
     })
 }
 
-export const get_genres = () =>{
-    return axios
-    .get('get-genres')
-}
-
 export const recommend_books_by_personality = () =>{
     return axios
-    .get('recommend-books-by-personality')
+    .post('recommend-books-by-personality')
+}
+
+export const get_genres = () =>{
+    return axios
+    .post('get-genres')
 }
 
 export const update_profile_data = (data) =>{
@@ -124,7 +124,7 @@ export const update_shelf = (data) =>{
 
 export const get_genre_recommendation = () =>{
     return axios
-    .get('get-genre-recommendation')
+    .post('get-genre-recommendation')
 }
 
 export const add_book = (data) =>{

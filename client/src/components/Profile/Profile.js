@@ -43,7 +43,7 @@ export class Profile extends Component {
             this.setState({edit: false})
             localStorage.setItem('username', this.state.username)
             localStorage.setItem('profile_pic', this.state.profile_pic)
-            window.location.reload()
+            window.location.reload(false)
         })
     }
 

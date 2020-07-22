@@ -3,6 +3,7 @@ import UserMenu from './UserMenu'
 import { Link } from 'react-router-dom'
 import { Login } from '../Home/Login'
 import { Register } from '../Home/Register'
+import { useHistory } from 'react-router-dom';
 import './Navbar.css';
 
 export class Navbar extends Component {
@@ -27,11 +28,12 @@ export class Navbar extends Component {
         this.setState({search_link: this.state.search_type + e.target.value})
     }
    
-    click = (e) =>{
-        e.preventDefault()
-        window.location.href = window.location.protocol + "//" + window.location.host + 
-        this.state.search_link;
-    }
+    // routeChange =(e)=> {
+    //     e.preventDefault()
+    //     // let history = useHistory();
+    //     // console.log(this.props.history)
+    //     console.log(this.props)
+    //   }
 
     render() {
     
@@ -58,9 +60,9 @@ export class Navbar extends Component {
                                 placeholder="Search" aria-label="Search" style={{border:'1.5px solid #151B2D'}}/>
 
                                 <div className="btn-group">
-                                    {/* <Link to={this.state.search_link}> */}
-                                    <button onClick={this.click} className="btn btn-outline-primary">Search</button>
-                                    {/* </Link> */}
+                                    <Link to={this.state.search_link}>
+                                        <button onClick={this.routeChange} className="btn btn-outline-primary">Search</button>
+                                    </Link>
                                     <button type="button" className="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
                                     
                                     <div className="dropdown-menu" aria-labelledby="dropdownMenu2" style={{border:'1.5px solid #151B2D'}}>

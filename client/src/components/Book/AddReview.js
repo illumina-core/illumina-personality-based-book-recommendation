@@ -25,7 +25,7 @@ export class AddReview extends Component {
         }
 
         add_review(rev).then(res => {
-            window.location.reload()
+            window.location.reload(false)
         }).catch(err => {
             alert(err)
         })

@@ -38,13 +38,13 @@ export class TopBookshelves extends Component {
               this.props.shelves.map((shelf) =>(
                 <div key={shelf.shelf_title} className="container-fluid" style={{paddingTop:'10px', paddingBottom:'20px'}}>
                     <div className="row">
-                    <Link to={this.props.url + "/book-shelves/" + shelf.shelf_title}>
+                    <Link to={"/book-shelves/" + shelf.shelf_title}>
                       <img className="img" alt={shelf.shelf_title} src={shelf.shelf_pic}  style={{width: '235px', height: '235px', border:'3.5px solid black'}} />
                     </Link>
                   </div>
                   <div className="row" style={{paddingTop:'10px'}}>
                       <h4 className="text-center w-100">
-                        <Link to={this.props.url + "/book-shelves/" + shelf.shelf_title} className="text-dark text-decoration-none">
+                        <Link to={"/book-shelves/" + shelf.shelf_title} className="text-dark text-decoration-none">
                           {shelf.shelf_title}
                         </Link>
                       </h4>

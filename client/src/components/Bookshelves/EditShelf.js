@@ -34,7 +34,7 @@ export class EditShelf extends Component {
 
         update_shelf(data).then(res =>{
             alert(res.data.result)
-            window.location.reload()
+            window.location.reload(false)
         })
     }
 

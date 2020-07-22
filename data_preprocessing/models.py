@@ -6,7 +6,7 @@ from datetime import datetime
 # review document schema
 class Reviews(EmbeddedDocument):
     username = StringField(unque=True)
-    profile_pic = StringField(default="../images/default_user.png")
+    profile_pic = StringField(default="../static/images/default_user.png")
     review_text = StringField()
     rating = FloatField(default=0.0)
     created = DateTimeField(default=datetime.utcnow())
@@ -17,7 +17,7 @@ class Books(Document):
     authors = ListField(StringField(), required=True)
     description = StringField(required=True, unique=True, default="")
     genres = ListField(StringField(), required=True)
-    cover_image = StringField(required=True, default="../images/default_book.png")
+    cover_image = StringField(required=True, default="../static/images/default_book.png")
     avg_rating = FloatField(default=0.0) 
     links = DictField()       # {'link name': url}
     personality_index = DictField(default={
@@ -41,7 +41,7 @@ class Books(Document):
 class Shelves(EmbeddedDocument):
     shelf_title = StringField(required=True)
     shelved_books = ListField(ReferenceField('Books', dbref=True), default=[])
-    shelf_pic = StringField(default="../images/default_bookshelf.png")
+    shelf_pic = StringField(default="../static/images/default_bookshelf.png")
     created = DateTimeField(default=datetime.utcnow())
 
 # user document schema
@@ -49,7 +49,7 @@ class Users(Document):
     username = StringField(unque=True)
     password = StringField()
     email = EmailField(unique=True)
-    profile_pic = StringField(default="../images/default_user.png")
+    profile_pic = StringField(default="../static/images/default_user.png")
     date_of_birth = DateTimeField()
     description = StringField(default="")
     cluster = IntField(default=-1)
@@ -66,7 +66,7 @@ class Users(Document):
     shelves = EmbeddedDocumentListField(Shelves, default=[
         Shelves(
             shelf_title="Favourite",
-            shelf_pic = "../images/favourite.png"
+            shelf_pic = "../static/images/favourite.png"
         )
     ], ordering="created", reverse=True)
     created = DateTimeField(default=datetime.utcnow())

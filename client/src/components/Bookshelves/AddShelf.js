@@ -31,7 +31,7 @@ export class AddShelf extends Component {
 
         add_shelf(data).then(res =>{
             alert(res.data.result)
-            window.location.reload()
+            window.location.reload(false)
         }).catch(err =>{
             alert(err)
         })

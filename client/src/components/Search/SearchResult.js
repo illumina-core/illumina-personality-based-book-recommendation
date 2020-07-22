@@ -15,11 +15,12 @@ export class SearchResult extends Component {
             books: [],
             total: 0,
             activePage: 1,
-            shelves: []
+            shelves: [],
+            url: ""
         }
     }
 
-    componentDidMount(){        
+    componentDidMount(){       
       if(this.props.location.search.split('?')[1].split('=')[0] === 'personality'){
         recommend_books_by_personality().then(res =>{
           this.setState({books: res.data.books})
@@ -37,6 +38,18 @@ export class SearchResult extends Component {
         })
       }
     }   
+
+    static getDerivedStateFromProps(props, state){
+      if('?' + window.location.href.split('?')[1] !== props.location.search){
+        window.location.reload(false)
+      }
+
+      
+      return {
+        cachedSomeProp: props
+        
+      };
+   }
 
     handlePageChange(pageNumber) {
         this.setState({ activePage: pageNumber })

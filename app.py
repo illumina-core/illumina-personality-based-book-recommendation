@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, session, render_template
+from flask import Flask, jsonify, request, session, render_template, send_from_directory
 from flask_bcrypt import Bcrypt 
 from flask_cors import CORS
 import json
@@ -34,7 +34,14 @@ host = f'mongodb+srv://{username}:{password}@illumina-lmf8b.gcp.mongodb.net/{db}
 
 connect(host=host)
 
-@app.route('/')
+@app.route('/', methods=['GET'])
+@app.route('/admin', methods=['GET'])
+@app.route('/genres', methods=['GET'])
+@app.route('/dashboard', methods=['GET'])
+@app.route('/profile', methods=['GET'])
+@app.route('/book-shelves', methods=['GET'])
+@app.route('/search', methods=['GET'])
+@app.route('/book/<id>', methods=['GET'])
 def index():
     return render_template('index.html')
 
@@ -104,7 +111,7 @@ def logout():
     session.clear()
     return jsonify({"logout": True})
 
-@app.route('/search', methods=['GET'])
+@app.route('/search', methods=['POST'])
 def search_book():  
     title = request.args.get('title', default = None, type = str)
     genre = request.args.get('genre', default = None, type = str)
@@ -137,7 +144,7 @@ def search_book():
 
     return  jsonify({"books":books.to_json(), "total": total})
 
-@app.route('/book/<id>', methods=['GET'])
+@app.route('/book/<id>', methods=['POST'])
 def get_book(id):
     try:
         book = Books.objects(id=id).get()
@@ -154,9 +161,9 @@ def get_book(id):
 
     return  jsonify({"book":book.to_json()})
  
-@app.route('/get-user', methods=['GET'])
-@app.route('/book/get-user', methods=['GET'])
-@app.route('/book-shelves/get-user', methods=['GET'])
+@app.route('/get-user', methods=['POST'])
+@app.route('/book/get-user', methods=['POST'])
+@app.route('/book-shelves/get-user', methods=['POST'])
 def get_user():
     user = Users.objects(username=session['user']).get()
     return jsonify({"user":user.to_json()})
@@ -244,8 +251,8 @@ def add_book_to_shelf():
         return jsonify({"result": 'Book Added'})
     return jsonify({"result": 'Book already present inside shelf'})
 
-@app.route('/get-user-shelf', methods=['GET'])
-@app.route('/book-shelves/get-user-shelf', methods=['GET'])
+@app.route('/get-user-shelf', methods=['POST'])
+@app.route('/book-shelves/get-user-shelf', methods=['POST'])
 def get_user_shelf():
     user = Users.objects(username=session['user']).get()
 
@@ -271,7 +278,7 @@ def get_user_shelf():
 
     return jsonify({"shelves": json.dumps(shelves)})
 
-@app.route('/get-book-recommendation', methods=['GET'])
+@app.route('/get-book-recommendation', methods=['POST'])
 def get_book_recommendation():
     user = Users.objects(username=session['user']).get()
 
@@ -351,7 +358,7 @@ def remove_shelf():
 
     return jsonify({'result': True})
 
-@app.route('/recommend-books-by-personality', methods=['GET'])
+@app.route('/recommend-books-by-personality', methods=['POST'])
 def recommend_books_by_personality():
     data = Users.objects(username=session['user']).only(
         'personality_index',
@@ -402,7 +409,7 @@ def recommend_books_by_personality():
 
     return  jsonify({"books":sorted_books, "total": 1, "shelves": shelves})
 
-@app.route('/get-genres', methods=['GET'])
+@app.route('/get-genres', methods=['POST'])
 def get_genres():
     genres = Books.objects().distinct('genres')
     dic = {}
@@ -450,7 +457,7 @@ def update_shelf():
 
     return jsonify({'result': 'Shelf has been updated'})
 
-@app.route('/get-genre-recommendation', methods=['GET'])
+@app.route('/get-genre-recommendation', methods=['POST'])
 def get_genre_recommendation():
     cluster = Users.objects(username=session['user']).get().cluster
     genres = []

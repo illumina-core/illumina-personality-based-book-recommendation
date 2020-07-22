@@ -100,7 +100,7 @@ export class EditBook extends Component {
 
         update_book(data).then(res =>{
             alert(res.data.result)
-            window.location.reload()
+            window.location.reload(false)
         })
     }
 
@@ -108,7 +108,7 @@ export class EditBook extends Component {
         e.preventDefault()
         delete_book(this.state.id).then(res =>{
             alert(res.data.result)
-            window.location.reload()
+            window.location.reload(false)
         })
     }
 

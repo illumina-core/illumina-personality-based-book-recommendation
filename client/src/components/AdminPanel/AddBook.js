@@ -11,7 +11,7 @@ export class AddBook extends Component {
             description: "",
             authors: "",
             genres: "",
-            cover_image:"../images/default_book.png",
+            cover_image:"../static/images/default_book.png",
             links: 0,
             extra_details: 0
 
@@ -79,7 +79,7 @@ export class AddBook extends Component {
 
         add_book(data).then(res =>{
             alert(res.data.result)
-            window.location.reload()
+            window.location.reload(false)
         })
     }
 
@@ -146,15 +146,15 @@ export class AddBook extends Component {
                         </div>
                         ))}
                         {
-                            this.state.cover_image === '../images/default_book.png' &&
+                            this.state.cover_image === '../static/images/default_book.png' &&
                             <div style={{paddingBottom:'10px'}}>
-                                <img src='../images/default_book.png' alt="img" width="80" height="80"  className="rounded img" style={{border: '2px solid white'}}/>
+                                <img src='../static/images/default_book.png' alt="img" width="80" height="80"  className="rounded img" style={{border: '2px solid white'}}/>
                             </div>
                         }
                         <div className="btn-group">
                             <button className="btn btn-secondary" onClick={onImageUpload}>Upload Image</button>
                             {
-                                this.state.cover_image !== '../images/default_book.png' &&
+                                this.state.cover_image !== '../static/images/default_book.png' &&
                                 <button className="btn btn-secondary" onClick={onImageRemoveAll}>Remove Image</button>
                             }
                         </div>
